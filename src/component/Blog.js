@@ -1,38 +1,41 @@
 import { useState } from "react";
 import { db } from "../firebaseConfig";
 
-
 const Blog = () => {
   const [text, setText] = useState("");
   const [message, setMessage] = useState("");
   const [author, setAuthor] = useState("");
   return (
     <div className="blog">
-      <h1>Blog</h1>
+      <h1 className="title">Create Blog</h1>
       <form>
-        <h3>Title :</h3>
         <input
           type="text"
           value={text}
           onChange={(e) => setText(e.target.value)}
-          placeholder="title"
+          placeholder="Title"
         />
         <br />
-        <h3>Message :</h3>
+
         <textarea
           value={message}
           onChange={(e) => setMessage(e.target.value)}
+          placeholder="Message"
+          cols="30"
+          rows="5"
         ></textarea>
         <br />
-        <h3>Author :</h3>
+
         <input
           type="text"
           value={author}
           onChange={(e) => setAuthor(e.target.value)}
-          placeholder="title"
+          placeholder="Author"
         />
 
-        <button onClick={createPost}>Post</button>
+        <button disabled={!text || !message} onClick={createPost}>
+          Post
+        </button>
       </form>
     </div>
   );

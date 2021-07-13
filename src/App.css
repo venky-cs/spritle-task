@@ -11,7 +11,7 @@
   height: 100vh;
 }
 .main{
-  width: 80%;
+  width: 80vw;
   height: 80vh;
   text-align: center;
 }
@@ -23,11 +23,11 @@
 .nav button:hover{
   background-color: red;
 }
-.sign {
+/* .sign {
      position:absolute;
      bottom:0;
      width: 80%;
-  }
+  } */
 
   .sign button{
      padding: 10px;
@@ -36,4 +36,107 @@
 
   textarea {
     resize: none;
+  }
+
+  form{
+     width: 37em;
+     margin: 3em auto;
+     background-color:#f3efe7;
+     padding: 2em;
+  }
+  input[type=text] {
+    height: 45px;
+  }
+
+  input[type=text],
+  textarea {
+    width: 100%;
+    margin-bottom: 1em;
+    font-size: .9em;
+    color: #cfcece;
+    font-weight: 300;
+    padding: .5em 1em;
+    border: none;
+    color: #555555;
+    font-weight: 300;
+  }
+
+  form > button{
+    cursor: pointer;
+    margin: 0;
+    padding: .5em 2em;
+    background: #636363;
+    border: none;
+    color: #fff;
+    font-size: 1em;
+    font-weight: 400;
+  }
+
+  .card {
+    display: inline-block;
+    /* transform: translate(50%, 5%); */
+    width: 30%;
+    text-align: center;
+    font-family: sans-serif;
+    background-color: #ddd;
+    padding: 10px;
+    margin: 20px;
+    position: relative;
+    border-radius: 10px;
+    box-shadow: 4px 13px 27px 1px rgb(0 0 0 / 23%);
+    transition: all 0.5s linear;
+    overflow: hidden;
+  }
+
+  .card:hover {
+    background-color: #e9e9f1;
+    transition: all 0.5s linear;
+
+  }
+
+  .card::before {
+    position: absolute;
+    content: '';
+    left: 0;
+    top: 0;
+    width: 11%;
+    height: 15%;
+    background-color: #3131a5;
+    color: #fff;
+    border-radius: 10px;
+    border-top-right-radius: 100%;
+    border-bottom-right-radius: 100%;
+  }
+
+  .card::after {
+    position: absolute;
+    content: '';
+    right: 0;
+    top: 0;
+    width: 11%;
+    height: 15%;
+    background-color: #3131a5;
+    color: #fff;
+    border-radius: 10px;
+    border-top-left-radius: 100%;
+    border-bottom-left-radius: 100%;
+  }
+
+  .card:hover::before,
+  .card:hover::after {
+    background-color: #0000ff;
+  }
+
+  .card h2 {
+    border-bottom: 2px solid #c3bcbc;
+    padding-bottom: 5px;
+  }
+
+  .card p {
+    padding: 5px;
+    line-height: 1.6rem;
+  }
+
+  .title{
+    margin:20px;
   }
