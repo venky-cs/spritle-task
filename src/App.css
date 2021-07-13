@@ -12,7 +12,7 @@
 }
 .main{
   width: 80%;
-  height: 50vh;
+  height: 80vh;
   text-align: center;
 }
 .nav button{
@@ -32,4 +32,8 @@
   .sign button{
      padding: 10px;
      margin: 20px;
+  }
+
+  textarea {
+    resize: none;
   }
