@@ -3,3 +3,33 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+.app{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.main{
+  width: 80%;
+  height: 50vh;
+  text-align: center;
+}
+.nav button{
+  border:none;
+  padding:10px 20px;
+  font-size: 20px;
+}
+.nav button:hover{
+  background-color: red;
+}
+.sign {
+     position:absolute;
+     bottom:0;
+     width: 80%;
+  }
+
+  .sign button{
+     padding: 10px;
+     margin: 20px;
+  }
