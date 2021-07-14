@@ -2,15 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-// import ReactMarkdown from "react-markdown";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
-  // <ReactMarkdown>
     <React.StrictMode>
       <App />
     </React.StrictMode>
-  // </ReactMarkdown>
   ,
   document.getElementById("root")
 );
