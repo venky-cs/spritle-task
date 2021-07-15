@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import "./App.css";
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -11,13 +11,22 @@ import {
 } from "@react-firebase/auth";
 import Nav from "./component/Nav";
 import Content from "./component/Content";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
+import BlogPost from './component/BlogPost'
 require("dotenv").config();
 
 function App() {
   const [auth, setAuth] = useState(false);
   const [page, setPage] = useState("home");
   return (
-    <FirebaseAuthProvider {...firebaseConfig} firebase={firebase}>
+    <Router>
+        <Switch>
+        <FirebaseAuthProvider {...firebaseConfig} firebase={firebase}>
+          <Route exact path="/">
       <div className="app">
         <div className="main">
           <Nav setPage={setPage}/>
@@ -69,7 +78,14 @@ function App() {
           </div>
         </div>
       </div>
+          </Route>
+
+          <Route path="/blog/:slug">
+            <BlogPost />
+          </Route>
     </FirebaseAuthProvider>
+        </Switch>
+      </Router>
   );
 }
 

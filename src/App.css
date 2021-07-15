@@ -39,7 +39,8 @@
   }
 
   form{
-     width: 37em;
+     width: 55em;
+     height: fit-content;
      margin: 3em auto;
      background-color:#f3efe7;
      padding: 2em;
@@ -52,7 +53,7 @@
   textarea {
     width: 100%;
     margin-bottom: 1em;
-    font-size: .9em;
+    font-size: 1.5em;
     color: #cfcece;
     font-weight: 300;
     padding: .5em 1em;
@@ -74,7 +75,6 @@
 
   .card {
     display: inline-block;
-    /* transform: translate(50%, 5%); */
     width: 30%;
     text-align: center;
     font-family: sans-serif;
@@ -82,7 +82,7 @@
     padding: 10px;
     margin: 20px;
     position: relative;
-    border-radius: 10px;
+    border-radius: 5px;
     box-shadow: 4px 13px 27px 1px rgb(0 0 0 / 23%);
     transition: all 0.5s linear;
     overflow: hidden;
@@ -99,7 +99,7 @@
     content: '';
     left: 0;
     top: 0;
-    width: 11%;
+    width: 10px;
     height: 15%;
     background-color: #3131a5;
     color: #fff;
@@ -113,7 +113,7 @@
     content: '';
     right: 0;
     top: 0;
-    width: 11%;
+    width: 10px;
     height: 15%;
     background-color: #3131a5;
     color: #fff;
@@ -139,4 +139,48 @@
 
   .title{
     margin:20px;
+  }
+
+  .full {
+    width: 80%;
+     display: inline-block;
+     position: relative;
+     top: 100px;
+     left: 100px;
+     height: 100%;
+     overflow: visible;
+  }
+
+  .full::after {
+    position: absolute;
+    content: '';
+    right: 0;
+    top: 0;
+    width: 11%;
+    height: 20px;
+    background-color: #3131a5;
+    color: #fff;
+    border-radius: 10px;
+    border-top-left-radius: 100%;
+    border-bottom-left-radius: 100%;
+  }
+
+  .full::before {
+    position: absolute;
+    content: '';
+    right: 0;
+    top: 0;
+    width: 11%;
+    height: 20px;
+    background-color: #3131a5;
+    color: #fff;
+    border-radius: 10px;
+    border-top-left-radius: 100%;
+    border-bottom-left-radius: 100%;
+  }
+
+  .select > .select-btn {
+    display: block;
+    margin: 10px;
+    padding: 10px 20px;
   }
