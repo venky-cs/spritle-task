@@ -176,3 +176,8 @@
   .btn > button{
      padding: 10px 20px;
   }
+
+  iframe{
+    width: 100%;
+    height: 500px;
+  }

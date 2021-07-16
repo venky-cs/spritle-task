@@ -12,7 +12,7 @@ function BlogPost() {
     const [select, setSelect] = useState();
 
     const value = useContext(saveContext)
-    const [,setSave] = value
+    const [save] = value
 
     let { slug } = useParams();
     slug = JSON.stringify(slug.slice(1))
@@ -52,9 +52,9 @@ function BlogPost() {
                 <div className="select">
                     <div className="btn">
                     <Link to="/" className="select-btn">Home</Link>
-                        {/* <button className="save-btn" onClick={() => setSave(localStorage.setItem("store", [localStorage.getItem('store'),data.title,data.message]))}>Save</button> */}
-                        <button className="save-btn" onClick={() => setSave(prevState => [...prevState,{title:data.title,message:data.message}])}>Save</button>
-                        {/* <button className="save-btn" onClick={(prevState) => setSave(localStorage.setItem("store", JSON.stringify([{title:data.title,message:data.message}])))}>Save</button> */}
+                        
+                        <button className="save-btn" onClick={() =>saveData(data)}>Save</button>
+                        
                     </div>
                     <div key={index} className="card full">
                         <h2>{data.title}</h2>
@@ -66,6 +66,16 @@ function BlogPost() {
             )
             ))}
     </div>;
+
+    function saveData(data){
+        localStorage.setItem(
+            'save',
+            JSON.stringify([
+                ...save,
+                { title: data.title, message: data.message, },
+            ])
+        );
+    }
 }
 
 export default BlogPost

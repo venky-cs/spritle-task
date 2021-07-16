@@ -2,10 +2,12 @@ import { useState } from "react";
 import { db } from "../firebaseConfig";
 
 
-let cors = 'https://cors-anywhere-venky.herokuapp.com/';
+// let cors = 'https://cors-anywhere-venky.herokuapp.com/';
 let key = "f7222436d420fd8"
-let keyOne = "9cf5644e3337d40"
-let keyTwo = "9fcf76aa5f77fa3"
+// let keyOne = "9cf5644e3337d40"
+// let keyTwo = "9fcf76aa5f77fa3"
+
+let imgur = "https://imgur.com/upload"
 
 
 const Blog = () => {
@@ -13,7 +15,7 @@ const Blog = () => {
   const [message, setMessage] = useState("");
   const [author, setAuthor] = useState("");
 
-  const [link, setLink] = useState("");
+  // const [link, setLink] = useState("");
 
   return (
     <div className="blog">
@@ -34,8 +36,10 @@ const Blog = () => {
           rows="15"
         ></textarea>{" "}
         <br />
-        <input type="file" onChange={getLink} />
-        <p> {link} </p> <br />
+        {/* <input type="file" onChange={getLink} /> */}
+        <iframe src="https://carry0987.github.io/Imgur-Upload/" title="description"></iframe>
+        {/* <p> {link} </p>  */}
+        <br />
         <input
           type="text"
           value={author}
