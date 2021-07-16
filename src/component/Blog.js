@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { db } from "../firebaseConfig";
-
+import Button from './Button'
 
 // let cors = 'https://cors-anywhere-venky.herokuapp.com/';
 let key = "f7222436d420fd8"
@@ -46,9 +46,9 @@ const Blog = () => {
           onChange={(e) => setAuthor(e.target.value)}
           placeholder="Author"
         />
-        <button disabled={!text || !message} onClick={createPost}>
+        <Button disabled={!text || !message} onClick={createPost}>
           Post{" "}
-        </button>{" "}
+        </Button>{" "}
       </form>{" "}
     </div>
   );

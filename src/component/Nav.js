@@ -1,12 +1,13 @@
 import {Link} from 'react-router-dom'
+import Button from './Button'
 const Nav = ({setPage}) => {
   return (
     <div className="nav">
-      <button onClick={() => setPage("home")}>Home</button>
-      <button onClick={() => setPage("blog")}>Blog</button>
-      <button>
+      <Button variant="default" onClick={() => setPage("home")}>Home</Button>
+      <Button variant="default" onClick={() => setPage("blog")}>Blog</Button>
+      <Button variant="default">
       <Link to="/save">Saves</Link>
-      </button>
+      </Button>
     </div>
   );
 };

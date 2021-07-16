@@ -19,6 +19,7 @@ import {
 import BlogPost from './component/BlogPost';
 import SaveContext from './context/SaveContext'
 import Saved from "./component/Saved";
+import Button from "./component/Button"
 require("dotenv").config();
 
 function App() {
@@ -38,7 +39,7 @@ function App() {
 
                 <div className="sign">
                   {!auth && (
-                    <button
+                    <Button variant="google"
                       onClick={() => {
                         const googleAuthProvider =
                           new firebase.auth.GoogleAuthProvider();
@@ -46,17 +47,17 @@ function App() {
                       }}
                     >
                       Sign In with Google
-                    </button>
+                    </Button>
                   )}
 
                   {auth && (
-                    <button
+                    <Button variant="google"
                       onClick={() => {
                         firebase.auth().signOut();
                       }}
                     >
                       Sign Out
-                    </button>
+                    </Button>
                   )}
                 </div>
 

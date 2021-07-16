@@ -5,7 +5,7 @@ import ContentLoader from "react-content-loader";
 import { db } from "../firebaseConfig";
 import { Link } from 'react-router-dom'
 import {saveContext} from '../context/SaveContext'
-
+import Button from './Button'
 
 function BlogPost() {
     const [blog, setBlog] = useState([]);
@@ -51,9 +51,11 @@ function BlogPost() {
             select.map((data, index) => (
                 <div className="select">
                     <div className="btn">
+                        <Button variant="google">
                     <Link to="/" className="select-btn">Home</Link>
+                        </Button>
                         
-                        <button className="save-btn" onClick={() =>saveData(data)}>Save</button>
+                        <Button variant="google" className="save-btn" onClick={() =>saveData(data)}>Save</Button>
                         
                     </div>
                     <div key={index} className="card full">

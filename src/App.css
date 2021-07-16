@@ -177,6 +177,15 @@
      padding: 10px 20px;
   }
 
+  button > a {
+    text-decoration: none;
+    color: white;
+  }
+   div > a{
+    text-decoration: none;
+    color: black;
+  }
+
   iframe{
     width: 100%;
     height: 500px;

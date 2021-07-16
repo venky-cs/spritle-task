@@ -11,7 +11,7 @@ export default function SaveContext(props) {
 
     useEffect(() => {
         setBlog(data)
-    },[])
+    },[data])
     return (
         <saveContext.Provider value={[blog, setBlog]}>
             {props.children}
