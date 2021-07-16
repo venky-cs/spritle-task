@@ -50,19 +50,14 @@ function BlogPost() {
         ) : (
             select.map((data, index) => (
                 <div className="select">
-                    <div className="btn">
-                        <Button variant="google">
-                    <Link to="/" className="select-btn">Home</Link>
-                        </Button>
-                        
-                        <Button variant="google" className="save-btn" onClick={() =>saveData(data)}>Save</Button>
-                        
-                    </div>
+                   
                     <div key={index} className="card full">
                         <h2>{data.title}</h2>
+                       
                         <p>
                             <ReactMarkdown>{data.message}</ReactMarkdown>
                         </p>
+                        <Button variant="google" className="save-btn" onClick={() => saveData(data)}>Save</Button>
                     </div>
                 </div>
             )

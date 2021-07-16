@@ -10,7 +10,6 @@ import {
   IfFirebaseAuthedAnd,
 } from "@react-firebase/auth";
 import Nav from "./component/Nav";
-import Content from "./component/Content";
 import {
   BrowserRouter as Router,
   Switch,
@@ -20,25 +19,41 @@ import BlogPost from './component/BlogPost';
 import SaveContext from './context/SaveContext'
 import Saved from "./component/Saved";
 import Button from "./component/Button"
+import Home from "./component/Home";
+import Blog from "./component/Blog";
 require("dotenv").config();
 
 function App() {
   const [auth, setAuth] = useState(false);
-  const [page, setPage] = useState("home");
   return (
     <Router>
       <Switch>
         <FirebaseAuthProvider {...firebaseConfig} firebase={firebase}>
           <SaveContext>
-            <Route exact path="/">
               <div className="app">
                 <div className="main">
+            {/* <Route exact path="/"> */}
                   <div className="sidebar">
-                    <Nav setPage={setPage} />
+                    <Nav  />
+                  </div>
+                {/* </Route> */}
+
+
+                  <div className="mainbar">
+                    <Route path="/home">
+                      <Home />
+                    </Route>
+                  <Route path="/createBlog">
+                     {auth ? <Blog /> : <h2>SignUp</h2>}
+                    </Route>
+                  <Route path="/blog/:slug">
+                    <BlogPost />
+                  </Route>
+                  <Route path="/save">
+                    <Saved />
+                  </Route>
                   </div>
 
-
-                  <Content page={page} auth={auth} />
                   <div className="sign">
                     {!auth && (
                       <Button variant="google"
@@ -84,14 +99,7 @@ function App() {
                   </div>
                 </div>
               </div>
-            </Route>
 
-            <Route path="/blog/:slug">
-              <BlogPost />
-            </Route>
-            <Route path="/save">
-              <Saved />
-            </Route>
           </SaveContext>
         </FirebaseAuthProvider>
       </Switch>

@@ -19,7 +19,7 @@ useEffect(() => {
     return (
         <div>
             <h2>Saved Blog</h2>
-            <Button><Link to="/">Back</Link></Button>
+            {/* <Button><Link to="/">Back</Link></Button> */}
             <div className="box">
                 { saved &&
                     saved.map((data, index) => (
