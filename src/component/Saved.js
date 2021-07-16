@@ -1,7 +1,8 @@
 import {useState,useEffect,useContext } from "react"
 import {saveContext} from '../context/SaveContext'
 import ReactMarkdown from "react-markdown";
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import Button from './Button'
 
 const Saved = () => {
     const value = useContext(saveContext)
@@ -18,6 +19,7 @@ useEffect(() => {
     return (
         <div>
             <h2>Saved Blog</h2>
+            <Button><Link to="/">Back</Link></Button>
             <div className="box">
                 { saved &&
                     saved.map((data, index) => (

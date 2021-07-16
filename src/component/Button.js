@@ -7,6 +7,7 @@ border: none;
   border-radius: 2px;
   padding: 12px 18px;
   font-size: 16px;
+  margin:20px;
   text-transform: uppercase;
   cursor: pointer;
   color: white;
