@@ -137,6 +137,10 @@
     line-height: 1.6rem;
   }
 
+  .home .card{
+    height: 250px;
+  }
+
   .title{
     margin:20px;
   }
@@ -149,38 +153,26 @@
      left: 100px;
      height: 100%;
      overflow: visible;
+     text-align: start;
   }
 
   .full::after {
-    position: absolute;
-    content: '';
-    right: 0;
-    top: 0;
     width: 11%;
-    height: 20px;
-    background-color: #3131a5;
-    color: #fff;
-    border-radius: 10px;
-    border-top-left-radius: 100%;
-    border-bottom-left-radius: 100%;
+    height: 10px;
+
   }
 
   .full::before {
-    position: absolute;
-    content: '';
-    right: 0;
-    top: 0;
     width: 11%;
-    height: 20px;
-    background-color: #3131a5;
-    color: #fff;
-    border-radius: 10px;
-    border-top-left-radius: 100%;
-    border-bottom-left-radius: 100%;
+    height: 10px;
+
   }
 
-  .select > .select-btn {
-    display: block;
-    margin: 10px;
-    padding: 10px 20px;
+  .btn {
+   display: flex;
+   justify-content: space-around;
+   margin:10px;
+  }
+  .btn > button{
+     padding: 10px 20px;
   }

@@ -1,14 +1,18 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect,useContext } from "react"
 import { useParams } from 'react-router-dom'
 import ReactMarkdown from "react-markdown";
 import ContentLoader from "react-content-loader";
 import { db } from "../firebaseConfig";
 import { Link } from 'react-router-dom'
+import {saveContext} from '../context/SaveContext'
 
 
 function BlogPost() {
     const [blog, setBlog] = useState([]);
     const [select, setSelect] = useState();
+
+    const value = useContext(saveContext)
+    const [,setSave] = value
 
     let { slug } = useParams();
     slug = JSON.stringify(slug.slice(1))
@@ -24,15 +28,13 @@ function BlogPost() {
                     datas.push(data);
                 });
                 setBlog(datas);
-                console.log(blog)
             })
             .catch((err) => console.log(err));
     }, []);
 
     useEffect(() => {
-        console.log(typeof slug)
+        // console.log(slug)
         setSelect(blog.filter(data => data.title === JSON.parse(slug)))
-        console.log(select)
     }, [blog, slug])
 
     return <div>
@@ -48,7 +50,12 @@ function BlogPost() {
         ) : (
             select.map((data, index) => (
                 <div className="select">
+                    <div className="btn">
                     <Link to="/" className="select-btn">Home</Link>
+                        {/* <button className="save-btn" onClick={() => setSave(localStorage.setItem("store", [localStorage.getItem('store'),data.title,data.message]))}>Save</button> */}
+                        <button className="save-btn" onClick={() => setSave(prevState => [...prevState,{title:data.title,message:data.message}])}>Save</button>
+                        {/* <button className="save-btn" onClick={(prevState) => setSave(localStorage.setItem("store", JSON.stringify([{title:data.title,message:data.message}])))}>Save</button> */}
+                    </div>
                     <div key={index} className="card full">
                         <h2>{data.title}</h2>
                         <p>

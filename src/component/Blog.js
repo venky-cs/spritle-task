@@ -68,27 +68,27 @@ const Blog = () => {
     const formData = new FormData();
     // formData.append('type', 'file')
     formData.append("image", a,a.name)
-    // fetch(`https://api.imgur.com/3/image`, {
-    //   method: "POST",
-    //   headers: {
-    //     Authorization: `Client-ID ${key}`,
-    //     Accept: "application/json",
-    //   },
-    //   body: formData,
-    // })
-    //   .then((res) => {
-    //     console.log(res)
-    //     let img= res.data
-    //     console.log(img)
-    //   })
-    //   .catch((err) => console.log(err));
+    fetch(`https://api.imgur.com/3/image`, {
+      method: "POST",
+      headers: {
+        Authorization: `Client-ID ${key}`,
+        Accept: "application/json",
+      },
+      body: formData,
+    })
+      .then((res) => {
+        console.log(res)
+        let img= res.data
+        console.log(img)
+      })
+      .catch((err) => console.log(err));
 
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", `https://api.imgur.com/3/upload.json`);
-    // Send authentication headers.
-    xhr.setRequestHeader("Authorization", "Client-ID 9fcf76aa5f77fa3");
-    // Send form data
-    xhr.send(formData);
+    // let xhr = new XMLHttpRequest();
+    // xhr.open("POST", `https://api.imgur.com/3/upload.json`);
+    // // Send authentication headers.
+    // xhr.setRequestHeader("Authorization", "Client-ID 9fcf76aa5f77fa3");
+    // // Send form data
+    // xhr.send(formData);
   }
  
 };

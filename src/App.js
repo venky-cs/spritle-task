@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState} from "react";
 import "./App.css";
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -16,7 +16,9 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
-import BlogPost from './component/BlogPost'
+import BlogPost from './component/BlogPost';
+import SaveContext from './context/SaveContext'
+import Saved from "./component/Saved";
 require("dotenv").config();
 
 function App() {
@@ -24,68 +26,73 @@ function App() {
   const [page, setPage] = useState("home");
   return (
     <Router>
-        <Switch>
+      <Switch>
         <FirebaseAuthProvider {...firebaseConfig} firebase={firebase}>
+          <SaveContext>
           <Route exact path="/">
-      <div className="app">
-        <div className="main">
-          <Nav setPage={setPage}/>
+            <div className="app">
+              <div className="main">
+                <Nav setPage={setPage} />
 
-          <Content page={page} auth={auth}/>
+                <Content page={page} auth={auth} />
 
-          <div className="sign">
-            {!auth && (
-              <button
-                onClick={() => {
-                  const googleAuthProvider =
-                    new firebase.auth.GoogleAuthProvider();
-                  firebase.auth().signInWithPopup(googleAuthProvider);
-                }}
-              >
-                Sign In with Google
-              </button>
-            )}
+                <div className="sign">
+                  {!auth && (
+                    <button
+                      onClick={() => {
+                        const googleAuthProvider =
+                          new firebase.auth.GoogleAuthProvider();
+                        firebase.auth().signInWithPopup(googleAuthProvider);
+                      }}
+                    >
+                      Sign In with Google
+                    </button>
+                  )}
 
-            {auth && (
-              <button
-                onClick={() => {
-                  firebase.auth().signOut();
-                }}
-              >
-                Sign Out
-              </button>
-            )}
-          </div>
+                  {auth && (
+                    <button
+                      onClick={() => {
+                        firebase.auth().signOut();
+                      }}
+                    >
+                      Sign Out
+                    </button>
+                  )}
+                </div>
 
-          <FirebaseAuthConsumer>
-            {({ isSignedIn, user, providerId }) => {
-              setAuth(isSignedIn);
-            }}
-          </FirebaseAuthConsumer>
-          <div>
-            <IfFirebaseAuthed>
-              {() => {
-                // return <div>You are authenticated</div>;
-              }}
-            </IfFirebaseAuthed>
-            <IfFirebaseAuthedAnd
-              filter={({ providerId }) => providerId !== "anonymous"}
-            >
-              {({ providerId }) => {
-                // return <div>You are authenticated with {providerId}</div>;
-              }}
-            </IfFirebaseAuthedAnd>
-          </div>
-        </div>
-      </div>
+                <FirebaseAuthConsumer>
+                  {({ isSignedIn, user, providerId }) => {
+                    setAuth(isSignedIn);
+                  }}
+                </FirebaseAuthConsumer>
+                <div>
+                  <IfFirebaseAuthed>
+                    {() => {
+                      // return <div>You are authenticated</div>;
+                    }}
+                  </IfFirebaseAuthed>
+                  <IfFirebaseAuthedAnd
+                    filter={({ providerId }) => providerId !== "anonymous"}
+                  >
+                    {({ providerId }) => {
+                      // return <div>You are authenticated with {providerId}</div>;
+                    }}
+                  </IfFirebaseAuthedAnd>
+                </div>
+              </div>
+            </div>
           </Route>
 
           <Route path="/blog/:slug">
-            <BlogPost />
+              <BlogPost />
           </Route>
-    </FirebaseAuthProvider>
-        </Switch>
-      </Router>
+          <Route path="/save">
+            <Saved />
+          </Route>
+            </SaveContext>
+        </FirebaseAuthProvider>
+      </Switch>
+    </Router>
   );
 }
 
