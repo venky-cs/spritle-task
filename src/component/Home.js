@@ -1,11 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect,useContext } from "react";
 import { db } from "../firebaseConfig";
 import ContentLoader from "react-content-loader";
 import ReactMarkdown from "react-markdown";
 import {Link} from 'react-router-dom'
+import {saveContext} from '../context/SaveContext'
 
 const Home = () => {
   const [blog, setBlog] = useState([]);
+  const values = useContext(saveContext)
+  const [save, ,setLoad] = values
 
   useEffect(() => {
     db.collection("post")
@@ -37,18 +40,43 @@ const Home = () => {
               ) : (
                 blog.map((data, index) => (
                   <div key={index} className="card">
-                    <Link to={"/blog/:" + data.title}>
+                  
                       <h2>{data.title}</h2>
                       <p>
                         <ReactMarkdown>{data.message.substring(0, 250)}</ReactMarkdown>
                       </p>
-                    </Link>
+                    <div className="btn">
+                        <Link to={"/blog/:" + data.title}>
+                        <img src="https://img.icons8.com/ios-filled/50/000000/open-book.png" alt="i"
+                        />
+                        </Link>
+
+                        <img src="https://img.icons8.com/ios-filled/50/000000/save--v2.png" onClick={() => saveData(data)} alt="save"/>
+
+                    </div>
                   </div>
                 ))
               )}
             </div>
           </div>
   );
+
+  function saveData(data) {
+    let a = JSON.parse(localStorage.getItem("save"))
+    let b =a && a.length > 0 && a.every(a => a.title !== data.title)
+    if (b === false) {
+      alert("Already Saved")
+    } else {
+      localStorage.setItem(
+        'save',
+        JSON.stringify([
+          ...save,
+          { title: data.title, message: data.message, },
+        ])
+      );
+      setLoad(prevState => !prevState)
+    }
+  }
 };
 
 export default Home;

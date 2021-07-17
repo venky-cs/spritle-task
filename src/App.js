@@ -25,26 +25,30 @@ require("dotenv").config();
 
 function App() {
   const [auth, setAuth] = useState(false);
+  
   return (
     <Router>
       <Switch>
         <FirebaseAuthProvider {...firebaseConfig} firebase={firebase}>
-          <SaveContext>
+         
               <div className="app">
                 <div className="main">
-            {/* <Route exact path="/"> */}
+                  
                   <div className="sidebar">
-                    <Nav  />
+                <Nav sign={auth ? signOut :signIn}  auth={auth}/>
                   </div>
-                {/* </Route> */}
 
 
                   <div className="mainbar">
+                <SaveContext>
                     <Route path="/home">
                       <Home />
                     </Route>
                   <Route path="/createBlog">
-                     {auth ? <Blog /> : <h2>SignUp</h2>}
+                     {auth ? <Blog /> : <>
+                     <h2>SignUp</h2>
+                     <Button onClick={signIn}>Click Here to login</Button>
+                     </>}
                     </Route>
                   <Route path="/blog/:slug">
                     <BlogPost />
@@ -52,31 +56,9 @@ function App() {
                   <Route path="/save">
                     <Saved />
                   </Route>
+                </SaveContext>
                   </div>
 
-                  <div className="sign">
-                    {!auth && (
-                      <Button variant="google"
-                        onClick={() => {
-                          const googleAuthProvider =
-                            new firebase.auth.GoogleAuthProvider();
-                          firebase.auth().signInWithPopup(googleAuthProvider);
-                        }}
-                      >
-                        Sign In with Google
-                      </Button>
-                    )}
-
-                    {auth && (
-                      <Button variant="google"
-                        onClick={() => {
-                          firebase.auth().signOut();
-                        }}
-                      >
-                        Sign Out
-                      </Button>
-                    )}
-                  </div>
 
                   <FirebaseAuthConsumer>
                     {({ isSignedIn, user, providerId }) => {
@@ -100,11 +82,20 @@ function App() {
                 </div>
               </div>
 
-          </SaveContext>
+        
         </FirebaseAuthProvider>
       </Switch>
     </Router>
   );
+
+  function signIn(){
+    const googleAuthProvider =
+      new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithPopup(googleAuthProvider);
+  }
+  function signOut(){
+    firebase.auth().signOut();
+  }
 }
 
 export default App;

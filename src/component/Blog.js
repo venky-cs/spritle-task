@@ -3,11 +3,11 @@ import { db } from "../firebaseConfig";
 import Button from './Button'
 
 // let cors = 'https://cors-anywhere-venky.herokuapp.com/';
-let key = "f7222436d420fd8"
+// let key = "f7222436d420fd8"
 // let keyOne = "9cf5644e3337d40"
 // let keyTwo = "9fcf76aa5f77fa3"
 
-let imgur = "https://imgur.com/upload"
+// let imgur = "https://imgur.com/upload"
 
 
 const Blog = () => {
@@ -65,35 +65,35 @@ const Blog = () => {
     setAuthor("");
   }
 
-  function getLink(e) {
-    e.preventDefault();
-    let a = e.target.files[0];
-    console.log(a)
-    const formData = new FormData();
-    // formData.append('type', 'file')
-    formData.append("image", a,a.name)
-    fetch(`https://api.imgur.com/3/image`, {
-      method: "POST",
-      headers: {
-        Authorization: `Client-ID ${key}`,
-        Accept: "application/json",
-      },
-      body: formData,
-    })
-      .then((res) => {
-        console.log(res)
-        let img= res.data
-        console.log(img)
-      })
-      .catch((err) => console.log(err));
+  // function getLink(e) {
+  //   e.preventDefault();
+  //   let a = e.target.files[0];
+  //   console.log(a)
+  //   const formData = new FormData();
+  //   // formData.append('type', 'file')
+  //   formData.append("image", a,a.name)
+  //   fetch(`https://api.imgur.com/3/image`, {
+  //     method: "POST",
+  //     headers: {
+  //       Authorization: `Client-ID ${key}`,
+  //       Accept: "application/json",
+  //     },
+  //     body: formData,
+  //   })
+  //     .then((res) => {
+  //       console.log(res)
+  //       let img= res.data
+  //       console.log(img)
+  //     })
+  //     .catch((err) => console.log(err));
 
-    // let xhr = new XMLHttpRequest();
-    // xhr.open("POST", `https://api.imgur.com/3/upload.json`);
-    // // Send authentication headers.
-    // xhr.setRequestHeader("Authorization", "Client-ID 9fcf76aa5f77fa3");
-    // // Send form data
-    // xhr.send(formData);
-  }
+  //   // let xhr = new XMLHttpRequest();
+  //   // xhr.open("POST", `https://api.imgur.com/3/upload.json`);
+  //   // // Send authentication headers.
+  //   // xhr.setRequestHeader("Authorization", "Client-ID 9fcf76aa5f77fa3");
+  //   // // Send form data
+  //   // xhr.send(formData);
+  // }
  
 };
 

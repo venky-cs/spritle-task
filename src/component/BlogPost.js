@@ -1,10 +1,9 @@
-import { useState, useEffect,useContext } from "react"
+import { useState, useEffect, useContext } from "react"
 import { useParams } from 'react-router-dom'
 import ReactMarkdown from "react-markdown";
 import ContentLoader from "react-content-loader";
 import { db } from "../firebaseConfig";
-import { Link } from 'react-router-dom'
-import {saveContext} from '../context/SaveContext'
+import { saveContext } from '../context/SaveContext'
 import Button from './Button'
 
 function BlogPost() {
@@ -12,7 +11,7 @@ function BlogPost() {
     const [select, setSelect] = useState();
 
     const value = useContext(saveContext)
-    const [save] = value
+    const [save, , setLoad] = value
 
     let { slug } = useParams();
     slug = JSON.stringify(slug.slice(1))
@@ -33,7 +32,6 @@ function BlogPost() {
     }, []);
 
     useEffect(() => {
-        // console.log(slug)
         setSelect(blog.filter(data => data.title === JSON.parse(slug)))
     }, [blog, slug])
 
@@ -50,10 +48,10 @@ function BlogPost() {
         ) : (
             select.map((data, index) => (
                 <div className="select">
-                   
+
                     <div key={index} className="card full">
                         <h2>{data.title}</h2>
-                       
+
                         <p>
                             <ReactMarkdown>{data.message}</ReactMarkdown>
                         </p>
@@ -64,7 +62,12 @@ function BlogPost() {
             ))}
     </div>;
 
-    function saveData(data){
+    function saveData(data) {
+        let a = JSON.parse(localStorage.getItem("save"))
+        let b = a && a.length > 0 && a.every(a => a.title !== data.title)
+        if(b=== false){
+            alert("Already Saved")
+        }else{
         localStorage.setItem(
             'save',
             JSON.stringify([
@@ -72,6 +75,8 @@ function BlogPost() {
                 { title: data.title, message: data.message, },
             ])
         );
+        setLoad(prevState => !prevState)
+        }
     }
 }
 

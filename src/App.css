@@ -29,7 +29,7 @@
 }
 
 .main .sidebar {
-  flex: .20;
+  flex: .15;
   width: 100%;
 }
 .main .mainbar{
@@ -150,9 +150,9 @@
     line-height: 1.6rem;
   }
 
-  .home .card{
+  /* .home .card{
     height: 250px;
-  }
+  } */
 
   .title{
     margin:20px;
@@ -186,15 +186,20 @@
    justify-content: space-around;
    margin:10px;
   }
-  .btn > button{
-     padding: 10px 20px;
+  .btn  img{
+     width: 45px;
+     padding: 5px 10px;
+     cursor: pointer;
+  }
+  .btn img:hover{
+    background-color: red;
   }
 
   button > a {
     text-decoration: none;
     color: white;
   }
-   div > a{
+  a{
     text-decoration: none;
     color: black;
   }
