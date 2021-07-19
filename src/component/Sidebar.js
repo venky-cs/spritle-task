@@ -80,7 +80,7 @@ export const SlickBar = styled.ul`
   transition: all 0.5s ease;
   border-radius: 0 30px 30px 0;
 
-  @media (max-width: 500px) {
+  @media (max-width: 450px) {
     width: ${(props) => (props.clicked ? "5rem" : "8rem")};
   }
 `;
@@ -146,7 +146,7 @@ export const Profile = styled.div`
   }
    @media (max-width: 500px) {
  width: ${(props) => (props.clicked ? "1rem" : ".5rem")};
- margin-left: ${(props) => (props.clicked ? "1.5rem" : "0")};
+ margin-left: ${(props) => (props.clicked ? "3.5rem" : "0")};
  flex-direction:column;
   img {
     width: 1.rem;
@@ -187,7 +187,7 @@ export const Name = styled.div`
       text-decoration: underline;
     }
   }
-  @media (max-width: 500px) {
+  @media (max-width: 450px) {
       padding: 0 .5rem;
   display: flex;
   flex-direction: row;

@@ -247,7 +247,7 @@
       }
 
   }
-  @media screen and (max-width:500px) {
+  @media screen and (max-width:600px) {
 
     .main {
       width: 100vw;
@@ -298,7 +298,7 @@
 
     .card p {
      font-size: 14px;
-     line-height: 1.3rem;
+
     }
 
 
