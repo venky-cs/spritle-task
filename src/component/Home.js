@@ -66,7 +66,7 @@ const Home = () => {
   function saveData(data) {
     let a = JSON.parse(localStorage.getItem("save"))
     let b =a && a.length > 0 && a.every(a => a.title !== data.title)
-    if (b === false) {
+    if (a && a.length > 0 && b === false) {
       alert("Already Saved")
     } else {
       localStorage.setItem(

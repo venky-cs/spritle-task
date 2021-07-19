@@ -66,7 +66,7 @@ function BlogPost() {
     function saveData(data) {
         let a = JSON.parse(localStorage.getItem("save"))
         let b = a && a.length > 0 && a.every(a => a.title !== data.title)
-        if(b=== false){
+        if(a &&a.length >0 &&b=== false){
             alert("Already Saved")
         }else{
         localStorage.setItem(
@@ -86,7 +86,7 @@ function BlogPost() {
         let b =Array(data.title)
         console.log(a)
         console.log(b)
-        let remove = a.filter(item => !b.includes(item.title))
+        let remove =a.length > 0 && a.filter(item => !b.includes(item.title))
         console.log(remove)
          localStorage.setItem(
             'save',

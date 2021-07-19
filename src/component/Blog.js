@@ -39,6 +39,7 @@ const Blog = () => {
         {/* <input type="file" onChange={getLink} /> */}
         <iframe src="https://venky-cs.github.io/imageUpload/" title="description"></iframe>
         {/* <p> {link} </p>  */}
+        <div></div>
         <br />
         <input
           type="text"

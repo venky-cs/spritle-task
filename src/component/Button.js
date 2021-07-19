@@ -16,7 +16,11 @@ border: none;
   outline: none;
    background-position: center;
   transition: background 0.8s;
-
+  
+ @media (max-width: 500px) {
+  padding: 10px 12px;
+  font-size: 8px;
+  }
   
 ${props => {
         if (props.disabled === true) {
@@ -42,7 +46,8 @@ ${props => {
   background-color: #6eb9f7;
   background-size: 100%;
   transition: background 0s;
-  }
+
+ 
   `
 
 export default Button

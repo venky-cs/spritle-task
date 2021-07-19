@@ -247,4 +247,60 @@
       }
 
   }
+  @media screen and (max-width:500px) {
+
+    .main {
+      width: 100vw;
+      text-align: center;
+    }
+    .card {
+      width: 60%;
+      margin-right: auto;
+    }
+    .main .sidebar {
+      flex: .15;
+    }
+    .main .mainbar {
+      flex: .80;
+      width: 100%;
+    }
+
+     .full {
+       width: 70%;
+       display: inline-block;
+       position: relative;
+       top: 0px;
+       left: 0px;
+     }
+
+      form {
+        width: 85%;
+        height: fit-content;
+        margin: 3em auto;
+        background-color: #f3efe7;
+        padding: 2em;
+      }
+
+      input[type=text] {
+        height: 20px;
+      }
+
+      input[type=text],
+      textarea {
+        width: 100%;
+        margin-bottom: 1em;
+        font-size: 1em;
+      }
+
+    .card h2 {
+    font-size: 18px;
+    }
+
+    .card p {
+     font-size: 14px;
+     line-height: 1.3rem;
+    }
+
+
+  }
  
