@@ -1,10 +1,26 @@
 import {Link} from 'react-router-dom'
-import {useState}from 'react'
-import { Text, Item, SlickBar, SidebarContainer, SideButton,Container} from './Sidebar'
+import {useState,useEffect}from 'react'
+import { Logout, Name, Details, Profile,Text, Item, SlickBar, SidebarContainer, SideButton,Container} from './Sidebar'
+import firebase from 'firebase'
 
 const Nav = ({sign,auth}) => {
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
+  const [profileClick, setprofileClick] = useState(false);
+  const handleProfileClick = () => setprofileClick(!profileClick);
+
+  const  [userName,setUserName] = useState("")
+  const  [userImage,setUserImage] = useState("")
+
+  useEffect(() => {
+  const user = firebase.auth().currentUser;
+  if (user !== null) {
+    const displayName = user.displayName;
+    const photoURL = user.photoURL;
+    setUserName(displayName)
+    setUserImage(photoURL)
+  }
+  },[auth])
 
  
   return (
@@ -62,8 +78,21 @@ const Nav = ({sign,auth}) => {
            
            
           </SlickBar>
+          {auth &&
+          <Profile clicked={profileClick}>
+            <img
+              onClick={() => handleProfileClick()}
+              src={userImage}
+              alt="Profile"
+            />
+            <Details clicked={profileClick}>
+              <Name>
+                <h4>{userName}</h4>
+              </Name>
 
-          
+            </Details>
+          </Profile>
+}
         </SidebarContainer>
       </Container>
     </div>
