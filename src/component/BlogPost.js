@@ -56,6 +56,7 @@ function BlogPost() {
                             <ReactMarkdown>{data.message}</ReactMarkdown>
                         </p>
                         <Button variant="google" className="save-btn" onClick={() => saveData(data)}>Save</Button>
+                        <Button variant="google" className="save-btn" onClick={() => removeData(data)}>Remove</Button>
                     </div>
                 </div>
             )
@@ -77,6 +78,23 @@ function BlogPost() {
         );
         setLoad(prevState => !prevState)
         }
+    }
+
+    function removeData(data) {
+        let blog = JSON.parse(localStorage.getItem("save"))
+        let a = blog && blog.length > 0 && blog.map(a => a)
+        let b =Array(data.title)
+        console.log(a)
+        console.log(b)
+        let remove = a.filter(item => !b.includes(item.title))
+        console.log(remove)
+         localStorage.setItem(
+            'save',
+            JSON.stringify(
+                remove
+            )
+        );
+        setLoad(prevState => !prevState)
     }
 }
 
