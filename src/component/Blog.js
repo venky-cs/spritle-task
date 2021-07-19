@@ -37,7 +37,7 @@ const Blog = () => {
         ></textarea>{" "}
         <br />
         {/* <input type="file" onChange={getLink} /> */}
-        <iframe src="https://carry0987.github.io/Imgur-Upload/" title="description"></iframe>
+        <iframe src="https://venky-cs.github.io/imageUpload/" title="description"></iframe>
         {/* <p> {link} </p>  */}
         <br />
         <input
