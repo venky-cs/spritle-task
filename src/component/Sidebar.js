@@ -55,6 +55,7 @@ export const SidebarContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   position: relative;
+  
 `;
 
 
@@ -104,6 +105,11 @@ export const Text = styled.span`
   overflow: hidden;
   margin-left: ${(props) => (props.clicked ? "1.5rem" : "0")};
   transition: all 0.3s ease;
+
+   @media (max-width: 768px) {
+    width: ${(props) => (props.clicked ? "50%" : "0")};
+    margin-left: ${(props) => (props.clicked ? ".5rem" : "0")};
+  }
 `;
 
 export const Profile = styled.div`

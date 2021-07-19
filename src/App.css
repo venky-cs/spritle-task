@@ -209,4 +209,42 @@
     height: 300px;
   }
 
-  
+  @media screen and (max-width:1024px) {
+
+    .main {
+      width: 95vw;
+      text-align: center;
+    }
+    .card {
+      width: 80%;
+    }
+    .main .sidebar {
+      flex: .15;
+    }
+
+    .main .mainbar {
+      flex: .80;
+      width: 100%;
+    }
+
+     .full {
+       width: 100%;
+       display: inline-block;
+       position: relative;
+       top: 0px;
+       left: 0px;
+       height: 100%;
+       overflow: visible;
+       text-align: start;
+     }
+
+      form {
+        width: 85%;
+        height: fit-content;
+        margin: 3em auto;
+        background-color: #f3efe7;
+        padding: 2em;
+      }
+
+  }
+ 

@@ -29,6 +29,7 @@ const Home = () => {
             <h1 className="title">Home Page</h1>
             <div className="box">
               {blog.length < 1 ? (
+          <div className="card">
                 <ContentLoader viewBox="0 0 820 450" height={450} width={820}>
                   <rect x="10" y="10" rx="5" ry="5" width="260" height="140" />
                   <rect x="280" y="10" rx="5" ry="5" width="260" height="280" />
@@ -37,6 +38,7 @@ const Home = () => {
                   <rect x="280" y="300" rx="5" ry="5" width="260" height="140" />
                   <rect x="550" y="160" rx="5" ry="5" width="260" height="280" />
                 </ContentLoader>
+                </div>
               ) : (
                 blog.map((data, index) => (
                   <div key={index} className="card">
