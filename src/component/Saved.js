@@ -13,7 +13,7 @@ useEffect(() => {
     setSaved(save)
 },[save])
     return (
-        <div>
+        <div className="save">
             <h2>Saved Blog</h2>
             <div className="box">
                 { saved &&

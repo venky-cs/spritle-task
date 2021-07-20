@@ -25,7 +25,7 @@ require("dotenv").config();
 
 function App() {
   const [auth, setAuth] = useState(false);
-  
+  const [slide,setSlide]=useState(false)
   
   return (
     <Router>
@@ -35,8 +35,10 @@ function App() {
               <div className="app">
                 <div className="main">
                   
-                  <div className="sidebar">
-                <Nav sign={auth ? signOut :signIn}  auth={auth}/>
+                  {/* <div className="sidebar" style={slide ? {flex:".15"} : {flex:"0.10"}}>
+                  </div> */}
+              <div className="sidebar" style={slide ? { flex: ".15" } : { flex: ".1" }}>
+                <Nav sign={auth ? signOut :signIn}  auth={auth} slide={setSlide}/>
                   </div>
 
 
@@ -97,6 +99,7 @@ function App() {
   function signOut(){
     firebase.auth().signOut();
   }
+
 }
 
 export default App;

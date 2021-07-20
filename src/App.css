@@ -1,7 +1,26 @@
-*{
+
+/* Basic styling */
+
+:root {
+  /* Colors */
+  --black: #09090c;
+  --grey: #a4b2bc;
+  --white: #fff;
+  --background: rgba(137, 171, 245, 0.37);
+}
+
+
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body {
+  background-color: var(--background);
+  font-family: "Poppins", sans-serif;
 }
 
 .app{
@@ -15,32 +34,19 @@
   height: 80vh;
   text-align: center;
 }
-.nav button{
-  border:none;
-  padding:10px 20px;
-  font-size: 20px;
-}
-.nav button:hover{
-  background-color: red;
-}
+
 
 .main {
   display: flex;
 }
 
 .main .sidebar {
-  flex: .15;
-  width: 100%;
+  flex: .10;
 }
 .main .mainbar{
-  flex:.70;
-  width: 100%;
+  flex:.90;
 }
-/* .sign {
-     position:absolute;
-     bottom:0;
-     width: 80%;
-  } */
+
 
   .sign button{
      padding: 10px;
@@ -94,7 +100,7 @@
     background-color: #ddd;
     padding: 10px;
     margin: 20px;
-    position: relative;
+    /* position: relative; */
     border-radius: 5px;
     box-shadow: 4px 13px 27px 1px rgb(0 0 0 / 23%);
     transition: all 0.5s linear;
@@ -107,7 +113,7 @@
 
   }
 
-  .card::before {
+  /* .card::before {
     position: absolute;
     content: '';
     left: 0;
@@ -138,7 +144,7 @@
   .card:hover::before,
   .card:hover::after {
     background-color: #0000ff;
-  }
+  } */
 
   .card h2 {
     border-bottom: 2px solid #c3bcbc;
@@ -150,9 +156,6 @@
     line-height: 1.6rem;
   }
 
-  /* .home .card{
-    height: 250px;
-  } */
 
   .title{
     margin:20px;
@@ -161,15 +164,15 @@
   .full {
     width: 100%;
      display: inline-block;
-     position: relative;
-     top: 100px;
-     left: 100px;
+     /* position: relative; */
+     /* top: 10px;
+     left: 10px; */
      height: 100%;
      overflow: visible;
      text-align: start;
   }
 
-  .full::after {
+  /* .full::after {
     width: 11%;
     height: 10px;
 
@@ -179,7 +182,7 @@
     width: 11%;
     height: 10px;
 
-  }
+  } */
 
   .btn {
    display: flex;
@@ -192,7 +195,7 @@
      cursor: pointer;
   }
   .btn img:hover{
-    background-color: red;
+    background-color: #6eb9f7;
   }
 
   button > a {
@@ -230,9 +233,9 @@
      .full {
        width: 100%;
        display: inline-block;
-       position: relative;
+       /* position: relative;
        top: 0px;
-       left: 0px;
+       left: 0px; */
        height: 100%;
        overflow: visible;
        text-align: start;
@@ -253,24 +256,27 @@
       width: 100vw;
       text-align: center;
     }
-    .card {
-      width: 60%;
-      margin-right: auto;
-    }
+
+   
     .main .sidebar {
-      flex: .15;
+      flex: .10;
     }
     .main .mainbar {
-      flex: .80;
+      flex: .90;
       width: 100%;
     }
+     .card {
+       width: 80%;
+       margin-right: auto;
+     }
 
      .full {
-       width: 70%;
+       width: 90%;
        display: inline-block;
-       position: relative;
+       margin-right: auto;
+       /* position: relative;
        top: 0px;
-       left: 0px;
+       left: 0px; */
      }
 
       form {
@@ -301,6 +307,6 @@
 
     }
 
-
   }
+  
  

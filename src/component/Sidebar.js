@@ -40,9 +40,7 @@ export const SideButton = styled.button`
     top: ${(props) => (props.clicked ? "1.2" : "1.5rem")};
     transform: ${(props) => (props.clicked ? "rotate(-135deg)" : "rotate(0)")};
   }
-  @media (max-width: 450px) {
-     display:none
-   }
+ 
 `;
 
 
@@ -80,9 +78,7 @@ export const SlickBar = styled.ul`
   transition: all 0.5s ease;
   border-radius: 0 30px 30px 0;
 
-  @media (max-width: 450px) {
-    width: ${(props) => (props.clicked ? "5rem" : "8rem")};
-  }
+  
 `;
 
 export const Item = styled.a`
@@ -106,6 +102,7 @@ export const Item = styled.a`
     filter: invert(92%) sepia(4%) saturate(1033%) hue-rotate(169deg)
       brightness(78%) contrast(85%);
   }
+ 
 `;
 
 export const Text = styled.span`
@@ -118,6 +115,7 @@ export const Text = styled.span`
     width: ${(props) => (props.clicked ? "50%" : "0")};
     margin-left: ${(props) => (props.clicked ? ".5rem" : "0")};
   }
+  
    
 `;
 
@@ -144,30 +142,14 @@ export const Profile = styled.div`
       padding: 2px;
     }
   }
-   @media (max-width: 500px) {
- width: ${(props) => (props.clicked ? "1rem" : ".5rem")};
- margin-left: ${(props) => (props.clicked ? "3.5rem" : "0")};
- flex-direction:column;
-  img {
-    width: 1.rem;
-    height: 2rem;
-    border-radius: 50%;
-    cursor: pointer;
-    &:hover {
-      border: 2px solid var(--grey);
-      padding: 2px;
-    }
-  }
-  }
+
 `;
 
 export const Details = styled.div`
   display: ${(props) => (props.clicked ? "flex" : "none")};
   justify-content: space-between;
   align-items: center;
-  @media (max-width: 500px) {
-    justify-content: center;
-  }
+  
 `;
 
 export const Name = styled.div`
@@ -187,11 +169,6 @@ export const Name = styled.div`
       text-decoration: underline;
     }
   }
-  @media (max-width: 450px) {
-      padding: 0 .5rem;
-  display: flex;
-  flex-direction: row;
-  }
+  
 `;
-
 

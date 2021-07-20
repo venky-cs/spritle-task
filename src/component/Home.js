@@ -4,12 +4,15 @@ import ContentLoader from "react-content-loader";
 import ReactMarkdown from "react-markdown";
 import {Link} from 'react-router-dom'
 import {saveContext} from '../context/SaveContext'
+import SaveIn from './save.png'
+import SaveOt from './saveOt.png'
 
 const Home = () => {
   const [blog, setBlog] = useState([]);
   const values = useContext(saveContext)
   const [save, ,setLoad] = values
-
+  let a = JSON.parse(localStorage.getItem("save"))
+  let b = 0;
   useEffect(() => {
     db.collection("post")
       .get()
@@ -53,7 +56,13 @@ const Home = () => {
                         />
                         </Link>
 
-                        <img src="https://img.icons8.com/ios-filled/50/000000/save--v2.png" onClick={() => saveData(data)} alt="save"/>
+                        {
+                        b =a && a.length > 0 && a.every(a => a.title !== data.title)
+                          ? <img src={SaveIn} onClick={() => saveData(data)} alt="save-t"  /> : 
+                          a.length > 0 ?
+                          <img src={SaveOt}  onClick={() => saveData(data)} alt="save-f" />
+                            : <img src={SaveIn} onClick={() => saveData(data)} alt="save-t" />
+                        }
 
                     </div>
                   </div>
@@ -66,8 +75,18 @@ const Home = () => {
   function saveData(data) {
     let a = JSON.parse(localStorage.getItem("save"))
     let b =a && a.length > 0 && a.every(a => a.title !== data.title)
+    let c = Array(data.title)
+    
     if (a && a.length > 0 && b === false) {
-      alert("Already Saved")
+      let remove = a.length > 0 && a.filter(item => !c.includes(item.title))
+      console.log(remove)
+      localStorage.setItem(
+        'save',
+        JSON.stringify(
+          remove
+        )
+      );
+      setLoad(prevState => !prevState)
     } else {
       localStorage.setItem(
         'save',
