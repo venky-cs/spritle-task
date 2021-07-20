@@ -1,21 +1,14 @@
 import { useState } from "react";
 import { db } from "../firebaseConfig";
 import Button from './Button'
-
-// let cors = 'https://cors-anywhere-venky.herokuapp.com/';
-let key = "f7222436d420fd8"
-// let keyOne = "9cf5644e3337d40"
-// let keyTwo = "9fcf76aa5f77fa3"
-
-// let imgur = "https://imgur.com/upload"
-
+import { storage } from '../firebaseConfig'
 
 const Blog = () => {
   const [text, setText] = useState("");
   const [message, setMessage] = useState("");
   const [author, setAuthor] = useState("");
 
-  // const [link, setLink] = useState("");
+  const [link, setLink] = useState("");
 
   return (
     <div className="blog">
@@ -36,9 +29,9 @@ const Blog = () => {
           rows="15"
         ></textarea>{" "}
         <br />
-        <iframe src="https://venky-cs.github.io/imageUpload/" title="description"></iframe>
-        {/* <input type="file" onChange={getLink} /> */}
-        {/* <p> {link} </p>  */}
+        {/* <iframe src="https://venky-cs.github.io/imageUpload/" title="description"></iframe> */}
+        <input type="file" onChange={getLink} />
+        <p> {link} </p> 
         <div></div>
         <br />
         <input
@@ -68,25 +61,10 @@ const Blog = () => {
 
   function getLink(e) {
     e.preventDefault();
-    let a = e.target.files[0];
-    const formData = new FormData();
-    formData.append("image", a)
-    fetch(`https://api.imgur.com/3/image`, {
-      method: "POST",
-      headers: {
-        Authorization: `Client-ID ${key}`,
-        "content-type": "multipart/form-data",
-      },
-      body: formData,
+    const uploadData = storage.ref(`images/${e.target.files[0].name}`).put(e.target.files[0])
+    uploadData.on("state_changed", snapshot => {},error => {console.log(error)},() => {
+      storage.ref("images").child(e.target.files[0].name).getDownloadURL().then(url => setLink(url))
     })
-      .then((res) => {
-        console.log(res)
-        let img= res.data
-        console.log(img)
-      })
-      .catch((err) => console.log(err));
-
- 
   }
  
 };

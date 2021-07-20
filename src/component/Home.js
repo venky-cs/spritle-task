@@ -7,6 +7,7 @@ import {saveContext} from '../context/SaveContext'
 import SaveIn from './save.png'
 import SaveOt from './saveOt.png'
 
+
 const Home = () => {
   const [blog, setBlog] = useState([]);
   const values = useContext(saveContext)

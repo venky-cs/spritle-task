@@ -32,7 +32,6 @@ const Nav = ({sign,auth,slide}) => {
         <SideButton clicked={click} onClick={() => {
           handleClick()
           slide()}}>
-          <img src="https://img.icons8.com/material-outlined/50/000000/menu--v4.png" alt="icon" width="30px" />
           
         </SideButton>
         <SidebarContainer>

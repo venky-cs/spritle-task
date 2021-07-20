@@ -37,7 +37,7 @@ function App() {
                   
                   {/* <div className="sidebar" style={slide ? {flex:".15"} : {flex:"0.10"}}>
                   </div> */}
-              <div className="sidebar" style={slide ? { flex: ".15" } : { flex: ".1" }}>
+              <div className="sidebar" >
                 <Nav sign={auth ? signOut :signIn}  auth={auth} slide={setSlide}/>
                   </div>
 
