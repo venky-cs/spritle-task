@@ -14,7 +14,7 @@ useEffect(() => {
 },[save])
     return (
         <div className="save">
-            <h2>Saved Blog</h2>
+            <h2 className="title">Saved Blog</h2>
             <div className="box">
                 { saved &&
                     saved.map((data, index) => (
