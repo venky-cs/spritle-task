@@ -11,9 +11,9 @@ const Blog = () => {
   const [link, setLink] = useState("");
 
   return (
-    <div className="blog">
-      <h1 className="title"> Create Blog </h1>{" "}
+
       <form>
+      <h1 className="title"> Create Blog </h1>{" "}
         <input
           type="text"
           value={text}
@@ -41,10 +41,10 @@ const Blog = () => {
           placeholder="Author"
         />
         <Button disabled={!text || !message} onClick={createPost}>
-          Post{" "}
-        </Button>{" "}
-      </form>{" "}
-    </div>
+          Post
+        </Button>
+      </form>
+ 
   );
 
   function createPost(e) {

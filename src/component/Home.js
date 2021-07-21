@@ -4,9 +4,12 @@ import ContentLoader from "react-content-loader";
 import ReactMarkdown from "react-markdown";
 import {Link} from 'react-router-dom'
 import {saveContext} from '../context/SaveContext'
-import SaveIn from './save.png'
-import SaveOt from './saveOt.png'
 
+
+const width = 7
+const height = 3
+const foregroundColor = '#F0F1F4'
+const backgroundColor = '#F9F9FA'
 
 const Home = () => {
   const [blog, setBlog] = useState([]);
@@ -33,15 +36,31 @@ const Home = () => {
             <h1 className="title">Home Page</h1>
             <div className="box">
               {blog.length < 1 ? (
-          <div className="card">
-                <ContentLoader viewBox="0 0 820 450" height={450} width={820}>
-                  <rect x="10" y="10" rx="5" ry="5" width="260" height="140" />
-                  <rect x="280" y="10" rx="5" ry="5" width="260" height="280" />
-                  <rect x="550" y="10" rx="5" ry="5" width="260" height="140" />
-                  <rect x="10" y="160" rx="5" ry="5" width="260" height="280" />
-                  <rect x="280" y="300" rx="5" ry="5" width="260" height="140" />
-                  <rect x="550" y="160" rx="5" ry="5" width="260" height="280" />
-                </ContentLoader>
+          <div>
+            <ContentLoader
+              foregroundColor={foregroundColor}
+              backgroundColor={backgroundColor}
+              style={{ width: '100%', height: 93 * height }}
+            >
+             
+              <rect
+                x="0"
+                y={height * 17}
+                rx="8"
+                ry="8"
+                width={width * 70}
+                height={height * 76}
+              />
+              <rect
+                x={width * 78}
+                y={height * 17}
+                rx="8"
+                ry="8"
+                width={width * 70}
+                height={height * 76}
+              />
+            
+            </ContentLoader>
                 </div>
               ) : (
                 blog.map((data, index) => (
@@ -53,16 +72,15 @@ const Home = () => {
                       </p>
                     <div className="btn">
                         <Link to={"/blog/:" + data.title}>
-                        <img src="https://img.icons8.com/ios-filled/50/000000/open-book.png" alt="i"
-                        />
+                        <i class="fas fa-book-reader"></i>
                         </Link>
 
                         {
                         b =a && a.length > 0 && a.every(a => a.title !== data.title)
-                          ? <img src={SaveIn} onClick={() => saveData(data)} alt="save-t"  /> : 
+                          ? <i className="far fa-bookmark" onClick={() => saveData(data)}></i> :
                             a && a.length > 0 ?
-                          <img src={SaveOt}  onClick={() => saveData(data)} alt="save-f" />
-                            : <img src={SaveIn} onClick={() => saveData(data)} alt="save-t" />
+                            <i className="fas fa-bookmark" onClick={() => saveData(data)}></i>
+                            : <i className="far fa-bookmark" onClick={() => saveData(data)}></i>
                         }
 
                     </div>
