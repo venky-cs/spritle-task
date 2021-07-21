@@ -10,14 +10,6 @@
 }
 
 
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body {
   background-color: var(--background);
   font-family: "Poppins", sans-serif;
@@ -244,8 +236,8 @@ body {
   position: relative;
   /* background: #E4E9F7; */
   height: 100vh;
-  left: 260px;
-  width: calc(100% - 260px);
+  left: 200px;
+  width: calc(100% - 200px);
   transition: all 0.5s ease;
 }
 .sidebar.close ~ .home-section{
@@ -440,11 +432,10 @@ body {
   }
 
   @media screen and (max-width:1024px) {
-*{
-  overflow-x: hidden;
-}
+
     .home,.save {
-      margin-left: 10px
+      margin-left: 10px;
+      overflow-x: hidden;
     }
     .card {
       width: 40%;
@@ -467,7 +458,7 @@ body {
         height: fit-content;
         margin: 3em auto;
         background-color: #f3efe7;
-        /* padding: 2em; */
+      overflow-x: hidden;
       }
 
   }
@@ -479,7 +470,6 @@ body {
 
      .card {
        width: 80%;
-       /* margin-right: auto; */
      }
 
      .full {

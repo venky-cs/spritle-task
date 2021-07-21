@@ -60,7 +60,7 @@ const Home = () => {
                         {
                         b =a && a.length > 0 && a.every(a => a.title !== data.title)
                           ? <img src={SaveIn} onClick={() => saveData(data)} alt="save-t"  /> : 
-                          a.length > 0 ?
+                            a && a.length > 0 ?
                           <img src={SaveOt}  onClick={() => saveData(data)} alt="save-f" />
                             : <img src={SaveIn} onClick={() => saveData(data)} alt="save-t" />
                         }
