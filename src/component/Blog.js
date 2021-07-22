@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { db } from "../firebaseConfig";
 import Button from './Button'
-import { storage } from '../firebaseConfig'
-
+import axios from 'axios'
+require('dotenv').config();
 const Blog = () => {
   const [text, setText] = useState("");
   const [message, setMessage] = useState("");
@@ -29,8 +29,8 @@ const Blog = () => {
           rows="15"
         ></textarea>{" "}
         <br />
-        {/* <iframe src="https://venky-cs.github.io/imageUpload/" title="description"></iframe> */}
-        <input type="file" onChange={getLink} />
+  
+      <input type="file" onChange={getLink} accept="image/*"/>
         <p> {link} </p> 
         <div></div>
         <br />
@@ -61,10 +61,27 @@ const Blog = () => {
 
   function getLink(e) {
     e.preventDefault();
-    const uploadData = storage.ref(`images/${e.target.files[0].name}`).put(e.target.files[0])
-    uploadData.on("state_changed", snapshot => {},error => {console.log(error)},() => {
-      storage.ref("images").child(e.target.files[0].name).getDownloadURL().then(url => setLink(url))
+ 
+    let formData = new FormData()
+    let image=e.target.files[0]
+    formData.append("image",image) 
+    console.log(formData)   
+
+
+    axios({
+      method: "post",
+      url: `https://cors-anywhere-venky.herokuapp.com/https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_IMGDD}`,
+      data: formData,
+      headers: { "Content-Type": "multipart/form-data" },
     })
+
+      .then(res => {
+        // console.log('Success:', res);
+        setLink(res.data.data.url);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
   }
  
 };
