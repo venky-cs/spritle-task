@@ -66,29 +66,28 @@ function BlogPost() {
     function saveData(data) {
         let a = JSON.parse(localStorage.getItem("save"))
         let b = a && a.length > 0 && a.every(a => a.title !== data.title)
-        if(a &&a.length >0 &&b=== false){
+        if (a && a.length > 0 && b === false) {
             alert("Already Saved")
-        }else{
-        localStorage.setItem(
-            'save',
-            JSON.stringify([
-                ...save,
-                { title: data.title, message: data.message, },
-            ])
-        );
-        setLoad(prevState => !prevState)
+        } else {
+            localStorage.setItem(
+                'save',
+                JSON.stringify([
+                    ...save,
+                    { title: data.title, message: data.message, },
+                ])
+            );
+            setLoad(prevState => !prevState)
         }
     }
 
     function removeData(data) {
         let blog = JSON.parse(localStorage.getItem("save"))
         let a = blog && blog.length > 0 && blog.map(a => a)
-        let b =Array(data.title)
-        console.log(a)
-        console.log(b)
-        let remove =a.length > 0 && a.filter(item => !b.includes(item.title))
-        console.log(remove)
-         localStorage.setItem(
+        let b = Array(data.title)
+
+        let remove = a.length > 0 && a.filter(item => !b.includes(item.title))
+
+        localStorage.setItem(
             'save',
             JSON.stringify(
                 remove

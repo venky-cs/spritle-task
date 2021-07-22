@@ -23,20 +23,20 @@ border: none;
   }
   
 ${props => {
-        if (props.disabled === true) {
-            return `
+    if (props.disabled === true) {
+      return `
                 background-color:#d9534f;
         `
-        }
-    }}
+    }
+  }}
     ${props => {
-        if (props.variant === 'google') {
-            return `
+    if (props.variant === 'google') {
+      return `
         background-color:#5bc0de;
         color:white;
         `
-        }
-    }}
+    }
+  }}
 
   &:hover{
        background: #47a7f5 radial-gradient(circle, transparent 1%, #47a7f5 1%) center/15000%;
