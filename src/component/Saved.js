@@ -1,23 +1,38 @@
-import { useState, useEffect, useContext } from "react"
-import { saveContext } from '../context/SaveContext'
+import { useState, useEffect} from "react"
 import ReactMarkdown from "react-markdown";
 import { Link } from 'react-router-dom';
-
+import { db } from "../firebaseConfig";
 
 const Saved = () => {
-    const value = useContext(saveContext)
-    const [save] = value
+
     const [saved, setSaved] = useState()
+    const[filtered,setFiltered]  =useState([])
+
 
     useEffect(() => {
-        setSaved(save)
-    }, [save])
+        db.collection("post")
+            .get()
+            .then((snap) => {
+                let datas = [];
+                snap.forEach((doc) => {
+                    const data = doc.data();
+                    datas.push(data);
+                });
+                setSaved(datas);
+            })
+            .catch((err) => console.log(err));
+           
+    }, []);
+
+    useEffect(() => {
+        saved && setFiltered(saved.filter((data) => data.isSaved))
+    },[saved])
     return (
         <div className="save">
             <h2 className="title">Saved Blog</h2>
             <div className="box">
-                {saved &&
-                    saved.map((data, index) => (
+                {filtered &&
+                    filtered.map((data, index) => (
                         <div key={index} className="card">
                             <Link to={"/blog/:" + data.title}>
                                 <h2>{data.title}</h2>

@@ -9,7 +9,7 @@ import {
   IfFirebaseAuthed,
   IfFirebaseAuthedAnd,
 } from "@react-firebase/auth";
-// import Nav from "./component/Nav";
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -17,7 +17,6 @@ import {
   Link
 } from "react-router-dom";
 import BlogPost from './component/BlogPost';
-import SaveContext from './context/SaveContext'
 import Saved from "./component/Saved";
 import Button from "./component/Button"
 import Home from "./component/Home";
@@ -97,13 +96,11 @@ function App() {
             </div>
             <section class="home-section">
 
-
-              <SaveContext>
                 <Route path="/home">
                   <Home />
                 </Route>
                 <Route path="/createBlog">
-                  {auth ? <Blog /> : <div className="signUp">
+                  {auth ? <Blog  user={userName}/> : <div className="signUp">
                     <h2>SignUp</h2>
                     <Button onClick={signIn}>Login to Continue...</Button>
                   </div>}
@@ -114,7 +111,6 @@ function App() {
                 <Route path="/save">
                   <Saved />
                 </Route>
-              </SaveContext>
             </section>
 
 

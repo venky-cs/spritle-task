@@ -1,17 +1,14 @@
-import { useState, useEffect, useContext } from "react"
+import { useState, useEffect } from "react"
 import { useParams } from 'react-router-dom'
 import ReactMarkdown from "react-markdown";
 import ContentLoader from "react-content-loader";
 import { db } from "../firebaseConfig";
-import { saveContext } from '../context/SaveContext'
 import Button from './Button'
 
 function BlogPost() {
     const [blog, setBlog] = useState([]);
     const [select, setSelect] = useState();
 
-    const value = useContext(saveContext)
-    const [save, , setLoad] = value
 
     let { slug } = useParams();
     slug = JSON.stringify(slug.slice(1))
@@ -24,12 +21,13 @@ function BlogPost() {
                 let datas = [];
                 snap.forEach((doc) => {
                     const data = doc.data();
-                    datas.push(data);
+                    const id = doc.id
+                    datas.push({ ...data, id: id, data: data });
                 });
                 setBlog(datas);
             })
             .catch((err) => console.log(err));
-    }, []);
+    }, [blog]);
 
     useEffect(() => {
         setSelect(blog.filter(data => data.title === JSON.parse(slug)))
@@ -55,45 +53,17 @@ function BlogPost() {
                         <p>
                             <ReactMarkdown>{data.message}</ReactMarkdown>
                         </p>
-                        <Button variant="google" className="save-btn" onClick={() => saveData(data)}>Save</Button>
-                        <Button variant="google" className="save-btn" onClick={() => removeData(data)}>Remove</Button>
+                        {!data.isSaved ? <Button variant="google" className="save-btn" onClick={() => saveBlog(data)}>Save</Button>
+                            : <Button variant="google" className="save-btn" onClick={() => saveBlog(data)}>Remove</Button>
+                        }
                     </div>
                 </div>
             )
             ))}
     </div>;
 
-    function saveData(data) {
-        let a = JSON.parse(localStorage.getItem("save"))
-        let b = a && a.length > 0 && a.every(a => a.title !== data.title)
-        if (a && a.length > 0 && b === false) {
-            alert("Already Saved")
-        } else {
-            localStorage.setItem(
-                'save',
-                JSON.stringify([
-                    ...save,
-                    { title: data.title, message: data.message, },
-                ])
-            );
-            setLoad(prevState => !prevState)
-        }
-    }
-
-    function removeData(data) {
-        let blog = JSON.parse(localStorage.getItem("save"))
-        let a = blog && blog.length > 0 && blog.map(a => a)
-        let b = Array(data.title)
-
-        let remove = a.length > 0 && a.filter(item => !b.includes(item.title))
-
-        localStorage.setItem(
-            'save',
-            JSON.stringify(
-                remove
-            )
-        );
-        setLoad(prevState => !prevState)
+    function saveBlog(data) {
+        db.collection("post").doc(data.id).update({ isSaved: !data.isSaved })
     }
 }
 

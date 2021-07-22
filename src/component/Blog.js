@@ -3,10 +3,9 @@ import { db } from "../firebaseConfig";
 import Button from './Button'
 import axios from 'axios'
 require('dotenv').config();
-const Blog = () => {
+const Blog = ({user}) => {
   const [text, setText] = useState("");
   const [message, setMessage] = useState("");
-  const [author, setAuthor] = useState("");
 
   const [link, setLink] = useState("");
 
@@ -34,12 +33,7 @@ const Blog = () => {
       <p> {link} </p>
       <div></div>
       <br />
-      <input
-        type="text"
-        value={author}
-        onChange={(e) => setAuthor(e.target.value)}
-        placeholder="Author"
-      />
+
       <Button disabled={!text || !message} onClick={createPost}>
         Post
       </Button>
@@ -51,12 +45,12 @@ const Blog = () => {
     e.preventDefault();
     db.collection("post").add({
       title: text,
-      author: author,
+      author: user,
       message: message,
+      isSaved:false
     });
     setText("");
     setMessage("");
-    setAuthor("");
   }
 
   function getLink(e) {
