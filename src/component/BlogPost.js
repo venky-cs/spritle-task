@@ -27,7 +27,7 @@ function BlogPost() {
                 setBlog(datas);
             })
             .catch((err) => console.log(err));
-    }, [blog]);
+    }, []);
 
     useEffect(() => {
         setSelect(blog.filter(data => data.title === JSON.parse(slug)))

@@ -29,7 +29,24 @@ const Blog = ({user}) => {
       ></textarea>{" "}
       <br />
 
-      <input type="file" onChange={getLink} accept="image/*" />
+<div className="img-upload">
+      <div className="Neon Neon-theme-dragdropbox">
+      <input type="file" onChange={getLink} accept="image/*"  />
+       <div className="Neon-input-dragDrop">
+         <div className="Neon-input-inner">
+           <div className="Neon-input-icon">
+             <i className="fa fa-file-image-o"></i>
+             </div>
+             <div class="Neon-input-text">
+               <h3>Drag&amp;Drop files here</h3> 
+               <span style={{display:"inline-block",margin: "15px 0"}}>or</span>
+               </div>
+               <p class="Neon-input-choose-btn blue">Browse Files</p>
+               </div>
+               </div>
+        </div>
+        {link &&<img src={link} alt="preview" />}
+      </div>
       <p> {link} </p>
       <div></div>
       <br />
@@ -63,7 +80,7 @@ const Blog = ({user}) => {
 
     axios({
       method: "post",
-      url: `https://cors-anywhere-venky.herokuapp.com/https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_IMGDD}`,
+      url: `https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_IMGDD}`,
       data: formData,
       headers: { "Content-Type": "multipart/form-data" },
     })

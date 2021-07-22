@@ -27,7 +27,7 @@ const Home = () => {
         setBlog(datas);
       })
       .catch((err) => console.log(err));
-  }, [load,blog]);
+  }, [load]);
 
   return (
           <div className="home">
