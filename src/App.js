@@ -63,20 +63,41 @@ function App() {
                   </Link>
                 </li>
 
+                {auth && <>
+                  <li onClick={() => setToggle(true)}>
+                    <Link to="/createBlog">
+                      <i className='bx bxs-message-square-detail'></i>
+                      <span className="link_name">Write Blog</span>
+                    </Link>
+                  </li>
 
-                <li onClick={() => setToggle(true)}>
-                  <Link to="/createBlog">
-                    <i className='bx bxs-message-square-detail'></i>
-                    <span className="link_name">Blog</span>
-                  </Link>
-                </li>
+                  <li onClick={() => setToggle(true)}>
+                    <Link to="/myBlog" >
+                      <i class="fas fa-id-card"></i>
+                      <span className="link_name">My Blog</span>
+                    </Link>
+                  </li>
+                </>}
 
                 <li onClick={() => setToggle(true)}>
                   <Link to="/save" >
                     <i className='bx bx-save'></i>
-                    <span className="link_name">Saved</span>
+                    <span className="link_name">Favourite</span>
                   </Link>
                 </li>
+
+                {!auth &&
+                  <li onClick={() => {
+                    setToggle(true)
+                  signIn()
+                    }}>
+                  <Link>
+                    <i class="fas fa-sign-in-alt"></i>
+                      <span className="link_name">LogIn</span>
+                    </Link>
+                  </li>
+                }
+
 
 
                 <div className="profile-details">
@@ -96,21 +117,21 @@ function App() {
             </div>
             <section class="home-section">
 
-                <Route path="/home">
-                  <Home  />
-                </Route>
-                <Route path="/createBlog">
-                  {auth ? <Blog  user={userName} pic={userImage}/> : <div className="signUp">
-                    <h2>SignUp</h2>
-                    <Button onClick={signIn}>Login to Continue...</Button>
-                  </div>}
-                </Route>
-                <Route path="/blog/:slug">
-                  <BlogPost />
-                </Route>
-                <Route path="/save">
-                  <Saved />
-                </Route>
+              <Route path="/home">
+                <Home />
+              </Route>
+              <Route path="/createBlog">
+                {auth ? <Blog user={userName} pic={userImage} /> : <div className="signUp">
+                  <h2>SignUp</h2>
+                  <Button onClick={signIn}>Login to Continue...</Button>
+                </div>}
+              </Route>
+              <Route path="/blog/:slug">
+                <BlogPost />
+              </Route>
+              <Route path="/save">
+                <Saved />
+              </Route>
             </section>
 
 
