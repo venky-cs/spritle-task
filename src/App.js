@@ -51,14 +51,14 @@ function App() {
           <div className="app">
             <div className={`sidebar ${toggle && "close"}`}>
               <div className="logo-details" onClick={toggler}>
-                <i class='bx bx-menu'  ></i>
+                <i className='bx bx-menu'  ></i>
                 <span className="logo_name">Blog App</span>
               </div>
 
               <ul className="nav-links">
                 <li onClick={() => setToggle(true)}>
                   <Link to="/home">
-                    <i class='bx bx-home'></i>
+                    <i className='bx bx-home'></i>
                     <span className="link_name">Home</span>
                   </Link>
                 </li>
@@ -66,14 +66,14 @@ function App() {
 
                 <li onClick={() => setToggle(true)}>
                   <Link to="/createBlog">
-                    <i class='bx bxs-message-square-detail'></i>
+                    <i className='bx bxs-message-square-detail'></i>
                     <span className="link_name">Blog</span>
                   </Link>
                 </li>
 
                 <li onClick={() => setToggle(true)}>
                   <Link to="/save" >
-                    <i class='bx bx-save'></i>
+                    <i className='bx bx-save'></i>
                     <span className="link_name">Saved</span>
                   </Link>
                 </li>
@@ -97,10 +97,10 @@ function App() {
             <section class="home-section">
 
                 <Route path="/home">
-                  <Home />
+                  <Home  />
                 </Route>
                 <Route path="/createBlog">
-                  {auth ? <Blog  user={userName}/> : <div className="signUp">
+                  {auth ? <Blog  user={userName} pic={userImage}/> : <div className="signUp">
                     <h2>SignUp</h2>
                     <Button onClick={signIn}>Login to Continue...</Button>
                   </div>}

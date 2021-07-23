@@ -16,17 +16,17 @@ function BlogPost() {
 
     useEffect(() => {
         db.collection("post")
-            .get()
-            .then((snap) => {
+            .onSnapshot((snapshot) => {
                 let datas = [];
-                snap.forEach((doc) => {
+                snapshot.forEach((doc) => {
                     const data = doc.data();
                     const id = doc.id
-                    datas.push({ ...data, id: id, data: data });
+                    datas.push({ ...data, id: id });
                 });
                 setBlog(datas);
-            })
-            .catch((err) => console.log(err));
+            }, (error) => {
+                console.log(error)
+            });
     }, []);
 
     useEffect(() => {
@@ -45,7 +45,7 @@ function BlogPost() {
             </ContentLoader>
         ) : (
             select.map((data, index) => (
-                <div className="select">
+                <div key={index} className="select">
 
                     <div key={index} className="card full">
                         <h2>{data.title}</h2>

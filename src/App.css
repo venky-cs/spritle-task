@@ -325,7 +325,7 @@ input[type="file"]{
   padding: 10px;
   margin: 20px;
   position: relative;
-  border-radius: 5px;
+  border-radius: 12px;
   box-shadow: 4px 13px 27px 1px rgb(0 0 0 / 23%);
   transition: all 0.5s linear;
   overflow: hidden;
@@ -411,6 +411,7 @@ i {
 .btn {
   display: flex;
   justify-content: space-around;
+  align-items: center;
   margin: 10px;
 }
 .btn img {
@@ -567,6 +568,11 @@ justify-content: space-evenly;
 
 .copy-btn:focus {
   outline: none;
+}
+
+.user-info{
+  display: flex;
+  align-items: center;
 }
 
 @media screen and (max-width: 1024px) {

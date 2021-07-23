@@ -5,7 +5,7 @@ import axios from 'axios'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
 require('dotenv').config();
-const Blog = ({ user }) => {
+const Blog = ({ user,pic }) => {
   const [text, setText] = useState("");
   const [message, setMessage] = useState("");
 
@@ -43,11 +43,11 @@ const Blog = ({ user }) => {
               <div className="Neon-input-icon">
                 <i className="fa fa-file-image-o"></i>
               </div>
-              <div class="Neon-input-text">
+              <div className="Neon-input-text">
                 <h3>Drag&amp;Drop files here</h3>
                 <span style={{ display: "inline-block", margin: "15px 0" }}>or</span>
               </div>
-              <p class="Neon-input-choose-btn blue">Browse Files</p>
+              <p className="Neon-input-choose-btn blue">Browse Files</p>
             </div>
           </div>
         </div>
@@ -88,7 +88,9 @@ const Blog = ({ user }) => {
       title: text,
       author: user,
       message: message,
-      isSaved: false
+      isSaved: false,
+      created: Math.floor(Date.now() / 1000),
+      profile:pic,
     });
     setText("");
     setMessage("");
