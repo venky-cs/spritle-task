@@ -510,7 +510,8 @@ align-items: center;
 justify-content: space-evenly;
 }
   .img-upload > img{
-    width: 343px;
+    width: 230px;
+    max-height: 200px;
   }
 
 .signUp {
@@ -524,6 +525,48 @@ justify-content: space-evenly;
 .home,
 .save {
   margin-left: 50px;
+}
+
+.copy-input {
+  max-width: 275px;
+  width: 100%;
+  cursor: pointer;
+  background-color: #eaeaeb;
+  border: none;
+  color: #6c6c6c;
+  font-size: 14px;
+  border-radius: 5px;
+  padding: 15px 45px 15px 15px;
+  font-family: 'Montserrat', sans-serif;
+  box-shadow: 0 3px 15px #b8c6db;
+  -moz-box-shadow: 0 3px 15px #b8c6db;
+  -webkit-box-shadow: 0 3px 15px #b8c6db;
+}
+
+.copy-input:focus {
+  outline: none;
+}
+
+.copy-btn {
+  width: 40px;
+  background-color: #eaeaeb;
+  font-size: 18px;
+  padding: 6px 9px;
+  border-radius: 5px;
+  border: none;
+  color: #6c6c6c;
+  margin-left: -50px;
+  transition: all .4s;
+}
+
+.copy-btn:hover {
+  transform: scale(1.3);
+  color: #1a1a1a;
+  cursor: pointer;
+}
+
+.copy-btn:focus {
+  outline: none;
 }
 
 @media screen and (max-width: 1024px) {
@@ -590,6 +633,7 @@ justify-content: space-evenly;
    }
    .img-upload > img {
      width: 100px;
+       max-height: 100px;
    }
 
   .home,
