@@ -112,7 +112,7 @@ function App() {
                       <div className="name-job">
                         <div className="profile_name">{userName}</div>
                       </div>
-                      <i className='bx bx-log-out' style={{ color: 'red', padding: "20px", cursor: "pointer", width: "50px" }} onClick={signOut}></i>
+                      <i className='bx bx-log-out' style={{ color: 'red', paddingRight: "20px", cursor: "pointer", fontSize: "30px" }} onClick={signOut}></i>
                     </>}
 
                 </div>

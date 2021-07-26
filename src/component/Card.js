@@ -17,12 +17,12 @@ const Card = ({ data, saveBlog, isDrag }) => {
     }, [isDragging])
 
     return (
-        <div className="card" key={data.id} ref={drag}>
+        <div className="card"  key={data.id} ref={drag}>
             <Link to={"/blog/:" + data.title}>
                 <h2>{data.title}</h2>
                 <p>
                     <ReactMarkdown>{data.message
-                    .substring(0, 250)
+                    .substring(0, 350)
                     }</ReactMarkdown>
                 </p>
             </Link>
