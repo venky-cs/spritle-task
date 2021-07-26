@@ -4,6 +4,8 @@ import Button from './Button'
 import axios from 'axios'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
+import { useHistory } from 'react-router-dom'
+import toast, { Toaster } from 'react-hot-toast';
 require('dotenv').config();
 const Blog = ({ user,pic }) => {
   const [text, setText] = useState("");
@@ -14,9 +16,14 @@ const Blog = ({ user,pic }) => {
 
   const [link, setLink] = useState("");
 
+  const history = useHistory();
+  const goToHome = () => history.push(`/home`);
+
   return (
 
     <form>
+      <Toaster position="top-right"
+        reverseOrder={false} />
       <h1 className="title"> Create Blog </h1>{" "}
       <input
         type="text"
@@ -74,7 +81,7 @@ const Blog = ({ user,pic }) => {
       <br />
       <center>
 
-        <Button disabled={!text || !message} onClick={createPost}>
+        <Button  onClick={createPost}>
           Post
         </Button>
       </center>
@@ -84,6 +91,7 @@ const Blog = ({ user,pic }) => {
 
   function createPost(e) {
     e.preventDefault();
+    if(text && message){
     db.collection("post").add({
       title: text,
       author: user,
@@ -92,8 +100,13 @@ const Blog = ({ user,pic }) => {
       created: Math.floor(Date.now() / 1000),
       profile:pic,
     });
+    toast.success("Done")
     setText("");
     setMessage("");
+    goToHome()
+  }else{
+      toast.error("Can't add empty Post")
+  }
   }
 
   function getLink(e) {

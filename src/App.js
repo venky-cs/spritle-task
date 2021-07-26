@@ -21,6 +21,9 @@ import Saved from "./component/Saved";
 import Button from "./component/Button"
 import Home from "./component/Home";
 import Blog from "./component/Blog";
+import Edit from "./component/Edit";
+import MyBlog from "./component/MyBlog";
+import Remove from "./component/Remove";
 require("dotenv").config();
 
 function App() {
@@ -89,10 +92,10 @@ function App() {
                 {!auth &&
                   <li onClick={() => {
                     setToggle(true)
-                  signIn()
-                    }}>
-                  <Link>
-                    <i class="fas fa-sign-in-alt"></i>
+                    signIn()
+                  }}>
+                    <Link>
+                      <i class="fas fa-sign-in-alt"></i>
                       <span className="link_name">LogIn</span>
                     </Link>
                   </li>
@@ -131,6 +134,15 @@ function App() {
               </Route>
               <Route path="/save">
                 <Saved />
+              </Route>
+              <Route path="/edit/:slug">
+                <Edit />
+              </Route>
+              <Route path="/remove/:slug">
+                <Remove />
+              </Route>
+              <Route path="/myBlog">
+                <MyBlog user={userName}/>
               </Route>
             </section>
 

@@ -304,7 +304,7 @@ form > button {
   font-weight: 400;
 }
 
-input[type="file"]{
+input[type="file"] {
   z-index: 999;
   opacity: 0;
   width: 320px;
@@ -432,88 +432,114 @@ a {
   color: black;
 }
 
-  .Neon {
-    font-family: sans-serif;
-    font-size: 14px;
-    color: #494949;
-    position: relative;
-
-
-  }
-
-  .Neon * {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-  }
-
-  .Neon-input-dragDrop {
-    display: block;
-    width: 343px;
-    margin: 0 auto 25px auto;
-    padding: 25px;
-    color: #8d9499;
-    color: #97A1A8;
-    background: #fff;
-    border: 2px dashed #C8CBCE;
-    text-align: center;
-    -webkit-transition: box-shadow 0.3s, border-color 0.3s;
-    -moz-transition: box-shadow 0.3s, border-color 0.3s;
-    transition: box-shadow 0.3s, border-color 0.3s;
-  }
-
-  .Neon-input-dragDrop .Neon-input-icon {
-    font-size: 48px;
-    margin-top: -10px;
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    transition: all 0.3s ease;
-  }
-
-  .Neon-input-text h3 {
-    margin: 0;
-    font-size: 18px;
-  }
-
-  .Neon-input-text span {
-    font-size: 12px;
-  }
-
-  .Neon-input-choose-btn.blue {
-    color: #008BFF;
-    border: 1px solid #008BFF;
-  }
-
-  .Neon-input-choose-btn {
-    display: inline-block;
-    padding: 8px 14px;
-    outline: none;
-    cursor: pointer;
-    text-decoration: none;
-    text-align: center;
-    white-space: nowrap;
-    font-size: 12px;
-    font-weight: bold;
-    color: #8d9496;
-    border-radius: 3px;
-    border: 1px solid #c6c6c6;
-    vertical-align: middle;
-    background-color: #fff;
-    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.05);
-    -webkit-transition: all 0.2s;
-    -moz-transition: all 0.2s;
-    transition: all 0.2s;
-  }
-
-  .img-upload{
-display: flex;
-align-items: center;
-justify-content: space-evenly;
+.Neon {
+  font-family: sans-serif;
+  font-size: 14px;
+  color: #494949;
+  position: relative;
 }
-  .img-upload > img{
-    width: 230px;
-    max-height: 200px;
-  }
+
+.Neon * {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.Neon-input-dragDrop {
+  display: block;
+  width: 343px;
+  margin: 0 auto 25px auto;
+  padding: 25px;
+  color: #8d9499;
+  color: #97a1a8;
+  background: #fff;
+  border: 2px dashed #c8cbce;
+  text-align: center;
+  -webkit-transition: box-shadow 0.3s, border-color 0.3s;
+  -moz-transition: box-shadow 0.3s, border-color 0.3s;
+  transition: box-shadow 0.3s, border-color 0.3s;
+}
+
+.Neon-input-dragDrop .Neon-input-icon {
+  font-size: 48px;
+  margin-top: -10px;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.Neon-input-text h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.Neon-input-text span {
+  font-size: 12px;
+}
+
+.Neon-input-choose-btn.blue {
+  color: #008bff;
+  border: 1px solid #008bff;
+}
+
+.Neon-input-choose-btn {
+  display: inline-block;
+  padding: 8px 14px;
+  outline: none;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: bold;
+  color: #8d9496;
+  border-radius: 3px;
+  border: 1px solid #c6c6c6;
+  vertical-align: middle;
+  background-color: #fff;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.05);
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+.img-upload,
+.dragged ,.popUp{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.img-upload > img {
+  width: 230px;
+  max-height: 200px;
+}
+
+.dragged {
+  width: 80vw;
+  justify-content: space-between;
+  position: fixed;
+  bottom: 0;
+}
+
+.dragged  div {
+  width: 300px;
+  height: 50px;
+  left: 200px;
+  margin: 0 100px;
+  border: 2px solid black;
+  align-items: center;
+  background-color: black;
+  color: white;
+  text-align: center;
+  font-size: 28px;
+}
+
+.dragged  div:first-child {
+  background-color: #008bff;
+}
+.dragged  div:last-child {
+  background-color: #ff2600;
+}
 
 .signUp {
   width: 80%;
@@ -538,7 +564,7 @@ justify-content: space-evenly;
   font-size: 14px;
   border-radius: 5px;
   padding: 15px 45px 15px 15px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   box-shadow: 0 3px 15px #b8c6db;
   -moz-box-shadow: 0 3px 15px #b8c6db;
   -webkit-box-shadow: 0 3px 15px #b8c6db;
@@ -557,7 +583,7 @@ justify-content: space-evenly;
   border: none;
   color: #6c6c6c;
   margin-left: -50px;
-  transition: all .4s;
+  transition: all 0.4s;
 }
 
 .copy-btn:hover {
@@ -570,9 +596,25 @@ justify-content: space-evenly;
   outline: none;
 }
 
-.user-info{
+.user-info {
   display: flex;
   align-items: center;
+}
+
+.popUp{
+  height: 100%;
+}
+
+.popUp div{
+  width: 500px;
+  padding: 30px;
+  border-radius: 12px;
+  background-color: red;
+}
+.popUp button{
+  margin-top: 15px;
+  margin-right: 20px;
+  padding: 10px 20px;
 }
 
 @media screen and (max-width: 1024px) {
@@ -613,13 +655,13 @@ justify-content: space-evenly;
   .full {
     width: 90%;
   }
-   .img-upload {
-     display: flex;
-     flex-direction: column;
-   }
-    .img-upload>img {
-      width: 200px;
-    }
+  .img-upload {
+    display: flex;
+    flex-direction: column;
+  }
+  .img-upload > img {
+    width: 200px;
+  }
 }
 @media screen and (max-width: 500px) {
   .home,
@@ -634,13 +676,13 @@ justify-content: space-evenly;
     width: calc(100% - 100px);
     transition: all 0.5s ease;
   }
-   .Neon-input-dragDrop{
-     width: 200px;
-   }
-   .img-upload > img {
-     width: 100px;
-       max-height: 100px;
-   }
+  .Neon-input-dragDrop {
+    width: 200px;
+  }
+  .img-upload > img {
+    width: 100px;
+    max-height: 100px;
+  }
 
   .home,
   .save {
