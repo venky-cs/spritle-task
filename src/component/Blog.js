@@ -7,7 +7,7 @@ import Loader from "react-loader-spinner";
 import { useHistory } from 'react-router-dom'
 import toast, { Toaster } from 'react-hot-toast';
 require('dotenv').config();
-const Blog = ({ user,pic }) => {
+const Blog = ({ user, pic }) => {
   const [text, setText] = useState("");
   const [message, setMessage] = useState("");
 
@@ -18,6 +18,19 @@ const Blog = ({ user,pic }) => {
 
   const history = useHistory();
   const goToHome = () => history.push(`/home`);
+
+  for (let count = 0; count < 90; count++) {
+    fetch(`https://jsonplaceholder.typicode.com/posts/${count}`)
+      .then(response => response.json())
+      .then(json => db.collection("post").add({
+        title: json.title,
+        author: user,
+        message: json.body,
+        isSaved: false,
+        created: Math.floor(Date.now() / 1000),
+        profile: pic,
+      }))
+  }
 
   return (
 
@@ -81,7 +94,7 @@ const Blog = ({ user,pic }) => {
       <br />
       <center>
 
-        <Button  onClick={createPost}>
+        <Button onClick={createPost}>
           Post
         </Button>
       </center>
@@ -91,22 +104,22 @@ const Blog = ({ user,pic }) => {
 
   function createPost(e) {
     e.preventDefault();
-    if(text && message){
-    db.collection("post").add({
-      title: text,
-      author: user,
-      message: message,
-      isSaved: false,
-      created: Math.floor(Date.now() / 1000),
-      profile:pic,
-    });
-    toast.success("Done")
-    setText("");
-    setMessage("");
-    goToHome()
-  }else{
+    if (text && message) {
+      db.collection("post").add({
+        title: text,
+        author: user,
+        message: message,
+        isSaved: false,
+        created: Math.floor(Date.now() / 1000),
+        profile: pic,
+      });
+      toast.success("Done")
+      setText("");
+      setMessage("");
+      goToHome()
+    } else {
       toast.error("Can't add empty Post")
-  }
+    }
   }
 
   function getLink(e) {

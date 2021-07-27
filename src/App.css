@@ -190,13 +190,15 @@ body {
   justify-content: space-between;
   background: #1d1b31;
   padding: 12px 0;
-  transition: all 0.5s ease;
+  transition: all 0.10s ease;
+  transition-delay: 0.3s;
 }
 .sidebar.close .profile-details {
   background: none;
 }
 .sidebar.close .profile-details {
   width: 78px;
+  transition-delay: 0s;
 }
 .sidebar .profile-details .profile-content {
   display: flex;
