@@ -1,5 +1,6 @@
 table {
     width: 100%;
+    background-color: white;
 }
 
 table thead tr {
@@ -67,7 +68,17 @@ table th.PrimaryFont {
     text-transform: none;
 }
 
-@media only screen and (max-width: 599px) {
+.table-options{
+    text-align: center;
+    margin: 20px;
+}
+
+.table-options button{
+    margin: 10px;
+    padding:8px 10px;
+}
+
+@media only screen and (max-width: 800px) {
     table th {
         display: none;
     }
@@ -75,7 +86,7 @@ table th.PrimaryFont {
     table td {
         position: relative;
         display: block;
-        padding-left: 110px;
+        padding-left: 150px;
     }
 
     table td:before {
@@ -84,7 +95,7 @@ table th.PrimaryFont {
         left: 10px;
         display: block;
         content: attr(aria-label) ": ";
-        font-weight: 700;
+        font-weight: 500;
     }
 
     table tbody tr {
@@ -102,5 +113,5 @@ body {
 }
 
 table {
-    border-collapse: collapse;
+    border-collapse: separate;
 }

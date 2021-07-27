@@ -1,9 +1,10 @@
-import {useState,useEffect,useMemo} from 'react'
-import {useTable} from 'react-table'
+import { useState, useEffect, useMemo } from 'react'
+import { useTable, usePagination } from 'react-table'
 import { db } from "../firebaseConfig";
-import {COLUMNS} from './Columns';
+import { COLUMNS } from './Columns';
 import dayjs from 'dayjs';
 import './table.css'
+import Button from './Button'
 
 const ABlog = () => {
     const [blog, setBlog] = useState([]);
@@ -15,7 +16,7 @@ const ABlog = () => {
                 snapshot.forEach((doc) => {
                     const data = doc.data();
                     const id = doc.id
-                    datas.push({ ...data, created: dayjs.unix(data.created).format('DD-MM-YYYY'),id:id });
+                    datas.push({ ...data, created: dayjs.unix(data.created).format('DD-MM-YYYY'), id: id });
                 });
                 setBlog(datas);
             }, (error) => {
@@ -24,17 +25,16 @@ const ABlog = () => {
     }, []);
 
 
-    const columns = useMemo(() => COLUMNS,[])
+    const columns = useMemo(() => COLUMNS, [])
     // const data = useMemo(() => blog,[])
 
-    const tableInstance = useTable({
+
+    const { getTableProps, getTableBodyProps, headerGroups, page, nextPage, previousPage, canNextPage, canPreviousPage, prepareRow, pageOptions, state, gotoPage, pageCount } = useTable({
         columns,
-        data:blog
-    })
+        data: blog
+    }, usePagination)
 
-    console.log(blog)
-
-    const {getTableProps,getTableBodyProps,headerGroups,rows,prepareRow} = tableInstance
+    const { pageIndex } = state
 
     return (
         <div>
@@ -54,26 +54,35 @@ const ABlog = () => {
 
                 <tbody {...getTableBodyProps()}>
                     {
-                    rows.map(row => {
-                        prepareRow(row)
-                        return (
-                            <tr {...row.getRowProps()}>
-                                {
-                                    row.cells.map(cell => {
-                                        return (
-                                            <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                                        )
-                                    })
-                                }
-                            </tr>
-                        )
-                    })
+                        page.map(row => {
+                            prepareRow(row)
+                            return (
+                                <tr {...row.getRowProps()}>
+                                    {
+                                        row.cells.map(cell => {
+                                            return (
+                                                <td aria-label={cell.column.Header} {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                                            )
+                                        })
+                                    }
+                                </tr>
+                            )
+                        })
                     }
                     <tr>
                         <td></td>
                     </tr>
                 </tbody>
             </table>
+            <div className="table-options">
+                <span>Page {' '}
+                    <strong>{pageIndex + 1} of {pageOptions.length}</strong>
+                </span>
+                <Button disabled={!canPreviousPage} onClick={() => gotoPage(0)}>{'<<'}</Button>
+                <Button disabled={!canPreviousPage} onClick={() => previousPage()}>previous</Button>
+                <Button disabled={!canNextPage} onClick={() => nextPage()}>next</Button>
+                <Button disabled={!canNextPage} onClick={() => gotoPage(pageCount - 1)}>{'>>'}</Button>
+            </div>
         </div>
     )
 }
