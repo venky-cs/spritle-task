@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState} from "react";
 import { db } from "../firebaseConfig";
 import Button from './Button'
 import axios from 'axios'
@@ -19,18 +19,6 @@ const Blog = ({ user, pic }) => {
   const history = useHistory();
   const goToHome = () => history.push(`/home`);
 
-  for (let count = 0; count < 90; count++) {
-    fetch(`https://jsonplaceholder.typicode.com/posts/${count}`)
-      .then(response => response.json())
-      .then(json => db.collection("post").add({
-        title: json.title,
-        author: user,
-        message: json.body,
-        isSaved: false,
-        created: Math.floor(Date.now() / 1000),
-        profile: pic,
-      }))
-  }
 
   return (
 
