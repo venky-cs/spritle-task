@@ -29,12 +29,12 @@ const ABlog = () => {
     // const data = useMemo(() => blog,[])
 
 
-    const { getTableProps, getTableBodyProps, headerGroups, page, nextPage, previousPage, canNextPage, canPreviousPage, prepareRow, pageOptions, state, gotoPage, pageCount } = useTable({
+    const { getTableProps, getTableBodyProps, headerGroups, page, nextPage, previousPage, canNextPage, canPreviousPage, prepareRow, pageOptions, state, gotoPage, pageCount,setPageSize } = useTable({
         columns,
         data: blog
     }, usePagination)
 
-    const { pageIndex } = state
+    const { pageIndex,pageSize } = state
 
     return (
         <div>
@@ -78,6 +78,13 @@ const ABlog = () => {
                 <span>Page {' '}
                     <strong>{pageIndex + 1} of {pageOptions.length}</strong>
                 </span>
+                <select value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
+                    {[5,10,15,25].map(pageSize => (
+                        <option key={pageSize} value={pageSize}>
+                          Show {pageSize}
+                        </option>
+                    ))}
+                </select>
                 <Button disabled={!canPreviousPage} onClick={() => gotoPage(0)}>{'<<'}</Button>
                 <Button disabled={!canPreviousPage} onClick={() => previousPage()}>previous</Button>
                 <Button disabled={!canNextPage} onClick={() => nextPage()}>next</Button>

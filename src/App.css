@@ -191,7 +191,7 @@ body {
   background: #1d1b31;
   padding: 12px 0;
   transition: all 0.10s ease;
-  transition-delay: 0.4s;
+  transition-delay: 0.3s;
 }
 .sidebar.close .profile-details {
   background: none;
