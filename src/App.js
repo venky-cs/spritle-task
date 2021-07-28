@@ -81,6 +81,7 @@ function App() {
                     <ul className="sub-menu" onClick={() => setToggle(true)}>
                       <li ><Link to="/users">Users</Link></li>
                       <li><Link to="/blogs">Blogs</Link></li>
+                      <li><Link to="/archive">Archive</Link></li>
                     </ul>
                   </li>
 

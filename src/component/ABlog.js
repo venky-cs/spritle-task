@@ -57,19 +57,35 @@ const ABlog = () => {
     return (
         <div>
             <h3 className="title">Blogs</h3>
-            {selectedFlatRows && selectedFlatRows.length === 1 && <Button onClick={editBlog}>Edit</Button>}
-            <Button onClick={removeBlog}>Remove</Button>
-            <Button onClick={archiveBlog}>Archive</Button>
             <table {...getTableProps()}>
                 <thead>
                     {headerGroups.map(headerGroup => (
-                        <tr {...headerGroup.getHeaderGroupProps()}>
-                            {
-                                headerGroup.headers.map(column => (
-                                    <th {...column.getHeaderProps()}>{column.render('Header')}</th>
-                                ))
-                            }
-                        </tr>
+                        <>
+                            <tr className="table-edit">
+                                {selectedFlatRows && selectedFlatRows.length === 1 ?
+                                    <th onClick={editBlog}>
+                                        <p>Edit</p>
+                                        <i class="fas fa-edit"></i>
+                                    </th>
+                                    : <th></th>}
+                                <th colspan="2"> </th>
+                                <th onClick={removeBlog}>
+                                    <p>Remove</p>
+                                    <i class="fas fa-trash"></i>
+                                </th>
+                                <th onClick={archiveBlog}>
+                                    <p>Archive</p>
+                                    <i class="fas fa-archive"></i>
+                                </th>
+                            </tr>
+                            <tr {...headerGroup.getHeaderGroupProps()}>
+                                {
+                                    headerGroup.headers.map(column => (
+                                        <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+                                    ))
+                                }
+                            </tr>
+                        </>
                     ))}
                 </thead>
 
