@@ -98,6 +98,7 @@ const Blog = ({ user, pic }) => {
         author: user,
         message: message,
         isSaved: false,
+        isSelect: false,
         created: Math.floor(Date.now() / 1000),
         profile: pic,
       });

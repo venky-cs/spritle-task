@@ -146,10 +146,10 @@ const ABlog = () => {
 
     function archiveBlog() {
         selectedFlatRows.map(data => {
-            console.log(data.values)
-            db.collection('archive').add(data.values)
+            // console.log(data.values)
+            // db.collection('archive').add(data.values)
             let id = data.values.id
-            db.collection('post').doc(id).delete()
+            db.collection('post').doc(id).update({isSelect : true})
         })
     }
 }

@@ -37,7 +37,7 @@ const CardList = ({ blog, saveBlog }) => {
                 breakpointCols={breakpointColumnsObj}
                 className="my-masonry-grid"
                 columnClassName="my-masonry-grid_column">
-            {blog.map((data, index) => (
+            {blog && blog.map((data, index) => (
                 <Card data={data} saveBlog={saveBlog} isDrag={isDrag} />
             ))}
             </Masonry>

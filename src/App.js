@@ -25,6 +25,7 @@ import Edit from "./component/Edit";
 import MyBlog from "./component/MyBlog";
 import Remove from "./component/Remove";
 import ABlog from "./component/ABlog";
+import Archive from "./component/Archive";
 require("dotenv").config();
 
 function App() {
@@ -160,10 +161,13 @@ function App() {
                 <Remove />
               </Route>
               <Route path="/myBlog">
-                <MyBlog user={userName}/>
+                <MyBlog user={userName} />
               </Route>
               <Route path="/blogs">
                 <ABlog />
+              </Route>
+              <Route path="/archive">
+                <Archive />
               </Route>
             </section>
 

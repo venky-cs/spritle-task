@@ -24,6 +24,7 @@ const Home = () => {
           const data = doc.data();
           const id = doc.id
           datas.push({ ...data, id: id });
+          datas.filter(data => !data.isSelect)
         });
         setBlog(datas);
       }, (error) => {
@@ -35,39 +36,39 @@ const Home = () => {
 
   return (
     <DndProvider backend={HTML5Backend}>
-    <div className="home">
-      <h1 className="title">Home Page</h1>
-      <div className="box">
-        {blog.length < 1 ? (
-          <div>
-            <ContentLoader
-              foregroundColor={foregroundColor}
-              backgroundColor={backgroundColor}
-              style={{ width: '100%', height: 93 * height }}
-            >
+      <div className="home">
+        <h1 className="title">Home Page</h1>
+        <div className="box">
+          {blog.length < 1 ? (
+            <div>
+              <ContentLoader
+                foregroundColor={foregroundColor}
+                backgroundColor={backgroundColor}
+                style={{ width: '100%', height: 93 * height }}
+              >
 
-              <rect
-                x="0"
-                y={height * 17}
-                rx="8"
-                ry="8"
-                width={width * 70}
-                height={height * 76}
-              />
-              <rect
-                x={width * 78}
-                y={height * 17}
-                rx="8"
-                ry="8"
-                width={width * 70}
-                height={height * 76}
-              />
+                <rect
+                  x="0"
+                  y={height * 17}
+                  rx="8"
+                  ry="8"
+                  width={width * 70}
+                  height={height * 76}
+                />
+                <rect
+                  x={width * 78}
+                  y={height * 17}
+                  rx="8"
+                  ry="8"
+                  width={width * 70}
+                  height={height * 76}
+                />
 
-            </ContentLoader>
-          </div>
-        ) : <CardList blog={blog} saveBlog={saveBlog} />}
+              </ContentLoader>
+            </div>
+          ) : <CardList blog={blog} saveBlog={saveBlog} />}
+        </div>
       </div>
-    </div>
     </DndProvider>
   );
 
