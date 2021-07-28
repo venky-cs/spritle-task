@@ -1,10 +1,12 @@
 import { useState, useEffect, useMemo } from 'react'
-import { useTable, usePagination } from 'react-table'
+import { useTable, usePagination, useRowSelect } from 'react-table'
 import { db } from "../firebaseConfig";
 import { COLUMNS } from './Columns';
 import dayjs from 'dayjs';
 import './table.css'
-import Button from './Button'
+import Button from './Button';
+import { useHistory } from 'react-router-dom'
+import { Checkbox } from './Checkbox';
 
 const ABlog = () => {
     const [blog, setBlog] = useState([]);
@@ -28,17 +30,36 @@ const ABlog = () => {
     const columns = useMemo(() => COLUMNS, [])
     // const data = useMemo(() => blog,[])
 
+    const history = useHistory();
 
-    const { getTableProps, getTableBodyProps, headerGroups, page, nextPage, previousPage, canNextPage, canPreviousPage, prepareRow, pageOptions, state, gotoPage, pageCount,setPageSize } = useTable({
+
+    const { getTableProps, getTableBodyProps, headerGroups, page, nextPage, previousPage, canNextPage, canPreviousPage, prepareRow, pageOptions, state, gotoPage, pageCount, setPageSize, selectedFlatRows } = useTable({
         columns,
         data: blog
-    }, usePagination)
+    }, usePagination, useRowSelect,
+        hooks => {
+            hooks.visibleColumns.push(columns => [
+                {
+                    id: 'selection',
+                    Header: ({ getToggleAllRowsSelectedProps }) => (
+                        <Checkbox {...getToggleAllRowsSelectedProps()} />
+                    ),
+                    Cell: ({ row }) => <Checkbox {...row.getToggleRowSelectedProps()} />
+                },
+                ...columns
+            ])
+        })
 
-    const { pageIndex,pageSize } = state
+    console.log(selectedFlatRows)
+
+    const { pageIndex, pageSize } = state
 
     return (
         <div>
             <h3 className="title">Blogs</h3>
+            {selectedFlatRows && selectedFlatRows.length === 1 && <Button onClick={editBlog}>Edit</Button>}
+            <Button onClick={removeBlog}>Remove</Button>
+            <Button onClick={archiveBlog}>Archive</Button>
             <table {...getTableProps()}>
                 <thead>
                     {headerGroups.map(headerGroup => (
@@ -74,14 +95,15 @@ const ABlog = () => {
                     </tr>
                 </tbody>
             </table>
+
             <div className="table-options">
                 <span>Page {' '}
                     <strong>{pageIndex + 1} of {pageOptions.length}</strong>
                 </span>
                 <select value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
-                    {[5,10,15,25].map(pageSize => (
+                    {[5, 10, 15, 25].map(pageSize => (
                         <option key={pageSize} value={pageSize}>
-                          Show {pageSize}
+                            Show {pageSize}
                         </option>
                     ))}
                 </select>
@@ -92,6 +114,28 @@ const ABlog = () => {
             </div>
         </div>
     )
+    function editBlog() {
+        selectedFlatRows.map(data => {
+            let id = data.values.id
+            history.push(`/edit/:${id}`)
+        })
+    }
+
+    function removeBlog() {
+        selectedFlatRows.map(data => {
+            let id = data.values.id
+            db.collection('post').doc(id).delete()
+        })
+    }
+
+    function archiveBlog() {
+        selectedFlatRows.map(data => {
+            console.log(data.values)
+            db.collection('archive').add(data.values)
+            let id = data.values.id
+            db.collection('post').doc(id).delete()
+        })
+    }
 }
 
 export default ABlog
