@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { useParams, useHistory } from 'react-router-dom'
 import { db } from "../firebaseConfig";
+import Button from './Button'
 
 const Remove = () => {
 
@@ -44,8 +45,8 @@ const Remove = () => {
                     <>
                         <h3>Are you sure to delete this {data.title} blog ?</h3>
                        
-                        <button onClick={deleteBlog}>Yes</button>
-                        <button onClick={backToHome}>No</button>
+                        <Button onClick={deleteBlog}>Yes</Button>
+                        <Button onClick={backToHome}>No</Button>
                     </>
                 )
                 }

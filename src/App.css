@@ -470,6 +470,7 @@ a {
 .dragged  div {
   width: 300px;
   height: 50px;
+  border-radius: 12px;
   left: 200px;
   margin: 0 100px;
   border: 2px solid black;
@@ -484,7 +485,7 @@ a {
   background-color: #008bff;
 }
 .dragged  div:last-child {
-  background-color: #ff2600;
+  background-color: #ff3c00;
 }
 
 .signUp {
@@ -555,7 +556,7 @@ a {
   width: 500px;
   padding: 30px;
   border-radius: 12px;
-  background-color: red;
+  background-color:#008bff;
 }
 .popUp button{
   margin-top: 15px;
