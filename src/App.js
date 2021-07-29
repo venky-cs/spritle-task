@@ -19,6 +19,8 @@ import MyBlog from "./component/MyBlog";
 import Remove from "./component/Remove";
 import Table from "./component/Table";
 import Archive from "./component/Archive";
+import UserTable from './component/UserTable'
+import { db } from "./firebaseConfig";
 require("dotenv").config();
 
 function App() {
@@ -181,6 +183,9 @@ function App() {
               <Route path="/blogs">
                 <Table />
               </Route>
+              <Route path="/users">
+                <UserTable />
+              </Route>
               <Route path="/archive">
                 <Archive />
               </Route>
@@ -188,6 +193,23 @@ function App() {
 
             <FirebaseAuthConsumer>
               {({ isSignedIn, user, providerId }) => {
+                if (user) {
+                  db.collection("user").get().then((snap) => {
+                    snap.forEach((doc) => {
+                      const data = doc.data();
+                      if (data && data.email !== user.email) {
+                        db.collection("user").add({
+                          name: user.displayName,
+                          email: user.email,
+                          uid: user.uid,
+                          img: user.photoURL,
+                          mobile: user.phoneNumber,
+                        });
+                      } else console.log("user already exit")
+                    });
+                  })
+                    .catch((err) => console.log(err));
+                }
                 setAuth(isSignedIn);
               }}
             </FirebaseAuthConsumer>
