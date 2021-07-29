@@ -23,8 +23,10 @@ import UserTable from './component/UserTable'
 import { db } from "./firebaseConfig";
 require("dotenv").config();
 
+
 function App() {
   const [auth, setAuth] = useState(false);
+  const [users, setUsers] = useState([])
 
   const [toggle, setToggle] = useState(true);
   const [dropDown, setdropDown] = useState(false);
@@ -41,6 +43,41 @@ function App() {
       setUserImage(photoURL);
     }
   }, [auth]);
+
+  const user = firebase.auth().currentUser;
+
+  useEffect(() => {
+    db.collection("user").onSnapshot(
+      (snapshot) => {
+        let datas = []
+        snapshot.forEach((doc) => {
+          const data = doc.data();
+          datas.push({ ...data })
+        })
+        setUsers(datas)
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }, []);
+
+  console.log(users)
+
+  useEffect(() => {
+    user &&
+      console.log(user.email)
+    let check = user && user.email && users.every(users => users.email !== user.email)
+    if (check) {
+      db.collection("user").add({
+        name: user.displayName,
+        email: user.email,
+        uid: user.uid,
+        img: user.photoURL,
+        mobile: user.phoneNumber,
+      })
+    } else console.log("user already exist")
+  }, [users])
 
   return (
     <Router>
@@ -221,23 +258,6 @@ function App() {
 
             <FirebaseAuthConsumer>
               {({ isSignedIn, user, providerId }) => {
-                if (user) {
-                  db.collection("user").get().then((snap) => {
-                    snap.forEach((doc) => {
-                      const data = doc.data();
-                      if (data && data.email !== user.email) {
-                        db.collection("user").add({
-                          name: user.displayName,
-                          email: user.email,
-                          uid: user.uid,
-                          img: user.photoURL,
-                          mobile: user.phoneNumber,
-                        });
-                      } else console.log("user already exit")
-                    });
-                  })
-                    .catch((err) => console.log(err));
-                }
                 setAuth(isSignedIn);
               }}
             </FirebaseAuthConsumer>
@@ -247,7 +267,7 @@ function App() {
     </Router>
   );
 
-  function signIn() {
+  async function signIn() {
     const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithPopup(googleAuthProvider);
   }
@@ -260,3 +280,4 @@ function App() {
 }
 
 export default App;
+

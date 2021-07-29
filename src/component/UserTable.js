@@ -4,12 +4,10 @@ import { db } from "../firebaseConfig";
 import { USER_COLUMNS } from "./UserColumns";
 import "./table.css";
 import Button from "./Button";
-import { useHistory } from "react-router-dom";
 import { Checkbox } from "./Checkbox";
 
 const Table = () => {
     const [user, setUser] = useState([]);
-
 
     useEffect(() => {
         db.collection("user").onSnapshot(
@@ -17,13 +15,14 @@ const Table = () => {
                 let datas = [];
                 snapshot.forEach((doc) => {
                     const data = doc.data();
-                    console.log(data)
+                    const img = data.img;
                     datas.push({
                         ...data,
-                        img: <img src={data.img} alt="profile-pic" />
+                        img: <img src={img} alt="pic" />,
                     });
-                    setUser(datas)
+                    datas.filter(data => !data.isSelect)
                 });
+                setUser(datas);
             },
             (error) => {
                 console.log(error);
@@ -34,8 +33,6 @@ const Table = () => {
 
     const columns = useMemo(() => USER_COLUMNS, []);
     // const data = useMemo(() => blog,[])
-
-    const history = useHistory();
 
     const {
         getTableProps,
@@ -74,8 +71,6 @@ const Table = () => {
         }
     );
 
-    console.log(selectedFlatRows);
-
     const { pageIndex, pageSize } = state;
 
     return (
@@ -84,15 +79,13 @@ const Table = () => {
             <table {...getTableProps()}>
                 <thead>
                     {headerGroups.map((headerGroup) => (
-                        <>
-                            <tr {...headerGroup.getHeaderGroupProps()}>
-                                {headerGroup.headers.map((column) => (
-                                    <th {...column.getHeaderProps()}>
-                                        {column.render("Header")}
-                                    </th>
-                                ))}
-                            </tr>
-                        </>
+                        <tr {...headerGroup.getHeaderGroupProps()}>
+                            {headerGroup.headers.map((column) => (
+                                <th {...column.getHeaderProps()}>
+                                    {column.render("Header")}
+                                </th>
+                            ))}
+                        </tr>
                     ))}
                 </thead>
 

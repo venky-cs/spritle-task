@@ -25,7 +25,6 @@ const Table = () => {
             ...data,
             created: dayjs.unix(data.created).format("DD-MM-YYYY"),
             id: id,
-
           });
           datas.filter(data => !data.isSelect)
         });
@@ -83,7 +82,6 @@ const Table = () => {
     }
   );
 
-  console.log(selectedFlatRows);
 
   const { pageIndex, pageSize } = state;
 
