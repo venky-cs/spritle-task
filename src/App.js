@@ -178,16 +178,44 @@ function App() {
                 <Remove />
               </Route>
               <Route path="/myBlog">
-                <MyBlog user={userName} />
+                {auth ? (
+                  <MyBlog user={userName} />
+                ) : (
+                  <div className="signUp">
+                    <h2>SignUp</h2>
+                    <Button onClick={signIn}>Login to Continue...</Button>
+                  </div>
+                )}
               </Route>
               <Route path="/blogs">
-                <Table />
+                {auth ? (
+                  <Table />
+                ) : (
+                  <div className="signUp">
+                    <h2>SignUp</h2>
+                    <Button onClick={signIn}>Login to Continue...</Button>
+                  </div>
+                )}
               </Route>
               <Route path="/users">
-                <UserTable />
+                {auth ? (
+                  <UserTable />
+                ) : (
+                  <div className="signUp">
+                    <h2>SignUp</h2>
+                    <Button onClick={signIn}>Login to Continue...</Button>
+                  </div>
+                )}
               </Route>
               <Route path="/archive">
-                <Archive />
+                {auth ? (
+                  <Archive />
+                ) : (
+                  <div className="signUp">
+                    <h2>SignUp</h2>
+                    <Button onClick={signIn}>Login to Continue...</Button>
+                  </div>
+                )}
               </Route>
             </section>
 
