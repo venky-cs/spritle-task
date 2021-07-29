@@ -1,30 +1,27 @@
-import { useState} from "react";
+import { useState } from "react";
 import { db } from "../firebaseConfig";
-import Button from './Button'
-import axios from 'axios'
+import Button from "./Button";
+import axios from "axios";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
-import { useHistory } from 'react-router-dom'
-import toast, { Toaster } from 'react-hot-toast';
-require('dotenv').config();
+import { useHistory } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
+require("dotenv").config();
 const Blog = ({ user, pic }) => {
   const [text, setText] = useState("");
   const [message, setMessage] = useState("");
 
-  const [load, setLoad] = useState(false)
-  const [status, setStatus] = useState("")
+  const [load, setLoad] = useState(false);
+  const [status, setStatus] = useState("");
 
   const [link, setLink] = useState("");
 
   const history = useHistory();
   const goToHome = () => history.push(`/home`);
 
-
   return (
-
     <form>
-      <Toaster position="top-right"
-        reverseOrder={false} />
+      <Toaster position="top-right" reverseOrder={false} />
       <h1 className="title"> Create Blog </h1>{" "}
       <input
         type="text"
@@ -53,7 +50,9 @@ const Blog = ({ user, pic }) => {
               </div>
               <div className="Neon-input-text">
                 <h3>Drag&amp;Drop files here</h3>
-                <span style={{ display: "inline-block", margin: "15px 0" }}>or</span>
+                <span style={{ display: "inline-block", margin: "15px 0" }}>
+                  or
+                </span>
               </div>
               <p className="Neon-input-choose-btn blue">Browse Files</p>
             </div>
@@ -62,32 +61,34 @@ const Blog = ({ user, pic }) => {
         {link && <img src={link} alt="preview" />}
       </div>
       <center>
-        {load ? <Loader
-          type="ThreeDots"
-          color="#00BFFF"
-          height={100}
-          width={100}
-          timeout={3000} //3 secs
-        /> :
+        {load ? (
+          <Loader
+            type="ThreeDots"
+            color="#00BFFF"
+            height={100}
+            width={100}
+            timeout={3000} //3 secs
+          />
+        ) : (
           <>
-            {link && <>
-              <input className="copy-input" value={link} readOnly />
-              <button className="copy-btn" onClick={copy}><i className="far fa-copy"></i></button>
-              <p>{status}</p>
-            </>}
+            {link && (
+              <>
+                <input className="copy-input" value={link} readOnly />
+                <button className="copy-btn" onClick={copy}>
+                  <i className="far fa-copy"></i>
+                </button>
+                <p>{status}</p>
+              </>
+            )}
           </>
-        }
+        )}
       </center>
       <div></div>
       <br />
       <center>
-
-        <Button onClick={createPost}>
-          Post
-        </Button>
+        <Button onClick={createPost}>Post</Button>
       </center>
     </form>
-
   );
 
   function createPost(e) {
@@ -102,25 +103,24 @@ const Blog = ({ user, pic }) => {
         created: Math.floor(Date.now() / 1000),
         profile: pic,
       });
-      toast.success("Done")
+      toast.success("Done");
       setText("");
       setMessage("");
-      goToHome()
+      goToHome();
     } else {
-      toast.error("Can't add empty Post")
+      toast.error("Can't add empty Post");
     }
   }
 
   function getLink(e) {
     e.preventDefault();
-    setLoad(true)
-    setStatus("")
-    setLink("")
+    setLoad(true);
+    setStatus("");
+    setLink("");
 
-    let formData = new FormData()
-    let image = e.target.files[0]
-    formData.append("image", image)
-
+    let formData = new FormData();
+    let image = e.target.files[0];
+    formData.append("image", image);
 
     axios({
       method: "post",
@@ -128,29 +128,27 @@ const Blog = ({ user, pic }) => {
       data: formData,
       headers: { "Content-Type": "multipart/form-data" },
     })
-
-      .then(res => {
+      .then((res) => {
         setLink(res.data.data.url);
-        setLoad(false)
+        setLoad(false);
       })
       .catch((error) => {
-        console.error('Error:', error);
+        console.error("Error:", error);
       });
   }
 
   function copy(e) {
-    e.preventDefault()
-    let copy = link
-    navigator.clipboard.writeText(copy)
-    const successful = document.execCommand('copy');
+    e.preventDefault();
+    let copy = link;
+    navigator.clipboard.writeText(copy);
+    const successful = document.execCommand("copy");
     if (successful) {
-      setStatus("Copied!")
+      setStatus("Copied!");
     } else {
-      setStatus("Unable to copy!")
+      setStatus("Unable to copy!");
     }
-    console.log(status)
+    console.log(status);
   }
-
 };
 
 export default Blog;

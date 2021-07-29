@@ -85,12 +85,12 @@ body {
 .sidebar .nav-links li:hover {
   background: #1d1b31;
 }
-.sidebar .nav-links li .iocn-link {
+.sidebar .nav-links li .icon-link {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.sidebar.close .nav-links li .iocn-link {
+.sidebar.close .nav-links li .icon-link {
   display: block;
 }
 .sidebar .nav-links li i {
@@ -356,17 +356,21 @@ i {
 
 .btn {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   margin: 10px;
+  cursor: pointer;
 }
 .btn img {
   width: 45px;
   padding: 5px 10px;
   cursor: pointer;
 }
-.btn img:hover {
+/* .btn img:hover {
   background-color: #6eb9f7;
+} */
+.days{
+  text-align:right;
 }
 
 button > a {
@@ -476,16 +480,16 @@ a {
   border: 2px solid black;
   align-items: center;
   background-color: black;
-  color: white;
+  color: black;
   text-align: center;
   font-size: 28px;
 }
 
 .dragged  div:first-child {
-  background-color: #008bff;
+  background-color:#DAD0C2;
 }
 .dragged  div:last-child {
-  background-color: #ff3c00;
+  background-color: #CDBBA7;
 }
 
 .signUp {
@@ -548,6 +552,10 @@ a {
   align-items: center;
 }
 
+.user-info img{
+  border-radius: 50%;
+}
+
 .popUp{
   height: 100%;
 }
@@ -556,11 +564,13 @@ a {
   width: 500px;
   padding: 30px;
   border-radius: 12px;
-  background-color:#008bff;
+  background-color:#acb6be;
+}
+.popUp .close{
+  text-align: right;
+  cursor: pointer;
 }
 .popUp button{
-  margin-top: 15px;
-  margin-right: 20px;
   padding: 10px 20px;
 }
 

@@ -6,124 +6,125 @@ import firebaseConfig from "./firebaseConfig";
 import {
   FirebaseAuthProvider,
   FirebaseAuthConsumer,
-  IfFirebaseAuthed,
-  IfFirebaseAuthedAnd,
 } from "@react-firebase/auth";
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
-import BlogPost from './component/BlogPost';
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import BlogPost from "./component/BlogPost";
 import Saved from "./component/Saved";
-import Button from "./component/Button"
+import Button from "./component/Button";
 import Home from "./component/Home";
 import Blog from "./component/Blog";
 import Edit from "./component/Edit";
 import MyBlog from "./component/MyBlog";
 import Remove from "./component/Remove";
-import ABlog from "./component/ABlog";
+import Table from "./component/Table";
 import Archive from "./component/Archive";
 require("dotenv").config();
 
 function App() {
   const [auth, setAuth] = useState(false);
 
+  const [toggle, setToggle] = useState(true);
+  const [dropDown, setdropDown] = useState(false);
 
-  const [toggle, setToggle] = useState(true)
-  const [dropDown, setdropDown] = useState(false)
-
-  const [userName, setUserName] = useState("")
-  const [userImage, setUserImage] = useState("")
+  const [userName, setUserName] = useState("");
+  const [userImage, setUserImage] = useState("");
 
   useEffect(() => {
     const user = firebase.auth().currentUser;
     if (user !== null) {
       const displayName = user.displayName;
       const photoURL = user.photoURL;
-      setUserName(displayName)
-      setUserImage(photoURL)
+      setUserName(displayName);
+      setUserImage(photoURL);
     }
-  }, [auth])
-
+  }, [auth]);
 
   return (
     <Router>
       <Switch>
         <FirebaseAuthProvider {...firebaseConfig} firebase={firebase}>
-
           <div className="app">
+            {/* sidebar */}
             <div className={`sidebar ${toggle && "close"}`}>
               <div className="logo-details" onClick={toggler}>
-                <i className='bx bx-menu'  ></i>
+                <i className="bx bx-menu"></i>
                 <span className="logo_name">Blog App</span>
               </div>
 
               <ul className="nav-links">
                 <li onClick={() => setToggle(true)}>
                   <Link to="/home">
-                    <i className='bx bx-home'></i>
+                    <i className="bx bx-home"></i>
                     <span className="link_name">Home</span>
                   </Link>
                 </li>
 
-                {auth && <>
+                {auth && (
+                  <>
+                    <li className={` ${dropDown ? "showMenu" : null}`}>
+                      <div className="icon-link">
+                        <Link to="/admin">
+                          <i className="fas fa-users-cog"></i>
+                          <span className="link_name">Admin</span>
+                        </Link>
+                        <i
+                          className="bx bxs-chevron-down arrow"
+                          onClick={() => setdropDown((prevState) => !prevState)}
+                        ></i>
+                      </div>
+                      <ul className="sub-menu" onClick={() => setToggle(true)}>
+                        <li>
+                          <Link to="/users">Users</Link>
+                        </li>
+                        <li>
+                          <Link to="/blogs">Blogs</Link>
+                        </li>
+                        <li>
+                          <Link to="/archive">Archive</Link>
+                        </li>
+                      </ul>
+                    </li>
 
-                  <li className={` ${dropDown ? "showMenu" : null}`}>
-                    <div className="iocn-link">
-                      <Link to="/admin">
-                        <i className="fas fa-users-cog" ></i>
-                        <span className="link_name">Admin</span>
+                    <li onClick={() => setToggle(true)}>
+                      <Link to="/createBlog">
+                        <i className="bx bxs-message-square-detail"></i>
+                        <span className="link_name">Write Blog</span>
                       </Link>
-                      <i className='bx bxs-chevron-down arrow' onClick={() => setdropDown(prevState => !prevState)}></i>
-                    </div>
-                    <ul className="sub-menu" onClick={() => setToggle(true)}>
-                      <li ><Link to="/users">Users</Link></li>
-                      <li><Link to="/blogs">Blogs</Link></li>
-                      <li><Link to="/archive">Archive</Link></li>
-                    </ul>
-                  </li>
+                    </li>
 
-                  <li onClick={() => setToggle(true)}>
-                    <Link to="/createBlog">
-                      <i className='bx bxs-message-square-detail'></i>
-                      <span className="link_name">Write Blog</span>
-                    </Link>
-                  </li>
-
-                  <li onClick={() => setToggle(true)}>
-                    <Link to="/myBlog" >
-                      <i class="fas fa-id-card"></i>
-                      <span className="link_name">My Blog</span>
-                    </Link>
-                  </li>
-                </>}
+                    <li onClick={() => setToggle(true)}>
+                      <Link to="/myBlog">
+                        <i class="fas fa-id-card"></i>
+                        <span className="link_name">My Blog</span>
+                      </Link>
+                    </li>
+                  </>
+                )}
 
                 <li onClick={() => setToggle(true)}>
-                  <Link to="/save" >
-                    <i className='bx bx-save'></i>
+                  <Link to="/save">
+                    <i className="bx bx-save"></i>
                     <span className="link_name">Favourite</span>
                   </Link>
                 </li>
 
-                {!auth &&
-                  <li onClick={() => {
-                    setToggle(true)
-                    signIn()
-                  }}>
+                {!auth && (
+                  <li
+                    onClick={() => {
+                      setToggle(true);
+                      signIn();
+                    }}
+                  >
                     <Link>
                       <i class="fas fa-sign-in-alt"></i>
                       <span className="link_name">LogIn</span>
                     </Link>
                   </li>
-                }
-
-
+                )}
 
                 <div className="profile-details">
-                  {auth &&
+                  {auth && (
                     <>
                       <div className="profile-content">
                         <img src={userImage} alt="profileImg" />
@@ -131,22 +132,36 @@ function App() {
                       <div className="name-job">
                         <div className="profile_name">{userName}</div>
                       </div>
-                      <i className='bx bx-log-out' style={{ color: 'red', paddingRight: "20px", cursor: "pointer", fontSize: "30px" }} onClick={signOut}></i>
-                    </>}
-
+                      <i
+                        className="bx bx-log-out"
+                        style={{
+                          color: "red",
+                          paddingRight: "20px",
+                          cursor: "pointer",
+                          fontSize: "30px",
+                        }}
+                        onClick={signOut}
+                      ></i>
+                    </>
+                  )}
                 </div>
               </ul>
             </div>
-            <section class="home-section">
 
+            {/* home */}
+            <section class="home-section">
               <Route path="/home">
                 <Home />
               </Route>
               <Route path="/createBlog">
-                {auth ? <Blog user={userName} pic={userImage} /> : <div className="signUp">
-                  <h2>SignUp</h2>
-                  <Button onClick={signIn}>Login to Continue...</Button>
-                </div>}
+                {auth ? (
+                  <Blog user={userName} pic={userImage} />
+                ) : (
+                  <div className="signUp">
+                    <h2>SignUp</h2>
+                    <Button onClick={signIn}>Login to Continue...</Button>
+                  </div>
+                )}
               </Route>
               <Route path="/blog/:slug">
                 <BlogPost />
@@ -164,53 +179,34 @@ function App() {
                 <MyBlog user={userName} />
               </Route>
               <Route path="/blogs">
-                <ABlog />
+                <Table />
               </Route>
               <Route path="/archive">
                 <Archive />
               </Route>
             </section>
 
-
             <FirebaseAuthConsumer>
               {({ isSignedIn, user, providerId }) => {
                 setAuth(isSignedIn);
               }}
             </FirebaseAuthConsumer>
-            <div>
-              <IfFirebaseAuthed>
-                {() => {
-                  // return <div>You are authenticated</div>;
-                }}
-              </IfFirebaseAuthed>
-              <IfFirebaseAuthedAnd
-                filter={({ providerId }) => providerId !== "anonymous"}
-              >
-                {({ providerId }) => {
-                  // return <div>You are authenticated with {providerId}</div>;
-                }}
-              </IfFirebaseAuthedAnd>
-            </div>
           </div>
-
-
         </FirebaseAuthProvider>
       </Switch>
     </Router>
   );
 
   function signIn() {
-    const googleAuthProvider =
-      new firebase.auth.GoogleAuthProvider();
+    const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithPopup(googleAuthProvider);
   }
   function signOut() {
     firebase.auth().signOut();
   }
   function toggler() {
-    setToggle(prevState => !prevState)
+    setToggle((prevState) => !prevState);
   }
-
 }
 
 export default App;
