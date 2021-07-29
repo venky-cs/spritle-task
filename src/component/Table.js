@@ -10,6 +10,9 @@ import { Checkbox } from "./Checkbox";
 
 const Table = () => {
   const [blog, setBlog] = useState([]);
+  const [filtered, setFiltered] = useState([]);
+  const [load, setLoad] = useState(false)
+
 
   useEffect(() => {
     db.collection("post").onSnapshot(
@@ -22,7 +25,9 @@ const Table = () => {
             ...data,
             created: dayjs.unix(data.created).format("DD-MM-YYYY"),
             id: id,
+
           });
+          datas.filter(data => !data.isSelect)
         });
         setBlog(datas);
       },
@@ -31,6 +36,10 @@ const Table = () => {
       }
     );
   }, []);
+
+  useEffect(() => {
+    blog && setFiltered(blog.filter((data) => data.isSelect));
+  }, [load]);
 
   const columns = useMemo(() => COLUMNS, []);
   // const data = useMemo(() => blog,[])
@@ -56,7 +65,7 @@ const Table = () => {
   } = useTable(
     {
       columns,
-      data: blog,
+      data: load ? filtered : blog,
     },
     usePagination,
     useRowSelect,
@@ -94,7 +103,18 @@ const Table = () => {
                 ) : (
                   <th></th>
                 )}
-                <th colspan="2"> </th>
+
+                {!load ?
+                  <th onClick={() => setLoad(prev => !prev)}>
+                    <p>Archived</p>
+                    <i class="fas fa-filter"></i>
+                  </th>
+                  : <th onClick={() => setLoad(prev => !prev)}>
+                    <p>All</p>
+                    <i class="fas fa-warehouse"></i>
+                  </th>
+                }
+                <th></th>
                 <th onClick={removeBlog}>
                   <p>Remove</p>
                   <i class="fas fa-trash"></i>
