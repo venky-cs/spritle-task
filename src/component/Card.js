@@ -37,9 +37,14 @@ const Card = ({ data, saveBlog, isDrag }) => {
         </p>
       </Link>
       <div className="btn">
-        <div className="user-info">
-          <img src={data.profile} alt="profile" />
-          <span>{data.author}</span>
+        <div>
+          <div className="user-info">
+            <img src={data.profile} alt="profile" />
+            <h4>{data.author}</h4>
+          </div>
+          <div>
+            <p className="days">{dateAgo(data.created) !== 0 && dateAgo(data.created) + " days ago"} </p>
+          </div>
         </div>
 
         <i
@@ -47,7 +52,7 @@ const Card = ({ data, saveBlog, isDrag }) => {
           onClick={() => saveBlog(data)}
         ></i>
       </div>
-      <p className="days">{dateAgo(data.created) !== 0 && dateAgo(data.created) + " days ago"} </p>
+
     </div>
   );
 };

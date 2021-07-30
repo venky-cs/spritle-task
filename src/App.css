@@ -324,7 +324,7 @@ input[type="file"] {
    border-radius: 12px;
    box-shadow: 4px 13px 27px 1px rgb(0 0 0 / 23%);
    transition: all 0.5s linear;
-     font-family: sans-serif;
+    font-family: sans-serif;
 }
 .card:hover {
   background-color: #e9e9f1;
@@ -358,7 +358,7 @@ i {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 10px;
+  margin-top: 10px;
   cursor: pointer;
 }
 .btn img {
@@ -370,7 +370,7 @@ i {
   background-color: #6eb9f7;
 } */
 .days{
-  text-align:right;
+  padding-left: 20px;
 }
 
 button > a {
