@@ -17,14 +17,14 @@ const Card = ({ data, saveBlog, isDrag }) => {
   useEffect(() => {
     isDrag(isDragging);
   }, [isDragging]);
-  
-  function dateAgo(createdDate){
-    let today = Math.floor(new Date().getTime()/1000)
-    let formatToday =dayjs.unix(today).format('YYYY-MM-DD')
+
+  function dateAgo(createdDate) {
+    let today = Math.floor(new Date().getTime() / 1000)
+    let formatToday = dayjs.unix(today).format('YYYY-MM-DD')
     let calculate = dayjs.unix(createdDate).format('YYYY-MM-DD')
     formatToday = dayjs(formatToday)
     calculate = dayjs(calculate)
-   let result = formatToday.diff(calculate,'day',true)
+    let result = formatToday.diff(calculate, 'day', true)
     return result
   }
 

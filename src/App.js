@@ -27,6 +27,7 @@ require("dotenv").config();
 function App() {
   const [auth, setAuth] = useState(false);
   const [users, setUsers] = useState([])
+  const [admin, setAdmin] = useState(false);
 
   const [toggle, setToggle] = useState(true);
   const [dropDown, setdropDown] = useState(false);
@@ -62,7 +63,6 @@ function App() {
     );
   }, []);
 
-  console.log(users)
 
   useEffect(() => {
     user &&
@@ -77,7 +77,8 @@ function App() {
         mobile: user.phoneNumber,
       })
     } else console.log("user already exist")
-  }, [users])
+
+  }, [toggle])
 
   return (
     <Router>
@@ -101,29 +102,31 @@ function App() {
 
                 {auth && (
                   <>
-                    <li className={` ${dropDown ? "showMenu" : null}`}>
-                      <div className="icon-link">
-                        <Link to="/admin">
-                          <i className="fas fa-users-cog"></i>
-                          <span className="link_name">Admin</span>
-                        </Link>
-                        <i
-                          className="bx bxs-chevron-down arrow"
-                          onClick={() => setdropDown((prevState) => !prevState)}
-                        ></i>
-                      </div>
-                      <ul className="sub-menu" onClick={() => setToggle(true)}>
-                        <li>
-                          <Link to="/users">Users</Link>
-                        </li>
-                        <li>
-                          <Link to="/blogs">Blogs</Link>
-                        </li>
-                        <li>
-                          <Link to="/archive">Archive</Link>
-                        </li>
-                      </ul>
-                    </li>
+                    {admin && <>
+                      <li className={` ${dropDown ? "showMenu" : null}`}>
+                        <div className="icon-link">
+                          <Link to="/admin">
+                            <i className="fas fa-users-cog"></i>
+                            <span className="link_name">Admin</span>
+                          </Link>
+                          <i
+                            className="bx bxs-chevron-down arrow"
+                            onClick={() => setdropDown((prevState) => !prevState)}
+                          ></i>
+                        </div>
+                        <ul className="sub-menu" onClick={() => setToggle(true)}>
+                          <li>
+                            <Link to="/users">Users</Link>
+                          </li>
+                          <li>
+                            <Link to="/blogs">Blogs</Link>
+                          </li>
+                          <li>
+                            <Link to="/archive">Archive</Link>
+                          </li>
+                        </ul>
+                      </li>
+                    </>}
 
                     <li onClick={() => setToggle(true)}>
                       <Link to="/createBlog">
@@ -224,41 +227,41 @@ function App() {
                   </div>
                 )}
               </Route>
-              <Route path="/blogs">
-                {auth ? (
-                  <Table />
-                ) : (
-                  <div className="signUp">
-                    <h2>SignUp</h2>
-                    <Button onClick={signIn}>Login to Continue...</Button>
-                  </div>
-                )}
-              </Route>
-              <Route path="/users">
-                {auth ? (
-                  <UserTable />
-                ) : (
-                  <div className="signUp">
-                    <h2>SignUp</h2>
-                    <Button onClick={signIn}>Login to Continue...</Button>
-                  </div>
-                )}
-              </Route>
-              <Route path="/archive">
-                {auth ? (
-                  <Archive />
-                ) : (
-                  <div className="signUp">
-                    <h2>SignUp</h2>
-                    <Button onClick={signIn}>Login to Continue...</Button>
-                  </div>
-                )}
-              </Route>
+              {admin && <>
+                <Route path="/blogs">
+                  {admin ? (
+                    <Table />
+                  ) : (
+                    <div className="signUp">
+                      <h2>Admin Page</h2>
+                    </div>
+                  )}
+                </Route>
+                <Route path="/users">
+                  {admin ? (
+                    <UserTable />
+                  ) : (
+                    <div className="signUp">
+                      <h2>Admin Page</h2>
+                    </div>
+                  )}
+                </Route>
+                <Route path="/archive">
+                  {auth ? (
+                    <Archive />
+                  ) : (
+                    <div className="signUp">
+                      <h2>Admin Page</h2>
+                    </div>
+                  )}
+                </Route></>}
             </section>
 
             <FirebaseAuthConsumer>
               {({ isSignedIn, user, providerId }) => {
                 setAuth(isSignedIn);
+                const email = "venky22ii1997@gmail.com";
+                user && user.email === email && setAdmin(true)
               }}
             </FirebaseAuthConsumer>
           </div>

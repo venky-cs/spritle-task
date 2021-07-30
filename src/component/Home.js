@@ -20,7 +20,7 @@ const Home = () => {
       .orderBy("created", "asc")
       // .limit(15)
       .onSnapshot((snapshot) => {
-        const lastDoc = snapshot.docs[snapshot.docs.length -1]
+        const lastDoc = snapshot.docs[snapshot.docs.length - 1]
         // setLastDoc(lastDoc);
         let datas = [];
         snapshot.forEach((doc) => {
