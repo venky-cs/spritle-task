@@ -100,49 +100,51 @@ function App() {
                   </Link>
                 </li>
 
-                {auth && (
+                {auth && admin && (
                   <>
-                    {admin && <>
-                      <li className={` ${dropDown ? "showMenu" : null}`}>
-                        <div className="icon-link">
-                          <Link to="/admin">
-                            <i className="fas fa-users-cog"></i>
-                            <span className="link_name">Admin</span>
-                          </Link>
-                          <i
-                            className="bx bxs-chevron-down arrow"
-                            onClick={() => setdropDown((prevState) => !prevState)}
-                          ></i>
-                        </div>
-                        <ul className="sub-menu" onClick={() => setToggle(true)}>
-                          <li>
-                            <Link to="/users">Users</Link>
-                          </li>
-                          <li>
-                            <Link to="/blogs">Blogs</Link>
-                          </li>
-                          <li>
-                            <Link to="/archive">Archive</Link>
-                          </li>
-                        </ul>
-                      </li>
-                    </>}
-
-                    <li onClick={() => setToggle(true)}>
-                      <Link to="/createBlog">
-                        <i className="bx bxs-message-square-detail"></i>
-                        <span className="link_name">Write Blog</span>
-                      </Link>
-                    </li>
-
-                    <li onClick={() => setToggle(true)}>
-                      <Link to="/myBlog">
-                        <i class="fas fa-id-card"></i>
-                        <span className="link_name">My Blog</span>
-                      </Link>
+                    <li className={` ${dropDown ? "showMenu" : null}`}>
+                      <div className="icon-link">
+                        <Link to="/admin">
+                          <i className="fas fa-users-cog"></i>
+                          <span className="link_name">Admin</span>
+                        </Link>
+                        <i
+                          className="bx bxs-chevron-down arrow"
+                          onClick={() => setdropDown((prevState) => !prevState)}
+                        ></i>
+                      </div>
+                      <ul className="sub-menu" onClick={() => setToggle(true)}>
+                        <li>
+                          <Link to="/users">Users</Link>
+                        </li>
+                        <li>
+                          <Link to="/blogs">Blogs</Link>
+                        </li>
+                        <li>
+                          <Link to="/archive">Archive</Link>
+                        </li>
+                      </ul>
                     </li>
                   </>
                 )}
+
+
+                {auth && (<>
+                  <li onClick={() => setToggle(true)}>
+                    <Link to="/createBlog">
+                      <i className="bx bxs-message-square-detail"></i>
+                      <span className="link_name">Write Blog</span>
+                    </Link>
+                  </li>
+
+                  <li onClick={() => setToggle(true)}>
+                    <Link to="/myBlog">
+                      <i class="fas fa-id-card"></i>
+                      <span className="link_name">My Blog</span>
+                    </Link>
+                  </li>
+                </>)}
+
 
                 <li onClick={() => setToggle(true)}>
                   <Link to="/save">
@@ -270,7 +272,7 @@ function App() {
     </Router>
   );
 
-  async function signIn() {
+  function signIn() {
     const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithPopup(googleAuthProvider);
   }
