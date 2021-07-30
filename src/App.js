@@ -260,7 +260,7 @@ function App() {
             <FirebaseAuthConsumer>
               {({ isSignedIn, user, providerId }) => {
                 setAuth(isSignedIn);
-                const email = "venky22ii1997@gmail.com";
+                const email = "venky22ii1997@gmail.com" || "rashid.tv@spritle.com";
                 user && user.email === email && setAdmin(true)
               }}
             </FirebaseAuthConsumer>
