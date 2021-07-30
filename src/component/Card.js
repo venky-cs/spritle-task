@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import { useDrag } from "react-dnd";
 import dayjs from 'dayjs';
+import DragLayerComponent from './DragLayerComponent'
 
 
 const Card = ({ data, saveBlog, isDrag }) => {
@@ -29,6 +30,7 @@ const Card = ({ data, saveBlog, isDrag }) => {
   }
 
   return (
+    // <DragLayerComponent>
     <div className="card" key={data.id} ref={drag} style={{ opacity: isDragging ? 0 : 1 }}>
       <Link to={"/blog/:" + data.title}>
         <h2>{data.title}</h2>
@@ -54,6 +56,8 @@ const Card = ({ data, saveBlog, isDrag }) => {
       </div>
 
     </div>
+    // </DragLayerComponent>
+
   );
 };
 

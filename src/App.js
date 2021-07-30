@@ -115,13 +115,13 @@ function App() {
                       </div>
                       <ul className="sub-menu" onClick={() => setToggle(true)}>
                         <li>
-                          <Link to="/users">Users</Link>
+                          <Link to="/admin/users">Users</Link>
                         </li>
                         <li>
-                          <Link to="/blogs">Blogs</Link>
+                          <Link to="/admin/blogs">Blogs</Link>
                         </li>
                         <li>
-                          <Link to="/archive">Archive</Link>
+                          <Link to="/admin/archive">Archive</Link>
                         </li>
                       </ul>
                     </li>
@@ -230,7 +230,7 @@ function App() {
                 )}
               </Route>
               {admin && <>
-                <Route path="/blogs">
+                <Route path="/admin/blogs">
                   {admin ? (
                     <Table />
                   ) : (
@@ -239,7 +239,7 @@ function App() {
                     </div>
                   )}
                 </Route>
-                <Route path="/users">
+                <Route path="/admin/users" exact>
                   {admin ? (
                     <UserTable />
                   ) : (
@@ -248,7 +248,7 @@ function App() {
                     </div>
                   )}
                 </Route>
-                <Route path="/archive">
+                <Route path="/admin/archive">
                   {auth ? (
                     <Archive />
                   ) : (
@@ -261,6 +261,7 @@ function App() {
 
             <FirebaseAuthConsumer>
               {({ isSignedIn, user, providerId }) => {
+                setAdmin(false)
                 setAuth(isSignedIn);
                 const email = "venky22ii1997@gmail.com" || "rashid.tv@spritle.com";
                 user && user.email === email && setAdmin(true)
