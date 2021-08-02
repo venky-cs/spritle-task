@@ -86,6 +86,8 @@ function BlogPost() {
                   </div>
                 </div>
 
+                {data.views && <p> <i class="fas fa-eye">{"  " + data.views}</i></p>}
+
                 <i
                   className={data.isSaved ? "fas fa-bookmark" : "far fa-bookmark"}
                   onClick={() => saveBlog(data)}
@@ -94,8 +96,9 @@ function BlogPost() {
             </div>
           </div>
         ))
-      )}
-    </div>
+      )
+      }
+    </div >
   );
 
   function saveBlog(data) {

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import { useDrag } from "react-dnd";
 import dayjs from 'dayjs';
+import { db } from "../firebaseConfig";
 
 
 const Card = ({ data, saveBlog, isDrag }) => {
@@ -31,7 +32,7 @@ const Card = ({ data, saveBlog, isDrag }) => {
   return (
 
     <div className="card" key={data.id} ref={drag} style={{ opacity: isDragging ? 0 : 1 }}>
-      <Link to={"/blog/:" + data.title}>
+      <Link to={"/blog/:" + data.title} onClick={() => updateViewCount(data.id)}>
         <h2>{data.title}</h2>
         <p>
           <ReactMarkdown>{data.message.substring(0, 350)}</ReactMarkdown>
@@ -57,6 +58,22 @@ const Card = ({ data, saveBlog, isDrag }) => {
     </div>
 
   );
+
+  function updateViewCount(id) {
+    let Id = id
+    console.log(Id)
+    console.log(data)
+    if (!data.views) {
+      console.log(data.views)
+      db.collection("post").doc(Id).update({
+        views: 1
+      });
+    } else
+      db.collection("post").doc(Id).update({
+        views: data.views + 1
+      });
+    console.log(data)
+  }
 };
 
 export default Card;
