@@ -14,6 +14,9 @@ const backgroundColor = "#F9F9FA";
 const Home = () => {
   const [blog, setBlog] = useState([]);
   const [drag, setDrag] = useState("");
+  const [search, setSearch] = useState("")
+  const [filtered, setFiltered] = useState([]);
+
   // const [lastDoc, setLastDoc] = useState([] | 15);
 
   console.log(drag)
@@ -63,10 +66,26 @@ const Home = () => {
   // };
 
 
+  useEffect(() => {
+    search && setFiltered(blog.filter((data) => data.title.toLowerCase() === search.toLowerCase()));
+  }, [search]);
+
+  console.log(filtered)
+
+  const searchBlog = (e) => {
+    setSearch(e.target.value)
+  }
+
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="home">
         <h1 className="title">Home Page</h1>
+
+        <div className="search">
+          <input type="text" value={search} onChange={searchBlog}
+            placeholder="search blog" />
+        </div>
+
         <div className="box" style={{ opacity: drag ? 0.5 : 1 }}>
           {blog.length < 1 ? (
             <div>
@@ -94,7 +113,7 @@ const Home = () => {
               </ContentLoader>
             </div>
           ) : (
-            <CardList blog={blog} saveBlog={saveBlog} checkDrag={checkDrag} />
+            <CardList blog={search && filtered && filtered.length === 1 ? filtered : blog} saveBlog={saveBlog} checkDrag={checkDrag} />
           )}
         </div>
         {/* <BottomScrollListener onBottom={fetchMore} /> */}

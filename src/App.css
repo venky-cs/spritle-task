@@ -271,6 +271,16 @@ textarea {
   resize: none;
 }
 
+.home .search{
+  width: 50%;
+  margin: auto;
+}
+
+.home .search input{
+  border-radius: 12px;
+
+}
+
 form {
   width: 80%;
   height: fit-content;
