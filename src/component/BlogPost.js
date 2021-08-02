@@ -4,10 +4,14 @@ import ReactMarkdown from "react-markdown";
 import ContentLoader from "react-content-loader";
 import { db } from "../firebaseConfig";
 import Button from "./Button";
+import dayjs from 'dayjs';
+
 
 function BlogPost() {
   const [blog, setBlog] = useState([]);
   const [select, setSelect] = useState();
+  const [status, setStatus] = useState("");
+
 
   let { slug } = useParams();
   slug = JSON.stringify(slug.slice(1));
@@ -33,6 +37,16 @@ function BlogPost() {
     setSelect(blog.filter((data) => data.title === JSON.parse(slug)));
   }, [blog, slug]);
 
+  function dateAgo(createdDate) {
+    let today = Math.floor(new Date().getTime() / 1000)
+    let formatToday = dayjs.unix(today).format('YYYY-MM-DD')
+    let calculate = dayjs.unix(createdDate).format('YYYY-MM-DD')
+    formatToday = dayjs(formatToday)
+    calculate = dayjs(calculate)
+    let result = formatToday.diff(calculate, 'day', true)
+    return result
+  }
+
   return (
     <div>
       {!select ? (
@@ -48,28 +62,35 @@ function BlogPost() {
         select.map((data, index) => (
           <div key={index} className="select">
             <div key={index} className="card full">
-              <h2>{data.title}</h2>
-
+              <div className="btn">
+                <h2>{data.title}</h2>
+                <div onClick={shareBlog}>
+                  <i class="fas fa-share"></i>
+                  <p>
+                    {status ? <span>{status}</span> : "Share"}
+                  </p>
+                </div>
+              </div>
+              <br />
               <p>
                 <ReactMarkdown>{data.message}</ReactMarkdown>
               </p>
-              {!data.isSaved ? (
-                <Button
-                  variant="google"
-                  className="save-btn"
+              <div className="btn">
+                <div>
+                  <div className="user-info">
+                    <img src={data.profile} alt="profile" />
+                    <h4>{data.author}</h4>
+                  </div>
+                  <div>
+                    <p className="days">{dateAgo(data.created) !== 0 && dateAgo(data.created) + " days ago"} </p>
+                  </div>
+                </div>
+
+                <i
+                  className={data.isSaved ? "fas fa-bookmark" : "far fa-bookmark"}
                   onClick={() => saveBlog(data)}
-                >
-                  Save
-                </Button>
-              ) : (
-                <Button
-                  variant="google"
-                  className="save-btn"
-                  onClick={() => saveBlog(data)}
-                >
-                  Remove
-                </Button>
-              )}
+                ></i>
+              </div>
             </div>
           </div>
         ))
@@ -80,6 +101,20 @@ function BlogPost() {
   function saveBlog(data) {
     db.collection("post").doc(data.id).update({ isSaved: !data.isSaved });
   }
+  function shareBlog() {
+    let url = document.URL
+    console.log(url)
+    navigator.clipboard.writeText(url);
+    const successful = document.execCommand("copy");
+    if (successful) {
+      setStatus("Copied!");
+    } else {
+      setStatus("Unable to copy!");
+    }
+    console.log(status);
+  }
+
+
 }
 
 export default BlogPost;
