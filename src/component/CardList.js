@@ -43,7 +43,7 @@ const CardList = ({ blog, saveBlog, checkDrag }) => {
           ))}
       </Masonry>
       {drag && (
-        <div className="dragged" ref={drop} >
+        <div className="dragged" ref={drop}>
           <div onDrop={goToEdit}>Edit </div>
           <div onDrop={goToRemove}>Remove</div>
         </div>
@@ -53,7 +53,7 @@ const CardList = ({ blog, saveBlog, checkDrag }) => {
 
   function isDrag(drag) {
     setDrag(drag);
-    checkDrag(drag)
+    checkDrag(drag);
   }
 };
 

@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { db } from "../firebaseConfig";
 import RenderCard from "./RenderCard";
 
-
 const MyBlog = ({ user }) => {
   const [myBlog, setMyBlog] = useState();
   const [filtered, setFiltered] = useState([]);

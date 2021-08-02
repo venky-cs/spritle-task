@@ -190,7 +190,7 @@ body {
   justify-content: space-evenly;
   background: #1d1b31;
   padding: 12px 0;
-  transition: all 0.10s ease;
+  transition: all 0.1s ease;
   transition-delay: 0.3s;
 }
 .sidebar.close .profile-details {
@@ -232,16 +232,9 @@ body {
   font-size: 12px;
 }
 .home-section {
-  /* position: relative; */
-  /* background: #E4E9F7; */
   height: 100vh;
-  /* left: 200px; */
   width: calc(100% - 200px);
   transition: all 0.5s ease;
-}
-.sidebar.close ~ .home-section {
-  /* left: 58px; */
-  /* width: calc(100% - 48px); */
 }
 .home-section .home-content {
   height: 60px;
@@ -271,15 +264,15 @@ textarea {
   resize: none;
 }
 
-.home .search{
+.home .search {
   width: 50%;
   margin: auto;
 }
 
-.home .search input{
+.home .search input {
   border-radius: 12px;
 }
-
+/* form */
 form {
   width: 80%;
   height: fit-content;
@@ -327,19 +320,16 @@ input[type="file"] {
   margin-left: auto;
 }
 
-.card{
-    background-color: #ddd;
-    padding: 20px;
-   border-radius: 12px;
-   box-shadow: 4px 13px 27px 1px rgb(0 0 0 / 23%);
-   transition: all 0.5s linear;
-    font-family: sans-serif;
-}
-.card:hover {
+/* card */
+.card {
+  background-color: #ddd;
+  padding: 20px;
   border-radius: 12px;
-  background-color: #efe9f1e5;
+  box-shadow: 4px 13px 27px 1px rgb(0 0 0 / 23%);
   transition: all 0.5s linear;
+  font-family: sans-serif;
 }
+
 .card h2 {
   border-bottom: 2px solid #c3bcbc;
 }
@@ -376,10 +366,8 @@ i {
   padding: 5px 10px;
   cursor: pointer;
 }
-/* .btn img:hover {
-  background-color: #6eb9f7;
-} */
-.days{
+
+.days {
   padding-left: 20px;
 }
 
@@ -464,7 +452,8 @@ a {
 }
 
 .img-upload,
-.dragged ,.popUp{
+.dragged,
+.popUp {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -481,7 +470,7 @@ a {
   bottom: 0;
 }
 
-.dragged  div {
+.dragged div {
   width: 300px;
   height: 50px;
   border-radius: 12px;
@@ -495,11 +484,11 @@ a {
   font-size: 28px;
 }
 
-.dragged  div:first-child {
-  background-color:#DAD0C2;
+.dragged div:first-child {
+  background-color: #dad0c2;
 }
-.dragged  div:last-child {
-  background-color: #CDBBA7;
+.dragged div:last-child {
+  background-color: #cdbba7;
 }
 
 .signUp {
@@ -562,55 +551,49 @@ a {
   align-items: center;
 }
 
-.user-info img{
+.user-info img {
   border-radius: 50%;
 }
 
-.popUp{
+.popUp {
   height: 100%;
 }
 
-.popUp div{
+.popUp div {
   width: 500px;
   padding: 30px;
   border-radius: 12px;
-  background-color:#acb6be;
+  background-color: #acb6be;
 }
-.popUp .close{
+.popUp .close {
   text-align: right;
   cursor: pointer;
 }
-.popUp button{
+.popUp button {
   padding: 10px 20px;
 }
 
 .my-masonry-grid {
   display: -webkit-box;
-  /* Not needed if autoprefixing */
   display: -ms-flexbox;
-  /* Not needed if autoprefixing */
   display: flex;
   margin-left: -30px;
-  /* gutter size offset */
   width: auto;
 }
 
 .my-masonry-grid_column {
   padding-left: 30px;
-  /* gutter size */
   background-clip: padding-box;
 }
 
-/* Style your items */
-.my-masonry-grid_column>div {
-  /* change div to reference your elements you put in <Masonry> */
-  background: #ddd;
+.my-masonry-grid_column > div {
+  background: white;
   margin-bottom: 30px;
-   padding: 20px;
-   border-radius: 12px;
-   box-shadow: 4px 13px 27px 1px rgb(0 0 0 / 23%);
-   transition: all 0.5s linear;
-   font-family: sans-serif;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 4px 13px 27px 1px rgb(0 0 0 / 23%);
+  transition: all 0.5s linear;
+  font-family: sans-serif;
 }
 
 @media screen and (max-width: 1024px) {
@@ -628,7 +611,7 @@ a {
     background-color: #f3efe7;
     overflow-x: hidden;
   }
-  .full{
+  .full {
     width: 100%;
   }
 }
@@ -642,6 +625,7 @@ a {
     width: 200px;
   }
 }
+
 @media screen and (max-width: 500px) {
   .home,
   .save {
@@ -663,7 +647,8 @@ a {
   }
 
   .home,
-  .save,.full {
+  .save,
+  .full {
     width: 100%;
   }
   .box {

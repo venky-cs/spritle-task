@@ -1,10 +1,10 @@
 table {
-    width: 100%;
-    background-color: white;
+  width: 100%;
+  background-color: white;
 }
 
 table thead tr {
-    background: #dcd5c5;
+  background: #dcd5c5;
 }
 
 table thead tr h1,
@@ -15,134 +15,134 @@ table thead tr h3,
 table thead tr .h3,
 table thead tr h4,
 table thead tr .h4 {
-    color: #151515;
+  color: #151515;
 }
 
 table thead tr a {
-    color: #0075b0;
+  color: #0075b0;
 }
 
 table thead tr a:hover,
 table thead tr a:focus {
-    color: white;
+  color: white;
 }
 
 table tbody tr:nth-of-type(even) {
-    background: #e2e2e2;
+  background: #e2e2e2;
 }
 
 table td,
 table th {
-    padding: 8px 14px;
-    text-align: left;
-    font-size: 0.9rem;
+  padding: 8px 14px;
+  text-align: left;
+  font-size: 0.9rem;
 }
 
 table td a,
 table th a {
-    font-weight: bold;
-    color: #00918a !important;
+  font-weight: bold;
+  color: #00918a !important;
 }
 
 table td a:hover,
 table th a:hover,
 table td a:focus,
 table th a:focus {
-    color: white !important;
+  color: white !important;
 }
 
 table th {
-    font-weight: 700;
-    font-size: 0.8rem;
-    line-height: 1.4;
-    font-family: "Gotham SSm A", "Gotham SSm B", Helvetica, sans-serif;
-    text-transform: uppercase;
-    margin: 0;
-    max-width: 800px;
-    line-height: inherit;
-    color: #151515;
+  font-weight: 700;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  font-family: "Gotham SSm A", "Gotham SSm B", Helvetica, sans-serif;
+  text-transform: uppercase;
+  margin: 0;
+  max-width: 800px;
+  line-height: inherit;
+  color: #151515;
 }
 
 table th.PrimaryFont {
-    text-transform: none;
+  text-transform: none;
 }
 
 .table-options {
-    text-align: center;
-    margin: 20px;
+  text-align: center;
+  margin: 20px;
 }
 
 .table-options button {
-    margin: 10px;
-    padding: 8px 10px;
+  margin: 10px;
+  padding: 8px 10px;
 }
-.table-edit{
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    /* background-color: lavender; */
+.table-edit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background-color: lavender; */
 }
 
 .table-options select {
-    margin-left: 20px;
-    padding: 8px 10px;
+  margin-left: 20px;
+  padding: 8px 10px;
 }
 
 .table-edit div {
-    text-align: center;
-    font-size: 10px;
-    padding: 10px 25px;
-    cursor: pointer;
+  text-align: center;
+  font-size: 10px;
+  padding: 10px 25px;
+  cursor: pointer;
 }
 
-.table-edit div>p{
-    color: rgb(55, 0, 255);
-    font: 500;
+.table-edit div > p {
+  color: rgb(55, 0, 255);
+  font: 500;
 }
 
-table img{
-    width: 30px;
-    border-radius: 50%;
+table img {
+  width: 30px;
+  border-radius: 50%;
 }
 
 @media only screen and (max-width: 800px) {
-    table th {
-        display: none;
-    }
+  table th {
+    display: none;
+  }
 
-    table td {
-        position: relative;
-        display: block;
-        padding-left: 150px;
-    }
+  table td {
+    position: relative;
+    display: block;
+    padding-left: 150px;
+  }
 
-    table td:before {
-        position: absolute;
-        top: 8px;
-        left: 10px;
-        display: block;
-        content: attr(aria-label) ":";
-        font-weight: 500;
-    }
+  table td:before {
+    position: absolute;
+    top: 8px;
+    left: 10px;
+    display: block;
+    content: attr(aria-label) ":";
+    font-weight: 500;
+  }
 
-    .table-edit th {
-        display: inline-block;
-    }
+  .table-edit th {
+    display: inline-block;
+  }
 
-    table tbody tr {
-        padding: 20px 0;
-        display: block;
-    }
+  table tbody tr {
+    padding: 20px 0;
+    display: block;
+  }
 
-    table:nth-of-type(odd) {
-        background: #f3f3f3;
-    }
+  table:nth-of-type(odd) {
+    background: #f3f3f3;
+  }
 }
 
 body {
-    padding: 20px;
+  padding: 20px;
 }
 
 table {
-    border-collapse: separate;
+  border-collapse: separate;
 }

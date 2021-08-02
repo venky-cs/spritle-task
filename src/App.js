@@ -18,14 +18,13 @@ import Edit from "./component/Edit";
 import MyBlog from "./component/MyBlog";
 import Remove from "./component/Remove";
 import Table from "./component/Table";
-import UserTable from './component/UserTable'
+import UserTable from "./component/UserTable";
 import { db } from "./firebaseConfig";
 require("dotenv").config();
 
-
 function App() {
   const [auth, setAuth] = useState(false);
-  const [users, setUsers] = useState([])
+  const [users, setUsers] = useState([]);
   const [admin, setAdmin] = useState(false);
 
   const [toggle, setToggle] = useState(true);
@@ -49,12 +48,12 @@ function App() {
   useEffect(() => {
     db.collection("user").onSnapshot(
       (snapshot) => {
-        let datas = []
+        let datas = [];
         snapshot.forEach((doc) => {
           const data = doc.data();
-          datas.push({ ...data })
-        })
-        setUsers(datas)
+          datas.push({ ...data });
+        });
+        setUsers(datas);
       },
       (error) => {
         console.log(error);
@@ -62,11 +61,10 @@ function App() {
     );
   }, []);
 
-
   useEffect(() => {
-    user &&
-      console.log(user.email)
-    let check = user && user.email && users.every(users => users.email !== user.email)
+    user && console.log(user.email);
+    let check =
+      user && user.email && users.every((users) => users.email !== user.email);
     if (check) {
       db.collection("user").add({
         name: user.displayName,
@@ -74,10 +72,9 @@ function App() {
         uid: user.uid,
         img: user.photoURL,
         mobile: user.phoneNumber,
-      })
-    } else console.log("user already exist")
-
-  }, [toggle])
+      });
+    } else console.log("user already exist");
+  }, [toggle]);
 
   return (
     <Router>
@@ -124,23 +121,23 @@ function App() {
                   </>
                 )}
 
+                {auth && (
+                  <>
+                    <li onClick={() => setToggle(true)}>
+                      <Link to="/createBlog">
+                        <i className="bx bxs-message-square-detail"></i>
+                        <span className="link_name">Write Blog</span>
+                      </Link>
+                    </li>
 
-                {auth && (<>
-                  <li onClick={() => setToggle(true)}>
-                    <Link to="/createBlog">
-                      <i className="bx bxs-message-square-detail"></i>
-                      <span className="link_name">Write Blog</span>
-                    </Link>
-                  </li>
-
-                  <li onClick={() => setToggle(true)}>
-                    <Link to="/myBlog">
-                      <i class="fas fa-id-card"></i>
-                      <span className="link_name">My Blog</span>
-                    </Link>
-                  </li>
-                </>)}
-
+                    <li onClick={() => setToggle(true)}>
+                      <Link to="/myBlog">
+                        <i class="fas fa-id-card"></i>
+                        <span className="link_name">My Blog</span>
+                      </Link>
+                    </li>
+                  </>
+                )}
 
                 <li onClick={() => setToggle(true)}>
                   <Link to="/save">
@@ -225,36 +222,38 @@ function App() {
                   </div>
                 )}
               </Route>
-              {admin && <>
-                <Route path="/admin/blogs">
-                  {admin ? (
-                    <Table />
-                  ) : (
-                    <div className="signUp">
-                      <h2>Admin Page</h2>
-                    </div>
-                  )}
-                </Route>
-                <Route path="/admin/users" exact>
-                  {admin ? (
-                    <UserTable />
-                  ) : (
-                    <div className="signUp">
-                      <h2>Admin Page</h2>
-                    </div>
-                  )}
-                </Route>
-              </>}
+              {admin && (
+                <>
+                  <Route path="/admin/blogs">
+                    {admin ? (
+                      <Table />
+                    ) : (
+                      <div className="signUp">
+                        <h2>Admin Page</h2>
+                      </div>
+                    )}
+                  </Route>
+                  <Route path="/admin/users" exact>
+                    {admin ? (
+                      <UserTable />
+                    ) : (
+                      <div className="signUp">
+                        <h2>Admin Page</h2>
+                      </div>
+                    )}
+                  </Route>
+                </>
+              )}
             </section>
 
             <FirebaseAuthConsumer>
               {({ isSignedIn, user, providerId }) => {
-                setAdmin(false)
+                setAdmin(false);
                 setAuth(isSignedIn);
-                let email = "rashid.tv@spritle.com"
-                user && user.email === email && setAdmin(true)
-                let email2 = "venky22ii1997@gmail.com"
-                user && user.email === email2 && setAdmin(true)
+                let email = "rashid.tv@spritle.com";
+                user && user.email === email && setAdmin(true);
+                let email2 = "venky22ii1997@gmail.com";
+                user && user.email === email2 && setAdmin(true);
               }}
             </FirebaseAuthConsumer>
           </div>
@@ -276,4 +275,3 @@ function App() {
 }
 
 export default App;
-

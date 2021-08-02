@@ -10,10 +10,9 @@ import { Checkbox } from "./Checkbox";
 
 const Table = () => {
   const [blog, setBlog] = useState([]);
-  const [filterArchive, setFilterArchive] = useState([])
+  const [filterArchive, setFilterArchive] = useState([]);
   const [filtered, setFiltered] = useState([]);
-  const [load, setLoad] = useState(false)
-
+  const [load, setLoad] = useState(false);
 
   useEffect(() => {
     db.collection("post").onSnapshot(
@@ -27,8 +26,8 @@ const Table = () => {
             created: dayjs.unix(data.created).format("DD-MM-YYYY"),
             id: id,
           });
-          setBlog(datas)
-          let filterArchive = datas.filter(data => !data.isSelect)
+          setBlog(datas);
+          let filterArchive = datas.filter((data) => !data.isSelect);
           setFilterArchive(filterArchive);
         });
       },
@@ -84,7 +83,6 @@ const Table = () => {
     }
   );
 
-
   const { pageIndex, pageSize } = state;
 
   return (
@@ -100,16 +98,17 @@ const Table = () => {
           <th></th>
         )}
 
-        {!load ?
-          <div onClick={() => setLoad(prev => !prev)}>
+        {!load ? (
+          <div onClick={() => setLoad((prev) => !prev)}>
             <i class="fas fa-filter"></i>
             <p>Archived</p>
           </div>
-          : <div onClick={() => setLoad(prev => !prev)}>
+        ) : (
+          <div onClick={() => setLoad((prev) => !prev)}>
             <p>All</p>
             <i class="fas fa-warehouse"></i>
           </div>
-        }
+        )}
 
         <div onClick={removeBlog}>
           <i class="fas fa-trash"></i>

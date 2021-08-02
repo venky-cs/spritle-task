@@ -5,7 +5,6 @@ import ContentLoader from "react-content-loader";
 import { db } from "../firebaseConfig";
 import dayjs from 'dayjs';
 
-
 function BlogPost() {
   const [blog, setBlog] = useState([]);
   const [select, setSelect] = useState();
@@ -49,13 +48,21 @@ function BlogPost() {
   return (
     <div>
       {!select ? (
-        <ContentLoader viewBox="0 0 820 450" height={450} width={820}>
-          <rect x="10" y="10" rx="5" ry="5" width="260" height="140" />
-          <rect x="280" y="10" rx="5" ry="5" width="260" height="280" />
-          <rect x="550" y="10" rx="5" ry="5" width="260" height="140" />
-          <rect x="10" y="160" rx="5" ry="5" width="260" height="280" />
-          <rect x="280" y="300" rx="5" ry="5" width="260" height="140" />
-          <rect x="550" y="160" rx="5" ry="5" width="260" height="280" />
+        <ContentLoader
+          speed={2}
+          width={1200}
+          height={300}
+          viewBox="0 0 1200 300"
+          backgroundColor="#f3f3f3"
+          foregroundColor="#ecebeb"
+        >
+          <rect x="48" y="NaN" rx="3" ry="3" width="88" height="NaN" />
+          <rect x="48" y="NaN" rx="3" ry="3" width="52" height="NaN" />
+          <rect x="0" y="NaN" rx="3" ry="3" width="410" height="NaN" />
+          <rect x="0" y="NaN" rx="3" ry="3" width="380" height="NaN" />
+          <rect x="0" y="NaN" rx="3" ry="3" width="178" height="NaN" />
+          <circle cx="NaN" cy="NaN" r="20" />
+          <rect x="67" y="74" rx="0" ry="0" width="507" height="135" />
         </ContentLoader>
       ) : (
         select.map((data, index) => (

@@ -40,7 +40,9 @@ const Remove = () => {
         {filtered &&
           filtered.map((data) => (
             <>
-              <h1 className="close" onClick={backToHome}><i class="fas fa-window-close"></i></h1>
+              <h1 className="close" onClick={backToHome}>
+                <i class="fas fa-window-close"></i>
+              </h1>
               <h3>Are you sure to delete this {data.title} blog ?</h3>
 
               <Button onClick={deleteBlog}>Yes</Button>

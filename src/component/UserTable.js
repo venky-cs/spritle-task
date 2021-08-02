@@ -21,10 +21,11 @@ const Table = () => {
                         img: <img src={img} alt="pic" />,
                     });
                 });
-                const unique = Array.from(new Set(datas.map(a => a.uid)))
-                    .map(uid => {
-                        return datas.find(a => a.uid === uid)
-                    })
+                const unique = Array.from(new Set(datas.map((a) => a.uid))).map(
+                    (uid) => {
+                        return datas.find((a) => a.uid === uid);
+                    }
+                );
                 setUser(unique);
             },
             (error) => {
@@ -32,7 +33,6 @@ const Table = () => {
             }
         );
     }, []);
-
 
     const columns = useMemo(() => USER_COLUMNS, []);
     // const data = useMemo(() => blog,[])
@@ -84,9 +84,7 @@ const Table = () => {
                     {headerGroups.map((headerGroup) => (
                         <tr {...headerGroup.getHeaderGroupProps()}>
                             {headerGroup.headers.map((column) => (
-                                <th {...column.getHeaderProps()}>
-                                    {column.render("Header")}
-                                </th>
+                                <th {...column.getHeaderProps()}>{column.render("Header")}</th>
                             ))}
                         </tr>
                     ))}
@@ -148,7 +146,6 @@ const Table = () => {
             </div>
         </div>
     );
-
 };
 
 export default Table;

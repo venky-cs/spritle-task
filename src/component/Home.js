@@ -5,7 +5,7 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import CardList from "./CardList";
 // import dayjs from 'dayjs';
-import Grid from './ContentLoader'
+import Grid from "./ContentLoader";
 
 const width = 7;
 const height = 3;
@@ -15,35 +15,38 @@ const backgroundColor = "#F9F9FA";
 const Home = () => {
   const [blog, setBlog] = useState([]);
   const [drag, setDrag] = useState("");
-  const [search, setSearch] = useState("")
+  const [search, setSearch] = useState("");
   const [filtered, setFiltered] = useState([]);
 
   // const [lastDoc, setLastDoc] = useState([] | 15);
 
-  console.log(drag)
+  console.log(drag);
 
   useEffect(() => {
-    const unsubscribe = db.collection("post")
+    const unsubscribe = db
+      .collection("post")
       .orderBy("created", "asc")
       // .limit(15)
-      .onSnapshot((snapshot) => {
-        const lastDoc = snapshot.docs[snapshot.docs.length - 1]
-        // setLastDoc(lastDoc);
-        let datas = [];
-        snapshot.forEach((doc) => {
-          const data = doc.data();
-          const id = doc.id
-          datas.push({ ...data, id: id });
-          datas.filter(data => !data.isSelect)
-        });
-        setBlog(datas);
-      }, (error) => {
-        console.log(error)
-      });
+      .onSnapshot(
+        (snapshot) => {
+          const lastDoc = snapshot.docs[snapshot.docs.length - 1];
+          // setLastDoc(lastDoc);
+          let datas = [];
+          snapshot.forEach((doc) => {
+            const data = doc.data();
+            const id = doc.id;
+            datas.push({ ...data, id: id });
+            datas.filter((data) => !data.isSelect);
+          });
+          setBlog(datas);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
 
     return () => unsubscribe();
   }, []);
-
 
   // const fetchMore = () => {
   //   db.collection("post")
@@ -66,16 +69,18 @@ const Home = () => {
   //     });
   // };
 
-
   useEffect(() => {
-    search && setFiltered(blog.filter((data) => data.title.toLowerCase() === search.toLowerCase()));
+    search &&
+      setFiltered(
+        blog.filter((data) => data.title.toLowerCase() === search.toLowerCase())
+      );
   }, [search]);
 
-  console.log(filtered)
+  console.log(filtered);
 
   const searchBlog = (e) => {
-    setSearch(e.target.value)
-  }
+    setSearch(e.target.value);
+  };
 
   return (
     <DndProvider backend={HTML5Backend}>
@@ -83,15 +88,25 @@ const Home = () => {
         <h1 className="title">Home Page</h1>
 
         <div className="search">
-          <input type="text" value={search} onChange={searchBlog}
-            placeholder="search blog" />
+          <input
+            type="text"
+            value={search}
+            onChange={searchBlog}
+            placeholder="search blog"
+          />
         </div>
 
         <div className="box" style={{ opacity: drag ? 0.5 : 1 }}>
           {blog.length < 1 ? (
             <Grid />
           ) : (
-            <CardList blog={search && filtered && filtered.length === 1 ? filtered : blog} saveBlog={saveBlog} checkDrag={checkDrag} />
+            <CardList
+              blog={
+                search && filtered && filtered.length === 1 ? filtered : blog
+              }
+              saveBlog={saveBlog}
+              checkDrag={checkDrag}
+            />
           )}
         </div>
         {/* <BottomScrollListener onBottom={fetchMore} /> */}
