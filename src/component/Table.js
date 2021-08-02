@@ -10,6 +10,7 @@ import { Checkbox } from "./Checkbox";
 
 const Table = () => {
   const [blog, setBlog] = useState([]);
+  const [filterArchive, setFilterArchive] = useState([])
   const [filtered, setFiltered] = useState([]);
   const [load, setLoad] = useState(false)
 
@@ -26,9 +27,10 @@ const Table = () => {
             created: dayjs.unix(data.created).format("DD-MM-YYYY"),
             id: id,
           });
-          datas.filter(data => !data.isSelect)
+          setBlog(datas)
+          let filterArchive = datas.filter(data => !data.isSelect)
+          setFilterArchive(filterArchive);
         });
-        setBlog(datas);
       },
       (error) => {
         console.log(error);
@@ -64,7 +66,7 @@ const Table = () => {
   } = useTable(
     {
       columns,
-      data: load ? filtered : blog,
+      data: load ? filtered : filterArchive,
     },
     usePagination,
     useRowSelect,

@@ -18,7 +18,6 @@ import Edit from "./component/Edit";
 import MyBlog from "./component/MyBlog";
 import Remove from "./component/Remove";
 import Table from "./component/Table";
-import Archive from "./component/Archive";
 import UserTable from './component/UserTable'
 import { db } from "./firebaseConfig";
 require("dotenv").config();
@@ -119,9 +118,6 @@ function App() {
                         </li>
                         <li>
                           <Link to="/admin/blogs">Blogs</Link>
-                        </li>
-                        <li>
-                          <Link to="/admin/archive">Archive</Link>
                         </li>
                       </ul>
                     </li>
@@ -248,15 +244,7 @@ function App() {
                     </div>
                   )}
                 </Route>
-                <Route path="/admin/archive">
-                  {auth ? (
-                    <Archive />
-                  ) : (
-                    <div className="signUp">
-                      <h2>Admin Page</h2>
-                    </div>
-                  )}
-                </Route></>}
+              </>}
             </section>
 
             <FirebaseAuthConsumer>
