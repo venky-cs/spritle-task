@@ -90,40 +90,41 @@ const Table = () => {
   return (
     <div>
       <h3 className="title">Blogs</h3>
+      <div className="table-edit">
+        {selectedFlatRows && selectedFlatRows.length === 1 ? (
+          <div onClick={editBlog}>
+            <i class="fas fa-edit"></i>
+            <p>Edit</p>
+          </div>
+        ) : (
+          <th></th>
+        )}
+
+        {!load ?
+          <div onClick={() => setLoad(prev => !prev)}>
+            <i class="fas fa-filter"></i>
+            <p>Archived</p>
+          </div>
+          : <div onClick={() => setLoad(prev => !prev)}>
+            <p>All</p>
+            <i class="fas fa-warehouse"></i>
+          </div>
+        }
+
+        <div onClick={removeBlog}>
+          <i class="fas fa-trash"></i>
+          <p>Remove</p>
+        </div>
+        <div onClick={archiveBlog}>
+          <i class="fas fa-archive"></i>
+          <p>Archive</p>
+        </div>
+      </div>
+
       <table {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup) => (
             <>
-              <tr className="table-edit">
-                {selectedFlatRows && selectedFlatRows.length === 1 ? (
-                  <th onClick={editBlog}>
-                    <p>Edit</p>
-                    <i class="fas fa-edit"></i>
-                  </th>
-                ) : (
-                  <th></th>
-                )}
-
-                {!load ?
-                  <th onClick={() => setLoad(prev => !prev)}>
-                    <p>Archived</p>
-                    <i class="fas fa-filter"></i>
-                  </th>
-                  : <th onClick={() => setLoad(prev => !prev)}>
-                    <p>All</p>
-                    <i class="fas fa-warehouse"></i>
-                  </th>
-                }
-                <th></th>
-                <th onClick={removeBlog}>
-                  <p>Remove</p>
-                  <i class="fas fa-trash"></i>
-                </th>
-                <th onClick={archiveBlog}>
-                  <p>Archive</p>
-                  <i class="fas fa-archive"></i>
-                </th>
-              </tr>
               <tr {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map((column) => (
                   <th {...column.getHeaderProps()}>

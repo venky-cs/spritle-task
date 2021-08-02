@@ -76,16 +76,28 @@ table th.PrimaryFont {
     margin: 10px;
     padding: 8px 10px;
 }
+.table-edit{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    /* background-color: lavender; */
+}
 
 .table-options select {
     margin-left: 20px;
     padding: 8px 10px;
 }
 
-.table-edit th {
+.table-edit div {
     text-align: center;
     font-size: 10px;
+    padding: 10px 25px;
     cursor: pointer;
+}
+
+.table-edit div>p{
+    color: rgb(55, 0, 255);
+    font: 500;
 }
 
 table img{
