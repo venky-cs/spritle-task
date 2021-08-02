@@ -5,6 +5,7 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import CardList from "./CardList";
 // import dayjs from 'dayjs';
+import Grid from './ContentLoader'
 
 const width = 7;
 const height = 3;
@@ -88,30 +89,7 @@ const Home = () => {
 
         <div className="box" style={{ opacity: drag ? 0.5 : 1 }}>
           {blog.length < 1 ? (
-            <div>
-              <ContentLoader
-                foregroundColor={foregroundColor}
-                backgroundColor={backgroundColor}
-                style={{ width: "100%", height: 93 * height }}
-              >
-                <rect
-                  x="0"
-                  y={height * 17}
-                  rx="8"
-                  ry="8"
-                  width={width * 70}
-                  height={height * 76}
-                />
-                <rect
-                  x={width * 78}
-                  y={height * 17}
-                  rx="8"
-                  ry="8"
-                  width={width * 70}
-                  height={height * 76}
-                />
-              </ContentLoader>
-            </div>
+            <Grid />
           ) : (
             <CardList blog={search && filtered && filtered.length === 1 ? filtered : blog} saveBlog={saveBlog} checkDrag={checkDrag} />
           )}

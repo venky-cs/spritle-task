@@ -1,6 +1,7 @@
 import ReactMarkdown from "react-markdown";
 import { Link } from "react-router-dom";
 import Masonry from "react-masonry-css";
+import Grid from './ContentLoader'
 
 const RenderCard = ({ filtered }) => {
   const breakpointColumnsObj = {
@@ -16,7 +17,7 @@ const RenderCard = ({ filtered }) => {
       className="my-masonry-grid"
       columnClassName="my-masonry-grid_column"
     >
-      {filtered &&
+      {filtered.length < 1 ? <Grid /> :
         filtered.map((data, index) => (
           <div key={index} className="card">
             <Link to={"/blog/:" + data.title}>

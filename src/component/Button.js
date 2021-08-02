@@ -10,7 +10,7 @@ border: none;
   text-transform: uppercase;
   cursor: pointer;
   color: white;
-  background-color: black;
+  background-color:#47a7f5;
   box-shadow: 0 0 4px #999;
   outline: none;
    background-position: center;
@@ -22,20 +22,20 @@ border: none;
   }
   
 ${(props) => {
-  if (props.disabled === true) {
-    return `
+    if (props.disabled === true) {
+      return `
                 background-color:#d9534f;
         `;
-  }
-}}
+    }
+  }}
     ${(props) => {
-      if (props.variant === "google") {
-        return `
+    if (props.variant === "google") {
+      return `
         background-color:#5bc0de;
         color:white;
         `;
-      }
-    }}
+    }
+  }}
 
   &:hover{
        background: #47a7f5 radial-gradient(circle, transparent 1%, #47a7f5 1%) center/15000%;
