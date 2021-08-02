@@ -20,9 +20,12 @@ const Table = () => {
                         ...data,
                         img: <img src={img} alt="pic" />,
                     });
-                    datas.filter(data => !data.isSelect)
                 });
-                setUser(datas);
+                const unique = Array.from(new Set(datas.map(a => a.uid)))
+                    .map(uid => {
+                        return datas.find(a => a.uid === uid)
+                    })
+                setUser(unique);
             },
             (error) => {
                 console.log(error);

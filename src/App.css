@@ -327,7 +327,8 @@ input[type="file"] {
     font-family: sans-serif;
 }
 .card:hover {
-  background-color: #e9e9f1;
+  border-radius: 12px;
+  background-color: #efe9f1e5;
   transition: all 0.5s linear;
 }
 .card h2 {

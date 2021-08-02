@@ -1,56 +1,25 @@
 import { useState, useEffect } from "react";
 import { db } from "../firebaseConfig";
 import RenderCard from "./RenderCard";
-import { BottomScrollListener } from 'react-bottom-scroll-listener';
 
 
 const MyBlog = ({ user }) => {
   const [myBlog, setMyBlog] = useState();
-  const [lastDoc, setLastDoc] = useState([] | 15);
   const [filtered, setFiltered] = useState([]);
 
   useEffect(() => {
-    const unsubscribe = db.collection("post")
-      .orderBy("created", "asc")
-      .limit(15)
-      .onSnapshot((snapshot) => {
-        const lastDoc = snapshot.docs[snapshot.docs.length -1]
-        setLastDoc(lastDoc);
+    db.collection("post")
+      .get()
+      .then((snap) => {
         let datas = [];
-        snapshot.forEach((doc) => {
+        snap.forEach((doc) => {
           const data = doc.data();
-          const id = doc.id
-          datas.push({ ...data, id: id });
-          datas.filter(data => !data.isSelect)
+          datas.push(data);
         });
         setMyBlog(datas);
-      }, (error) => {
-        console.log(error)
-      });
-
-    return () => unsubscribe();
+      })
+      .catch((err) => console.log(err));
   }, []);
-
-   const fetchMore = () => {
-    db.collection("post")
-      .orderBy("created", "asc")
-      .startAfter(lastDoc)
-      .limit(15)
-      .onSnapshot((snapshot) => {
-        let datas = [];
-        snapshot.forEach((doc) => {
-          const data = doc.data();
-          const id = doc.id
-          datas.push({ ...data, id: id });
-          datas.filter(data => !data.isSelect)
-        });
-        const lastDoc = snapshot.docs[snapshot.docs.length -1]
-        setLastDoc(lastDoc);
-        setMyBlog((blog) => [...blog].concat(datas));
-      }, (error) => {
-        console.log(error)
-      });
-  };
 
   useEffect(() => {
     myBlog && setFiltered(myBlog.filter((data) => data.author === user));
@@ -60,7 +29,6 @@ const MyBlog = ({ user }) => {
     <div className="save">
       <h2 className="title">My Blog</h2>
       <RenderCard filtered={filtered} />
-        <BottomScrollListener onBottom={fetchMore} />
     </div>
   );
 };

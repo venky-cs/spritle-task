@@ -4,7 +4,7 @@ import { useDrop } from "react-dnd";
 import { useHistory } from "react-router-dom";
 import Masonry from "react-masonry-css";
 
-const CardList = ({ blog, saveBlog }) => {
+const CardList = ({ blog, saveBlog, checkDrag }) => {
   const [drag, setDrag] = useState("");
   const [edit, setEdit] = useState("");
 
@@ -53,6 +53,7 @@ const CardList = ({ blog, saveBlog }) => {
 
   function isDrag(drag) {
     setDrag(drag);
+    checkDrag(drag)
   }
 };
 

@@ -13,7 +13,10 @@ const backgroundColor = "#F9F9FA";
 
 const Home = () => {
   const [blog, setBlog] = useState([]);
+  const [drag, setDrag] = useState("");
   // const [lastDoc, setLastDoc] = useState([] | 15);
+
+  console.log(drag)
 
   useEffect(() => {
     const unsubscribe = db.collection("post")
@@ -64,7 +67,7 @@ const Home = () => {
     <DndProvider backend={HTML5Backend}>
       <div className="home">
         <h1 className="title">Home Page</h1>
-        <div className="box">
+        <div className="box" style={{ opacity: drag ? 0.5 : 1 }}>
           {blog.length < 1 ? (
             <div>
               <ContentLoader
@@ -91,7 +94,7 @@ const Home = () => {
               </ContentLoader>
             </div>
           ) : (
-            <CardList blog={blog} saveBlog={saveBlog} />
+            <CardList blog={blog} saveBlog={saveBlog} checkDrag={checkDrag} />
           )}
         </div>
         {/* <BottomScrollListener onBottom={fetchMore} /> */}
@@ -101,6 +104,10 @@ const Home = () => {
 
   function saveBlog(data) {
     db.collection("post").doc(data.id).update({ isSaved: !data.isSaved });
+  }
+
+  function checkDrag(drag) {
+    setDrag(drag);
   }
 };
 
