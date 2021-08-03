@@ -1,16 +1,10 @@
 import { useState, useEffect } from "react";
 import { db } from "../firebaseConfig";
-import ContentLoader from "react-content-loader";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import CardList from "./CardList";
-// import dayjs from 'dayjs';
 import Grid from "./ContentLoader";
 
-const width = 7;
-const height = 3;
-const foregroundColor = "#F0F1F4";
-const backgroundColor = "#F9F9FA";
 
 const Home = () => {
   const [blog, setBlog] = useState([]);
@@ -72,14 +66,15 @@ const Home = () => {
   useEffect(() => {
     search &&
       setFiltered(
-        blog.filter((data) => data.title.toLowerCase() === search.toLowerCase())
+        blog.filter((data) => data.title.toLowerCase().includes(search.toLowerCase()))
       );
   }, [search]);
 
   console.log(filtered);
 
   const searchBlog = (e) => {
-    setSearch(e.target.value);
+    const searched = e.target.value
+    setSearch(searched);
   };
 
   return (
@@ -94,6 +89,7 @@ const Home = () => {
             onChange={searchBlog}
             placeholder="search blog"
           />
+
         </div>
 
         <div className="box" style={{ opacity: drag ? 0.5 : 1 }}>
@@ -102,7 +98,7 @@ const Home = () => {
           ) : (
             <CardList
               blog={
-                search && filtered && filtered.length === 1 ? filtered : blog
+                search && filtered && filtered.length > 1 ? filtered : blog
               }
               saveBlog={saveBlog}
               checkDrag={checkDrag}
