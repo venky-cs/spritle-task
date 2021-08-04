@@ -4,7 +4,7 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import CardList from "./CardList";
 import Grid from "./ContentLoader";
-
+import { BottomScrollListener } from 'react-bottom-scroll-listener'
 
 const Home = () => {
   const [blog, setBlog] = useState([]);
@@ -12,19 +12,19 @@ const Home = () => {
   const [search, setSearch] = useState("");
   const [filtered, setFiltered] = useState([]);
 
-  // const [lastDoc, setLastDoc] = useState([] | 15);
+  const [lastDoc, setLastDoc] = useState();
 
-  console.log(drag);
+
 
   useEffect(() => {
     const unsubscribe = db
       .collection("post")
       .orderBy("created", "asc")
-      // .limit(15)
+      .limit(12)
       .onSnapshot(
         (snapshot) => {
           const lastDoc = snapshot.docs[snapshot.docs.length - 1];
-          // setLastDoc(lastDoc);
+          setLastDoc(lastDoc);
           let datas = [];
           snapshot.forEach((doc) => {
             const data = doc.data();
@@ -42,26 +42,26 @@ const Home = () => {
     return () => unsubscribe();
   }, []);
 
-  // const fetchMore = () => {
-  //   db.collection("post")
-  //     .orderBy("created", "asc")
-  //     .startAfter(lastDoc)
-  //     .limit(15)
-  //     .onSnapshot((snapshot) => {
-  //       let datas = [];
-  //       snapshot.forEach((doc) => {
-  //         const data = doc.data();
-  //         const id = doc.id
-  //         datas.push({ ...data, id: id });
-  //         datas.filter(data => !data.isSelect)
-  //       });
-  //       const lastDoc = snapshot.docs[snapshot.docs.length -1]
-  //       setLastDoc(lastDoc);
-  //       setBlog((blog) => [...blog].concat(datas));
-  //     }, (error) => {
-  //       console.log(error)
-  //     });
-  // };
+  const fetchMore = () => {
+    db.collection("post")
+      .orderBy("created", "asc")
+      .startAfter(lastDoc)
+      .limit(15)
+      .onSnapshot((snapshot) => {
+        let datas = [];
+        snapshot.forEach((doc) => {
+          const data = doc.data();
+          const id = doc.id
+          datas.push({ ...data, id: id });
+          datas.filter(data => !data.isSelect)
+        });
+        const lastDoc = snapshot.docs[snapshot.docs.length - 1]
+        setLastDoc(lastDoc);
+        setBlog((blog) => datas, blog);
+      }, (error) => {
+        console.log(error)
+      });
+  };
 
   useEffect(() => {
     search &&
@@ -105,7 +105,21 @@ const Home = () => {
             />
           )}
         </div>
-        {/* <BottomScrollListener onBottom={fetchMore} /> */}
+
+        <div className="btn">
+          <button className="pg" onClick={() => {
+            setLastDoc(prev => prev - 12)
+            fetchMore()
+            window.scrollTo(0, 0)
+          }}>{"<<"} Previous</button>
+
+          <button className="pg" onClick={
+            () => {
+              fetchMore()
+              window.scrollTo(0, 0)
+            }
+          }>Next {">>"}</button>
+        </div>
       </div>
     </DndProvider>
   );
