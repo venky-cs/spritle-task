@@ -62,6 +62,26 @@ const Home = () => {
         console.log(error)
       });
   };
+  const previous = () => {
+    db.collection("post")
+      .orderBy("created", "asc")
+      // .startAfter(lastDoc)
+      .limit(15)
+      .onSnapshot((snapshot) => {
+        let datas = [];
+        snapshot.forEach((doc) => {
+          const data = doc.data();
+          const id = doc.id
+          datas.push({ ...data, id: id });
+          datas.filter(data => !data.isSelect)
+        });
+        const lastDoc = snapshot.docs[snapshot.docs.length - 1]
+        setLastDoc(lastDoc);
+        setBlog((blog) => datas, blog);
+      }, (error) => {
+        console.log(error)
+      });
+  };
 
   useEffect(() => {
     search &&
@@ -108,9 +128,7 @@ const Home = () => {
 
         <div className="btn">
           <button className="pg" onClick={() => {
-            setLastDoc(prev => prev - 12)
-            console.log(lastDoc, typeof (lastDoc))
-            fetchMore()
+            previous()
             window.scrollTo(0, 0)
           }}>{"<<"} Previous</button>
 
