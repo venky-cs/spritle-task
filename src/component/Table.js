@@ -154,7 +154,6 @@ const Table = () => {
             );
           })}
           <tr>
-            <td></td>
           </tr>
         </tbody>
       </table>
