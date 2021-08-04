@@ -20,14 +20,21 @@ import Remove from "./component/Remove";
 import Table from "./component/Table";
 import UserTable from "./component/UserTable";
 import { db } from "./firebaseConfig";
+import { useSelector, useDispatch } from 'react-redux'
+import { openMenu, closeMenu } from './redux/actions'
 require("dotenv").config();
 
+
 function App() {
+
+  const store = useSelector(state => state)
+  const dispatch = useDispatch()
+  console.log(store)
   const [auth, setAuth] = useState(false);
   const [users, setUsers] = useState([]);
   const [admin, setAdmin] = useState(false);
 
-  const [toggle, setToggle] = useState(true);
+  const [toggle, setToggle] = useState(store);
   const [dropDown, setdropDown] = useState(false);
 
   const [userName, setUserName] = useState("");
@@ -44,6 +51,8 @@ function App() {
   }, [auth]);
 
   const user = firebase.auth().currentUser;
+
+
 
   useEffect(() => {
     db.collection("user").onSnapshot(
@@ -74,7 +83,7 @@ function App() {
         mobile: user.phoneNumber,
       });
     } else console.log("user already exist");
-  }, [toggle]);
+  }, [store]);
 
   return (
     <Router>
@@ -82,14 +91,14 @@ function App() {
         <FirebaseAuthProvider {...firebaseConfig} firebase={firebase}>
           <div className="app">
             {/* sidebar */}
-            <div className={`sidebar ${toggle && "close"}`}>
+            <div className={`sidebar ${store && "close"}`}>
               <div className="logo-details" onClick={toggler}>
                 <i className="bx bx-menu"></i>
                 <span className="logo_name">Blog App</span>
               </div>
 
               <ul className="nav-links">
-                <li onClick={() => setToggle(true)}>
+                <li onClick={() => dispatch(openMenu())}>
                   <Link to="/home">
                     <i className="bx bx-home"></i>
                     <span className="link_name">Home</span>
@@ -123,14 +132,14 @@ function App() {
 
                 {auth && (
                   <>
-                    <li onClick={() => setToggle(true)}>
+                    <li onClick={() => dispatch(openMenu())}>
                       <Link to="/createBlog">
                         <i className="bx bxs-message-square-detail"></i>
                         <span className="link_name">Write Blog</span>
                       </Link>
                     </li>
 
-                    <li onClick={() => setToggle(true)}>
+                    <li onClick={() => dispatch(openMenu())}>
                       <Link to="/myBlog">
                         <i class="fas fa-id-card"></i>
                         <span className="link_name">My Blog</span>
@@ -139,7 +148,7 @@ function App() {
                   </>
                 )}
 
-                <li onClick={() => setToggle(true)}>
+                <li onClick={() => dispatch(openMenu())}>
                   <Link to="/save">
                     <i className="bx bx-save"></i>
                     <span className="link_name">Favourite</span>
@@ -270,7 +279,8 @@ function App() {
     firebase.auth().signOut();
   }
   function toggler() {
-    setToggle((prevState) => !prevState);
+    !store && dispatch(openMenu())
+    store && dispatch(closeMenu())
   }
 }
 

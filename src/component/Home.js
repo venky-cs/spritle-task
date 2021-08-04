@@ -109,6 +109,7 @@ const Home = () => {
         <div className="btn">
           <button className="pg" onClick={() => {
             setLastDoc(prev => prev - 12)
+            console.log(lastDoc, typeof (lastDoc))
             fetchMore()
             window.scrollTo(0, 0)
           }}>{"<<"} Previous</button>
