@@ -48,16 +48,20 @@ const Home = () => {
       .startAfter(lastDoc)
       .limit(15)
       .onSnapshot((snapshot) => {
-        let datas = [];
-        snapshot.forEach((doc) => {
-          const data = doc.data();
-          const id = doc.id
-          datas.push({ ...data, id: id });
-          datas.filter(data => !data.isSelect)
-        });
-        const lastDoc = snapshot.docs[snapshot.docs.length - 1]
-        setLastDoc(lastDoc);
-        setBlog((blog) => datas, blog);
+        if (snapshot.size !== 0) {
+          let datas = [];
+          snapshot.forEach((doc) => {
+            const data = doc.data();
+            const id = doc.id
+            datas.push({ ...data, id: id });
+            datas.filter(data => !data.isSelect)
+          });
+          const lastDoc = snapshot.docs[snapshot.docs.length - 1]
+          setLastDoc(lastDoc);
+          setBlog((blog) => datas, blog);
+        } else {
+          console.log("no more blog")
+        }
       }, (error) => {
         console.log(error)
       });
